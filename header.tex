@@ -1,50 +1,9 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Accents français
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Note(Ronana) My biber force me to load babel, see
-% http://tex.stackexchange.com/a/315537. And babel and
-% inputenc should not be used in conjonction.
-% \usepackage[utf8]{inputenc}
+\usepackage[utf8]{inputenc}
 \usepackage[american]{babel}
 \usepackage[T1]{fontenc}
-
-\usepackage[style=ieee, minbibnames=1, maxbibnames=1]{biblatex}
-\addbibresource{main.bib}
-
-%\renewcommand*{\bibfont}{\footnotesize}
-\AtEveryBibitem{\clearfield{doi}} % clears language
-\AtEveryBibitem{%
-  \ifentrytype{article}{%
-  }{%
-   \clearfield{url}%
-    \clearfield{urldate}%
-  }%
-  \ifentrytype{inproceedings}{%
-  }{%
-    \clearfield{url}%
-    \clearfield{urldate}%
-    \clearfield{series}%
-    \clearfield{location}%
-    \clearfield{publisher}%
-  }%
-  \ifentrytype{incollection}{%
-
-  }{%
-    \clearlist{editor}%
-    \clearfield{edilisttor}%
-  }%
-  \ifentrytype{inbook}{%
-  }{%
-    \clearfield{url}%
-    \clearfield{urldate}%
-  }%
-  \ifentrytype{book}{%
-  }{%
-    \clearfield{url}%
-    \clearfield{urldate}%
-    \clearfield{edition}%
-  }%
-}
 
 \usepackage{xspace}
 \usepackage{hyperref}
