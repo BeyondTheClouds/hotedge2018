@@ -12,69 +12,82 @@ that are deployed at the edge of the network.
 %
 Referred to as the Edge Computing paradigm, this model has been attracting
 growing interest for the last few years as it enables delivering Cloud
-Computing capabilities closer to end-users, their related devices, and
-applications.
+Computing capabilities closer to end-users, their related devices, and the applications.
 %
 
 %% A lot of academics works focus on how to leverage these
 %% infrastructures to address specicifc use-cases
 While several academic studies have highlighed the advantages of Edge
-Computing infrastructures in different
+Computing infrastructures in various
 domains~\cite{bonomi2012fog,zhang2015cloud,7574435,satyanarayanan2017emergence},
 the development of
 %%  We need a resource management system that enables administrators to
 %% operate and end-users to use edge resources.
-an appropriate management system that will enable, on the first hand,
+a resource management system that will enable, on the first hand,
 an operator to aggregate, supervise and expose such massively
 distributed resources and, on the other hand, developers to implement
 new kinds of services that may be deployed and managed on demand is
 still an open question.
 
 %%  Delivierng en Edge IaaS system is complex
-To the best of our knowledge, only a few activities have been
-investigating how such a system can be designed overall.  With their
-IOx and Fog Director software solutions~\cite{bonomi2012fog}, Cisco allows IoT
-applications to run on infrastructures composed of NFV-enabled
-hardware (at the edge) and existing centralized clouds. However, their
-solution does not allow to run Virtual Machines  and does not compete
-with existing IaaS platforms.
+With their IOx and Fog Director software
+solutions~\cite{bonomi2012fog}, Cisco allows IoT applications to run
+on infrastructures composed of NFV-enabled hardware (at the edge) and
+existing centralized clouds. However, their solution does not allow to
+run Virtual Machines (VMs) and does not compete with existing IaaS
+platforms.
 %
-Although Edge infrastructures significantly differ from traditional Cloud ones
-regarding heterogeneity, dynamicity and the potential massive
-distribution of resources and networking environment, administrators and end-users expect the same capabilities.
-To mitigate the complexity of a complete stack, most advanced proposals have been focusing
-on orchestrating applications accross distinct independent cloud
-systems (\aka virtual infrastructure managers).
+The European Telecommunications Standards Institute (ETSI) MEC
+Industry Specification Group defined in 2016 a software architecture
+to orchestrate distinct independent cloud systems, \aka virtual
+infrastructure managers in their terminology
+(VIM)~\cite{7574435}. While the proposal should allow the deployment
+of VMs at the edge, there is no implementation available yet.  At the
+same time, a consortium composed of several industrial groups proposed
+the ONAP framework~\cite{onap} that enables the orchestration and
+automation of virtual network functions across distinct VIMs.  From
+the academic side, brokering approaches have been also investigated.
+For instance, the FogBow proposal~\cite{brasileiro2016fogbow} aims to
+support large federations of Infrastructure-as-a-service (IaaS) cloud
+providers. More recently, the NIST Cloud Computing Program (NCCP)
+%Public Working Group has recognized the importance of advancement and development of
+%frameworks to support seamless implementation of federated community
+%cloud environments. In August 2017, the NCCP
+%Public Working Group
+% (PWG) on Federated Cloud (PWGFC)
+initiated a collaborative effort with the IEEE P2302 group(, Standards for Intercloud Interoperability and
+Federation (SIIF), to advance Federated Cloud) through the development
+of a conceptual architecture and a vocabulary.
+%The IEEE P2302 will
+%develop a standard based on the NIST model.  Additional information
+%can be found at
+\footnote{\url{https://collaborate.nist.gov/twiki-cloud-computing/bin/view/CloudComputing/FederatedCloudPWGFC} (Valid on March 2018).}
 %
-Among the major projects, one can cite the architecture
-defined by the European Telecommunications Standards Institute (ETSI)
-MEC Industry Specification Group~\cite{7574435} or more recently the
-ONAP framework~\cite{onap}, which is supported by several industrial groups. 
-From the academic side, brokering approaches have been also proposed.
-For instance, the FogBow proposal~\cite{brasileiro2016fogbow} aims to support large
-federations of Infrastructure-as-a-service (IaaS) cloud providers.
+While all these projects propose extensions to %current interfaces
+% (APIs) to turn location into a first-class citizen, and
+allow end-users/developers to manage edge application life cycle in geo-distributed
+manner, they do not provide a well-suited software stack to enable
+administrators to operate, and developers to use, edge infrastructures
+like Cloud Computing ones.
+%
+Although Edge infrastructures significantly differ regarding heterogeneity, resiliency  and the potential
+massive distribution of resources and networking environment,
+administrators and end-users expect to find most features that makes
+the success of the Cloud Computing paradigm.
+%
 
-While all these projects have extended current interfaces (APIs) to
-turn location into a first-class citizen, and allow developpers to
-manage edge application life cycle in geo-distributed manner, they do not
-provide a well-suited software stack to operate and use edge infrastructures like cloud computing ones. 
-
-This paper proposes several
-contributions to make progress on the aformentioned question.
+In this paper, we propose two major contributions to favor the development of a resource management system for edge computing infrastructures~:
 \begin{itemize}
-\item A list of expected features from bothe the administrators and end-users' perspectives;
-\item A discussion of pros/cons of top/down 
+\item A exhaustive list of the features that are expected from both administrators and end-users of edge computing infrastructures ; 
+\item A discussion related to the pros and cons of possible design strategies (top/down and bottom up).
 \end{itemize}
 
-The remaining of the paper ...
+We highlight this study is done with any assumption but the fact that each edge site can communicate with the other ones eventually.
 
+The remaining of the paper ...
 
 
 % In this paper, we provide a list of expected features for both administrators and admins.
 % We investigate whether a stack such as OpenStack, the defacto open-source standard can fullfil these requirements
 % We finally discusss two possibles ways for moving forward: top/down vs bottom/up.
-
-
-% TODO: talk about:
-% The NIST Cloud Computing Program (NCCP) recognized, in the USG Cloud Computing Standards and Technology Roadmap (NIST SP 500-293), the importance of advancement and development of frameworks to support seamless implementation of federated community cloud environments. In August 2017, the NCCP Public Working Group (PWG) on Federated Cloud (PWGFC) initiated a collaborative effort with the IEEE P2302 group, Standards for Intercloud Interoperability and Federation (SIIF), to advance Federated Cloud through the development of a conceptual architecture and a vocabulary. The IEEE P2302 will develop a standard based on the NIST model.  Additional information can be found at https://collaborate.nist.gov/twiki-cloud-computing/bin/view/CloudComputing/FederatedCloudPWGFC  
 
