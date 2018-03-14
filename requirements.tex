@@ -1,5 +1,34 @@
-
 \section{Requirements}
 \label{sec:requirements}
+
+As mentionned, administrators and end-users of edge infrastructures expect to get a set of high
+level mechanisms whose assembly results in a system capable of
+operating a geo-distributed IaaS infrastructure.
+Those mechanisms include primary services that are needed to operate and use resources on demand~\cite{6165242} 
+\begin{itemize}
+\item The virtual machines manager is in charge of managing VMs’ cycle
+  of life (configuration, scheduling, deployment, suspend/resume and
+  shut down).
+  \AL[DP]{Please emphasize that here we talk about VM but the manager can manager container or bare-metals}
+\item The Image manager is in charge of VM’ template files (a.k.a. VM
+  images).
+\item The Network manager provides connectivity to the infrastructure:
+  virtual networks for VMs and external access for users.
+\item The Storage manager provides persistent storage facilities to
+  VMs.
+\item The Administrative tools provide user interfaces to operate and
+  use the infrastructure.
+\item Finally, the Information manager monitors data of the
+  infrastructure for the auditing/accounting.
+\end{itemize}
+
+Those services enables administrators and developers/end-users to respectively operate and use the infrasrtucture on demand.
+In the following, we propose a class
+Thus the challenge is to investigate how each of the aforementioned services should be implemented
+
+
+In this section, we identify
+\AL[DP]{TODO}
+
 
 
