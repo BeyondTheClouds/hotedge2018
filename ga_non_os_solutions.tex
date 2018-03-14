@@ -2,4 +2,26 @@
 \subsection{Non-OpenStack approaches}
 \label{subsec:non-os}
 
+\subsubsection{ONAP}
+
+The Open Network Automation Platform (ONAP) \cite{web:onap} is a framework to
+design and instantiate Virtual Network Functions (VNFs) on top of Virtual
+Infrastructure Managers (VIMs), like OpenStack, Microsoft Azure or Amazon Web
+Services. Driven by the Linux Foundation since 2017, this active project is
+built on a modular architecture where each module is in charge of the designing
+or the orchestration of VNFs. For instance, some modules are in charge of
+provisioning compute and network resources, while others are in charge of
+scheduling, authentication or storing images.
+
+%
+%For instance, the Master Service Orchestration (MSO) module coordinates the
+%actions to deploy VNFs, while the Data Collector, Analytics and Events (DCAE)
+%module is in charge of collecting metrics and raises alarms to other modules.
+%
+
+More particularly, ONAP relies on the multi-VIM module to orchestrate multiple
+independent infrastructure managers. This module provides an abstraction of the
+underlying VIMs and acts as a request broker between ONAP's modules and VIMs. To
+that end, it is itself composed of sub-modules to manage inter and intra-VIM
+actions (e.g. inter-VIM scheduling, network overlays).
 
