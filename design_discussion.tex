@@ -15,28 +15,9 @@ In a top-down case, a system  would rely on existing VIM APIs and no modificatio
 However, if one wants to operate a complete edge infrastructure through a single entry point, it means that certain VIM low-level services need to be reimplemented at a higher-level (e.g. authentication, resource scheduling, monitoring, etc). Moreover, if the latter case applies and if multiple VIMs are deployed, it might become impractical to provide a single VIM management-view to users as different VIMs might have specific features that need to be managed. It is also most certain that in this approach, a reduced/limited set of functionalities will be available compared to a single VIM instance functionalities. In other words, certain requirements cannot be fulfilled without changing the natice VIM (e.g. live migration across sites).
 
 
-
-
-%%%% TOP-DOWN
-%% PROS
-%+ can be used to introduce a method for horizontal scaling 
-%+ can easily be adopted by users as it does not change the core code of the cloud platform that is already trusted by the users
-%+ if done properly, can potentially allow users to be exposed to the API endpoints they are already used to. I.e., they do not need to use new client libraries or a new 'horizon' for accessing the services. 
-
-%% CONS
-%+ It may not be possible to implement some as efficiently as if they were done bottom-up
-
-
 In a bottom-up case, the system is not limited by existing (VIM) features. This can allow the creation of a more efficient systems, for example, without the need to repeatedly implement features at different levels. Moreover, it can potentially fullfil any and all (reasonable) requirements since any feature missing can be implemented. 
 However, efficiency and freedom come at a cost. Writting a completely new system will be expensive (time and resource wise). Equally, extending/modifying and existing system as similar cost. Moreover, a bottom-up approach would certainly mean the entire edge infrastructure would rely on a specific platform/VIM. 
 
-
-%%%% BOTTOM-UP
-%% PROS 
-
-%% CONS
-%- How can you address the multi operator use-case? 
-%- look at the pros above and identify the related cons
 
 The above two approaches each have their pros and cons, and none individually can fullfil all requirements of an edge infrastructure. On the one hand, a top-down approach brings modularity and a certain level of independence between components, however it is limited by that same independence as it requires low-level features to be enabled. On the other hand, a bottom-up approach can be very costly without in the end being able to provide all required features. It becomes somehow easy to state that a system for the edge requires a two-side approach, where top-down bottom-up approaches meet. The real question becomes then, where shall these meet?
 \AL[Comment by Joao]{After reading this first draft, everything seems so obvious. Where is the value here? Can we further elaborate on the last question? i.e. where should the two approaches meet? Maybe we do not want to make a hard conclusion, but we can point that the community has not yet settled on one way and refer to the related work. But again, this would still leave the problem open...and again, would such statements value enough for the paper? 
