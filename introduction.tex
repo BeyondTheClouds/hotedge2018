@@ -19,7 +19,7 @@ Computing capabilities closer to end-users, their related devices, and the appli
 %% infrastructures to address specicifc use-cases
 While several academic studies have highlighed the advantages of Edge
 Computing infrastructures in various
-domains~\cite{bonomi2012fog,zhang2015cloud,7574435,satyanarayanan2017emergence},
+domains~\cite{bonomi2012fog,zhang2015cloud,yi2015fog,shi2016edge,satyanarayanan2017emergence},
 the development of
 %%  We need a resource management system that enables administrators to
 %% operate and end-users to use edge resources.
@@ -34,11 +34,17 @@ With their IOx and Fog Director software
 solutions~\cite{bonomi2012fog}, Cisco allows IoT applications to run
 on infrastructures composed of NFV-enabled hardware (at the edge) and
 existing centralized clouds. However, their solution does not allow to
-run Virtual Machines (VMs) and does not compete with existing IaaS
-platforms.
+run workloads in isolated environments such as containers or virtual
+machines (VMs). 
 %
-The European Telecommunications Standards Institute (ETSI) MEC
-Industry Specification Group defined in 2016 a software architecture
+This is rather critical as administrators and end-users expect to find
+most features that makes the success of the Cloud Computing paradigm
+and even if Edge infrastructures significantly differ regarding
+heterogeneity, resiliency and the potential massive distribution of
+resources and networking environment.
+
+In 2016, the European Telecommunications Standards Institute (ETSI) MEC
+Industry Specification Group defined  a software architecture
 to orchestrate distinct independent cloud systems, \aka virtual
 infrastructure managers in their terminology
 (VIM)~\cite{7574435}. While the proposal should allow the deployment
@@ -46,7 +52,7 @@ of VMs at the edge, there is no implementation available yet.  At the
 same time, a consortium composed of several industrial groups proposed
 the ONAP framework~\cite{onap} that enables the orchestration and
 automation of virtual network functions across distinct VIMs.  From
-the academic side, brokering approaches have been also investigated.
+the academic side, federated approaches have been also investigated.
 For instance, the FogBow proposal~\cite{brasileiro2016fogbow} aims to
 support large federations of Infrastructure-as-a-service (IaaS) cloud
 providers. More recently, the NIST Cloud Computing Program (NCCP)
@@ -55,8 +61,8 @@ providers. More recently, the NIST Cloud Computing Program (NCCP)
 %cloud environments. In August 2017, the NCCP
 %Public Working Group
 % (PWG) on Federated Cloud (PWGFC)
-initiated a collaborative effort with the IEEE P2302 group(, Standards for Intercloud Interoperability and
-Federation (SIIF), to advance Federated Cloud) through the development
+initiated a collaborative effort with the IEEE P2302 group (Standards for Intercloud Interoperability and
+Federation), to advance Federated Cloud through the development
 of a conceptual architecture and a vocabulary.
 %The IEEE P2302 will
 %develop a standard based on the NIST model.  Additional information
@@ -65,26 +71,47 @@ of a conceptual architecture and a vocabulary.
 %
 While all these projects propose extensions to %current interfaces
 % (APIs) to turn location into a first-class citizen, and
-allow end-users/developers to manage edge application life cycle in geo-distributed
-manner, they do not provide a well-suited software stack to enable
-administrators to operate, and developers to use, edge infrastructures
-like Cloud Computing ones.
+allow end-users/developers to manage edge applications life cycle,
+they do not provide a well-suited software stack to enable
+administrators to operate, and developers to use, distinct edge sites
+like a global Cloud Computing infrastructure. In other words, there is
+currently not well-suited solutions to easily deliver cloud computing
+services at the edge.
 %
-Although Edge infrastructures significantly differ regarding heterogeneity, resiliency  and the potential
-massive distribution of resources and networking environment,
-administrators and end-users expect to find most features that makes
-the success of the Cloud Computing paradigm.
 %
 
-In this paper, we propose two major contributions to favor the development of a resource management system for edge computing infrastructures~:
+In this paper, we present preliminary reflexions regarding how such a
+system can be delivered. To this aim, we propose~:
 \begin{itemize}
-\item A classification of the features that are expected from both administrators and end-users of edge computing infrastructures ; 
-\item A discussion related to the pros and cons of possible design strategies (top/down and bottom up).
+\item A classification of the features that are expected from both
+  administrators and end-users of edge computing infrastructures
+  ; %, which higlights in particular why edge infrastructures differ
+    %from federated ones ;
+\item An analyzis of pros and cons of possible design strategies
+  (top/down and bottom up).
 \end{itemize}
 
-We highlight this study is done without any assumption but the fact that each edge site can communicate with the other ones eventually.
+The edge infrastructure we considered to conduct this study is
+composed of up to hundreds of micro DCs, which are themselves composed
+of up to one hundred servers (up to two racks).  Figure 1 gives an
+overview of this infrastructure with several micro/nano DCs. The
+expected latency as well as the bandwidth between each element may
+fluctuate significantly, in particular because the network links can
+be either wired or wireless (represented by plain and dashed lines on
+the figure). Finally, it might be possible to consider additional DCs
+deployed at the Extreme Edge, within a private institution.
 
-The remaining of the paper ...
+
+The remaining of the paper is organized as
+follows. Section~\ref{sec:requirements} presents major features expected by administrators and developers, higlightling in particular the main differences
+w.r.t federated infrastructures.
+Section~\ref{sec:design_considerations} introduces two approaches
+that opensource communities could follow to design and develop a IaaS
+toolkit, \aka a resource management system, dedicated to edge
+environments. Section~\ref{sec:design_discussion} discusses pros/cons
+of both approaches. Existing solutions that might serve as
+starting points, are discussed in
+Section~\ref{sec:related_work}. Finally, Section~\ref{sec:conclusion} concludes this paper.
 
 
 % In this paper, we provide a list of expected features for both administrators and admins.
