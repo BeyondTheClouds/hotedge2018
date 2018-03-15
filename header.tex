@@ -7,6 +7,7 @@
 
 \usepackage{xspace}
 \usepackage{hyperref}
+\usepackage[capitalise, noabbrev]{cleveref}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Todo notes
@@ -38,7 +39,11 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%
 % Table add-ons
-\usepackage{array,multirow}
+%\usepackage{array,multirow}
+\usepackage{longtable, booktabs, multirow}
+\usepackage{array,booktabs}
+\newcolumntype{L}{@{}>{\kern\tabcolsep}l<{\kern\tabcolsep}}
+\usepackage{colortbl}
 
 \newcolumntype{P}[1]{>{\centering\arraybackslash}p{#1}}
 \newcolumntype{M}[1]{>{\centering\arraybackslash}m{#1}}
@@ -59,3 +64,6 @@
 \usepackage[scaled=0.85]{beramono}
 \usepackage{listings}
 \lstset{numbers=none,basicstyle=\ttfamily}
+\usepackage{import}
+
+
