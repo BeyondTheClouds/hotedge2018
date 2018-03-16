@@ -1,10 +1,11 @@
 
-%\begin{minipage}{\textwidth}
-  \scriptsize
-  \begin{tabular}{@{} l L L L @{} >{\kern\tabcolsep}l @{}}    \toprule
+\scriptsize
+\begin{tabular}{@{} l L L L @{} >{\kern\tabcolsep}l @{}}
+    \toprule
   %\begin{tabular}{@{} p{.25\textwidth} p{.25\textwidth}p{.25\textwidth}p{.25\textwidth} @{} >{\kern\tabcolsep}l @{}}    \toprule
 
-    \emph{Levels} & \emph{Admin}& \emph{User} & \emph{Both} \\\midrule
+    \emph{Levels} & \emph{Admin}& \emph{User} & \emph{Both} \\
+    \midrule
 
     L1: Operate/use any site &
     Manage any site: &
@@ -13,12 +14,6 @@
 
     (all operations are based in single site) &
     - install services &
-    %Install, use (manage users, flavors, quotas) and upgrade services&
-%    \begin{itemize}[nosep]
-%      \item Install services 
-%      \item Use services (manage users, flavors, quotas) 
-%      \item Upgrade services
-%    \end{itemize}&
     - compute resources&
     - resources metrics \\
 
@@ -35,43 +30,43 @@
 
     \rowcolor{black!20}[0pt][0pt]
     L2: Operate/use several sites &
-    Manage many sites &
-    Provision on many sites &
-    Collect metrics regarding many sites\\
+    &
+    &
+    L1 but over a set of sites\\
 
     \rowcolor{black!20}[0pt][0pt]
     (all operations cover at least two sites) &
-    (L1 but over a set of sites)&
-    (L1 but over a set of sites)&
-    L1 but over a set of sites \\
+    &
+    &
+    Collect metrics regarding many sites\\
 
     \rowcolor{black!20}[0pt][0pt]
     - L2.1 Explicit manner&
-    &
-    &
+    Manage many sites &
+    Provision on many sites &
     \\
     
     \rowcolor{black!20}[0pt][0pt]
     - L2.2 Implicit manner&
-    &
-    &
+    Autonomic management&
+    Autonomic provisioning&
     \\
     %\\% add space between levels
 
-    L3: Be robust w.r.t. split brains &
+    L3: Be robust \wrt split brains &
     &
     &
-    Collect metrics regarding one or many sites\\ 
+    L1 for an isolated site\\ 
 
     (all operations cover one or many sites) &
     &
     &
-    L1 for an isolated site \\
+    L1 and L2 for an isolated set of sites\\
 
     - L3.1 Application robustness&
     \hfill ------ \hfill &
     Access user's applications&
-    L1 and L2 for an isolated set of sites \\
+    Collect metrics regarding one or many sites\\
 
     - L3.2 Management service robustness&
     Manage one or many sites &
@@ -81,40 +76,39 @@
 
     \rowcolor{black!20}[0pt][0pt]
     L4: Multiple Cloud environments &
-    Manage one or many sites &
-    Provision on one or many sites&
-    Collect metrics regarding one or many sites\\ 
+    &
+    &
+    L3 with different types of IaaS managers\\ 
 
     \rowcolor{black!20}[0pt][0pt]
     (all operations cover one or many sites) &
     &
     &
-    L3 with different types of IaaS managers  \\
+    Discover sites' capabilities/compatibilities\\
 
     \rowcolor{black!20}[0pt][0pt]
     - L4.1 Different IaaS versions&
-    &
-    &
+    Manage different IaaS versions&
+    Provision on different IaaS versions&
     \\
     
     \rowcolor{black!20}[0pt][0pt]
     - L4.2 Different IaaS technologies&
-    &
-    &
+    Manage different IaaS technos&
+    Provision on different IaaS technos&
     \\
     %\\% add space between levels
 
     L5: Multiple operators &
     \hfill ------ \hfill &
     Provision on one or many sites&
-    Collect metrics regarding one or many sites\\ 
+    L4 with multiple operators\\ 
 
     (all operations cover one or many sites) &
     &
     &
-    L4 with multiple operators \\
+    Collect metrics from different operators\\
     \bottomrule
 
-  \end{tabular}
-%\end{minipage}
+\end{tabular}
 

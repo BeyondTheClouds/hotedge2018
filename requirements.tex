@@ -7,10 +7,11 @@
   \def\svgwidth{\columnwidth}
   \input{figures/sites.pdf_tex}
   \caption{Partial representation of the targeted edge infrastructure, composed
-    of multiple sites. Each site homes servers (represented by black bullets)
-    and have a set of users (depicted by black squares). The red dashed line
-    depicts a split-brain situation that separates the infrastructure into $2$
-    partitions, where \emph{Site 1} is isolated from \emph{Site 2} and \emph{3}.}
+    of multiple sites. Each site is composed of many servers (represented by
+    black bullets) and have a set of users (depicted by black squares). The red
+    dashed line depicts a split-brain situation that separates the
+    infrastructure into $2$ partitions, isolating \emph{Site 1} from \emph{Site
+    2} and \emph{3}.}
   \label{fig:sites}
 \end{figure}
 
@@ -68,39 +69,42 @@ sites (L2), up to considering they can be owned by different operators (L5).
 following:
 
 \paragraph{L1: Operate/use any site}
-This level contains all the operations related to a single site of the
-infrastructure. For instance, to operate \emph{Site 1} depicted in
-\cref{fig:sites}, an administrator might desire to install or update a set of
-the previously defined resource management services. After what, those
-services can be used to manage users, access, flavors (\ie available
-capacities of compute resources) or quotas, regarding \emph{Site 1}.
+This level contains all the requirements at the scope of a single site of the
+infrastructure. The second row of \cref{tab:requirements} lists those
+requirements expected from administrators and users. To operate a single site,
+like \emph{Site 1} depicted in \cref{fig:sites}, the resource management
+services defined previously must be installed (or upgraded) by an
+administrator. After what, admins can use those services to manage users,
+accesses, flavors (\ie available capacities of compute resources) or quotas,
+regarding \emph{Site 1}.
 % edge sites are remote & unmanned and should administrated remotely
 % tools need to support intermittent network access to the site
 
-Any end-user of the infrastructure should be able to provision compute, network
-or storage resources on any single site, supposing he is authorized to. For
-instance, a user located at \emph{Site 1} should be able to provision resources
-in a site using the site's services, \eg boot a VM in \emph{Site 2}, using
-images, flavors or networks defined in \emph{Site 2} -- as long as the site is
-reachable.
+Any end-user of the infrastructure expects to be able to provision compute,
+network or storage resources on any single site, supposing he is authorized to.
+For instance, a user located at \emph{Site 1} should be able to boot a VM in
+\emph{Site 2}, using images, flavors or networks defined in \emph{Site 2} -- as
+long as the site is reachable.
 
-Furthermore, administrators and users expect to monitor data (\eg related to
-resources, users, and projects) from any single site. This is used for instance
-for respectively managing quotas and listing existing resources.
+Furthermore, administrators and users expect metrics to be monitored (\eg
+related to resources, users, and projects) from any single site. This is used
+for instance for respectively managing quotas and listing existing resources.
 
 \paragraph{L2: Operate/use several sites:}
 We now consider in this level that the operations previously defined in L1
 cover at least two sites. For instance, an administrator might desire to
-configure users access on a per-site basis, so that a specific user of the
-infrastructure can boot a VM on \emph{Site 1}, using an image defined in
-\emph{Site 2}. To that end both administrators and users require to collect
-data that belong to several sites. As depicted in \cref{tab:requirements}, such
-collaboration between site can be either handled in an explicit manner (\ie
-admins and users specify explicitly which sites are targeted), references as
-the sub-level L2.1, or in an implicit manner (L2.2). The implicit manner
-suggests that policies and constraints are provided by admins and users so that
-a scheduler takes placement decisions regarding the desired actions. This is
-used for auto-scaling and autonomous optimization mechanisms.
+configure users access on a per-site basis. Regarding users, they also expect
+a collaboration between sites to boot, for instance, a VM on \emph{Site 1},
+using an image defined in \emph{Site 2}. To that end both administrators and
+users require to collect data that belong to several sites. We define here two
+sub-levels as depicted in \cref{tab:requirements}. Such collaboration between
+sites can be either explicit (\ie the targeted sites are explicitly specified),
+referenced as the sub-level L2.1, or implicit (L2.2). The implicit manner
+suggests that policies (\eg performance objectives, energy consumption) and
+constraints (\eg affinity, underlying hardware) are provided by admins and users so
+that an edge-aware orchestrator takes the right decisions regarding the users'
+desiderata and the state of the infrastructure (\eg auto-scaling, relocating
+workloads between sites, re-scheduling faulty resources across sites).
 % should be elaborated and/or refs should be given here
 
 \paragraph{L3: Robustness wrt split brains:}
@@ -116,22 +120,31 @@ for any set of sites inside the partition.
 % what about quotas? how to manage them in case of split-brain?
 % suppose a user has a global quotas on several sites, it is impossible to
 % determine its global consumption in case of split-brains?
-Two sub-levels are proposed here since the robustness can be w.r.t. the
-applications deployed on compute resources (L3.1) or to the management services
-(L3.2).
+Two sub-levels are proposed here: L3.1 considers the robustness of already
+deployed resources (\eg a user should be able to access a deployed application
+despite the split brain, if he can reach the related site), while the
+robustness of management services, treated in L3.2, is required for both admins
+and users.
 % tricky issue: management of split brain between collaborative services in
 % different sites
 
 \paragraph{L4: Multiple Cloud environments:}
-We consider here L3 mechanisms while being able to manage multiple
-infrastructure environments to bring flexibility w.r.t. the
-infrastructure managers of the different sites. Since edge infrastructures are
-dynamic infrastructures where sites can join and leave, different versions of an
-IaaS manager can exist on different sites. One requirement is to make them
-collaborate (L4.1). Another requirement is to prevent vendor lock-in between
-multiple generic IaaS manager technologies (\eg OpenStack, CloudStack), and
-container orchestrators like Kubernetes (L4.2).
+Since edge infrastructures are dynamic infrastructures where sites can join and
+leave, different versions of an IaaS manager can exist on different sites. One
+requirement here is to consider L3 requirements between sites operated by
+different manager versions (L4.1). Another requirement is to prevent vendor
+lock-in between multiple generic IaaS manager technologies (\eg OpenStack,
+CloudStack), and container orchestrators like Kubernetes (L4.2).
+As a consequence, it is necessary to discover site's capabilities to determine
+their compatibilities. For instance, it is not possible to migrate a VM from
+\emph{Site 1} to \emph{Site 2} if the latter is managed by a container
+orchestrator.
 
 \paragraph{L5: Multiple operators:}
-
+We now consider that sites can be owned by different operators. As depicted in
+\cref{tab:requirements}, no requirements is expected by administrators since an
+operator should not be able to administrate another operator's sites. However,
+operators should be able to collaborate to offer their resources to users.
+Specific metrics should be collected at the scope of operators to manage for
+instance billing between them.
 
