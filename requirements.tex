@@ -89,6 +89,12 @@ long as the site is reachable.
 Furthermore, administrators and users expect metrics to be monitored (\eg
 related to resources, users, and projects) from any single site. This is used
 for instance for respectively managing quotas and listing existing resources.
+As mentioned, Edge infrastructures are dynamic, \ie sites can join and leave the
+infrastructure (on purpose or due to intermittent network access). As a
+consequence, tools also need to support this churn effect.
+Regarding the security aspect, one requirement expected by both admins and
+users is that the communications in the infrastructure are secured (\eg
+isolated, encrypted) and that actions are logged for auditing.
 
 \paragraph{L2: Operate/use several sites:}
 We now consider in this level that the operations previously defined in L1
