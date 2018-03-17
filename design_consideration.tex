@@ -6,13 +6,32 @@
 
 \section{Design Considerations}
 \label{design_considerations}
+This paper considers an Edge Infrastructure that is composed of
+hundreds of micro Data Centers named Edge Site. Each Edge Site
+provides control and compute capabilities (see~\ref{sec:requirements})
+on top of dozens of servers. They \emph{collaborate} with each-other
+to shape up the Edge Infrastructure and a Wide Area Network (WAN)
+interconnects them through both wired and wireless network links. This
+results in up to 300ms of RTT between two Edge Sites and common
+disconnections.
 
-The Edge Infrastructure we consider is an infrastructure that
-is composed of up to hundreds of micro DCs, which are themselves
-composed of up to one hundred servers (up to two racks). Figure 1
-gives an overview of a Fog/Edge architecture with several micro/nano
-DCs and the expected latency between each element. The network links
-can be either wired or wireless (represented by plain and dashed lines
-on the figure). Finally, it might be possible to consider additional
-DCs deployed at the Extreme Edge, within a private institution.
+Despite the fallibility of the network, and frequent isolation risks
+of an Edge Site form the rest of the Infrastructure (\ie network
+split-brain), the Edge Infrastructure may be kept sustainable. This is
+achieved by supposing a collaboration a la peer-to-peer, that is, an
+Edge Site always serves local resources and collaborates with other
+Edge Sites if needed. Thus, a user can make a SSH on his VM during a
+network split-brain if he gets a local access to the Edge Site. The
+same user can also start a VM using the VMI of an other Edge Site if
+the collaboration can be established.
 
+When it comes to develop this resource management system for the Edge
+computing, the developer gets two possibilities: a \emph{top-down} or
+\emph{bottom-up} design. Both designs impact how to handle the
+collaboration needed by such a system.
+
+\paragraph{Top-Down Collaboration}
+The top-down design implements the collaboration required by by
+federating IaaS managers' API. todo
+
+\paragraph{Bottom-Up Collaboration} todo
