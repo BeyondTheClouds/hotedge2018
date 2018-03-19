@@ -1,5 +1,5 @@
 
-\section{Requirements}
+\section{Administrators/Developers' Requirements}
 \label{sec:requirements}
 
 % \begin{figure}[t]
@@ -24,43 +24,24 @@
     \label{tab:requirements}
 \end{table*}
 
-%The network community proposed a few years ago a software architecture to operate Network Function Virtualization
 
-As previously mentioned, administrators and end-users of edge infrastructures
-% expect to get a set of high level mechanisms whose assembly results in a system
-% capable of operating and using a geo-distributed IaaS infrastructure. Those mechanisms
-% are provided by different services, each of which is in charge of an aspect of
-% the infrastructure management~\cite{moreno2012csp}:
-
-% \begin{itemize}
-%   \item The Compute manager is in charge of provisioning compute resources
-%     (\ie virtual/bare-metal machines, containers), and managing their life cycle
-%     (\eg configuration, scheduling, deployment, suspend/resume and shut down).
-%   \item The Image manager is in charge of machine and container images that are
-%     used to boot compute resources.
-%   \item The Network manager provides connectivity to the infrastructure:
-%     virtual networks for compute resources and external access for users.
-%   \item The Storage manager provides persistent storage facilities to
-%     compute resources.
-%   \item The Administrative tools provide administrator and user interfaces to
-%     operate and use the infrastructure.
-%   \item Finally, the Information manager monitors data of the infrastructure for
-%     auditing and accounting.
-% \end{itemize}
-
-In an edge computing infrastructure, servers located at the edge sites can
-include both management services, and compute resources.
-%Those services enable administrators and developers/end-users to respectively
-%operate and use the infrastructure on demand.
-
-Based on the services previously defined, we propose a classification of the
-requirements expected by administrators and end-users to operate and use edge
-computing infrastructures composed of many sites. Our classification is based
-on $5$ \emph{levels}, starting from the easiest aspects (\ie interacting with
-a single site -- level 1, or L1) to more complex aspects like managing multiple
-sites (L2), up to considering they can be owned by different operators (L5).
-\Cref{tab:requirements} summarizes the classification we detail in the
-following:
+As previously mentioned, administrators and end-users of edge
+infrastructures expect to get a set of high level mechanisms whose
+assembly results in a system capable of operating and using a
+geo-distributed IaaS infrastructure (Compute, Storage and Network
+managers, monitoring and administrative tools)~\cite{moreno2012csp}.
+However, considering each of these services independently is not
+sufficient enough to identify the challenges our community should deal with.
+%
+In this section, we consider and classify concrete actions administrators and
+developers/end-users expect to perform on edge computing infrastructures.
+\AL{Polish (in particular by adding a transition)}.
+The classification is based on $5$ \emph{levels},
+starting from the easiest aspects, \ie interacting with a single site
+-- level 1 (L1) to more complex aspects like managing multiple
+sites (L2), up to considering they can be owned by different operators
+(L5).  \Cref{tab:requirements} summarizes the classification we detail
+in the following:
 
 \paragraph{L1: Operate/use any site}
 This level contains all the requirements at the scope of a single site of the
