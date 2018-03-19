@@ -10,6 +10,8 @@
 
 %There are two fundamental ways to address the design of the system: 1) top-down, leveraging on existing VIMs as they are made available today (i.e. without modifications/extensions); 2) bottom-up, modifying/extending existing VIMs or even creating a completely new system. 
 
+\AL[Comment by Joao]{Add more cross-reference to L1-L5}
+
 A \emph{top-down} system  relies on existing VIM APIs and on overlay components, with no modifications to the base code of a VIM.
 OpenStack, for example, provides a new release every six months and the code varies a lot between each release, however changes rarely impact the APIs. A \emph{top-down} approach gives independency to the VIM development and the remaining system components. Moreover, if designed to do so, the system can easily allow to mix different VIMs (e.g. OpenStack, Kubernetes) and different versions of a VIM (\eg OpenStack Pike and OpenStack Queens release). 
 
