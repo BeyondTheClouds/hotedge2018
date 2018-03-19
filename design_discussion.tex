@@ -16,6 +16,10 @@ OpenStack, for example, provides a new release every six months and the code var
 However, in order to operate a distributed edge infrastructure through a single entry point, it means that certain (low-level) VIM services need to be reimplemented at the overlay level (\eg authentication, resource scheduling, resource monitoring, etc). 
 Moreover, as of today, it is also certain that a reduced/limited set of functionalities will be available compared throughout the entire edge infrastructure as compared to a single VIM environment. In other words, certain requirements cannot be fulfilled without changing the natice VIM (\eg live migration and virtual networking across sites). For example, OpenStack Tricircle, a project that aims to allow virtual networking across different sites by introducing an overlay component ended up introducing new mechanisms into the core of OpenStack. On the other hand, FogBow~\cite{brasileiro2016fogbow} does not introduce any changes to the VIM core, however its support for cross site networking is limited to layer 3 networking using IPsec tunneling.
 
+An interesting fact about existing \emph{top-down} is that nearly all ...
+
+\AL[Comment by Joao]{still need to work here}
+
 %------Moreover, if different VIM flavors are deployed, it might become impractical to provide a single VIM management-view to users as different VIMs might have specific features that need to be managed. 
 
 
@@ -25,8 +29,11 @@ However, efficiency and freedom come at a cost in this case. Most existing VIM s
 
 %Writting a completely new system will be expensive (time and resource wise). Equally, extending/modifying and existing system as similar cost. Moreover, a bottom-up approach would certainly mean the entire edge infrastructure would rely on a specific platform/VIM. 
 
+\AL[Comment by Joao]{Still need to improve this section}
 
-The above two approaches each have their pros and cons, and none individually can fullfil all requirements of an edge infrastructure. On the one hand, a \emph{top-down} approach brings modularity and a certain level of independence between components, however it is limited by that same independence as it requires low-level VIM features to be enabled. On the other hand, a \emph{bottom-up} approach can be very costly without in the end being able to provide all required features (\eg L4 requirements - see \Cref{tab:requirements}). It becomes somehow easy to state that a system for the edge requires a two-side approach, where top-down bottom-up approaches meet. The real question becomes then, where shall these meet?
+The above two approaches each have their pros and cons, and none individually can fullfil all requirements of an edge infrastructure. On the one hand, a \emph{top-down} approach brings modularity and a certain level of independence between components, however it is limited by that same independence as it requires low-level VIM features to be enabled. 
+On the other hand, a \emph{bottom-up} approach can be very costly without in the end being able to provide all required features (\eg L4 requirements - see \Cref{tab:requirements}).
+It becomes somehow easy to state that a system for the edge requires a two-side approach, where top-down bottom-up approaches meet. The real question becomes then, where shall these meet?
 
 
 \AL[Comment by Joao]{Would a picture with a simplified view of a top-down system vs a bottom-up one help the reader?}
