@@ -4,8 +4,8 @@
 
 
 % Edge Infrastructures are the next platform
-With the emergence of Internet of Things applications (IoT) and new
-usages related Network Function
+With the emergence of Internet of Things (IoT) and augmented/virtual reality (AR/VR) 
+applications, as well as the new usages related Network Function
 Virtualization technologies (NFV), Cloud and Network communities are now advocating
 for going towards massively distributed small sized infrastructures
 that are deployed at the edge of the network.
@@ -17,23 +17,22 @@ Computing capabilities closer to end-users, their related devices, and the appli
 
 %% A lot of academics works focus on how to leverage these
 %% infrastructures to address specicifc use-cases
-While several academic studies have highlighed the advantages of Edge
+While several academic studies have highlighted the advantages of Edge
 Computing infrastructures in various
 domains~\cite{bonomi2012fog,zhang2015cloud,yi2015fog,shi2016edge,satyanarayanan2017emergence},
 the development of
 %%  We need a resource management system that enables administrators to
 %% operate and end-users to use edge resources.
-a resource management system that will enable, on the first hand,
+a resource management system that will enable, on the one hand,
 an operator to aggregate, supervise and expose such massively
 distributed resources and, on the other hand, developers to implement
 new kinds of services that may be deployed and managed on demand is
 still an open question.
 
 %%  Delivierng en Edge IaaS system is complex
-With their IOx and Fog Director software
-solutions~\cite{bonomi2012fog}, Cisco allows IoT applications to run
-on infrastructures composed of NFV-enabled hardware (at the edge) and
-existing centralized clouds. However, their solution does not allow to
+Domain specific solutions such as ~\cite{bonomi2012fog} allow IoT applications 
+to run on infrastructures composed of NFV-enabled hardware (at the edge) and
+existing centralized clouds. However, these solutions do not allow to
 run workloads in isolated environments such as containers or virtual
 machines (VMs). 
 %
@@ -66,8 +65,8 @@ of a conceptual architecture and a vocabulary.
 %can be found at
 \footnote{\url{https://collaborate.nist.gov/twiki-cloud-computing/bin/view/CloudComputing/FederatedCloudPWGFC} (Valid on March 2018).}
 %
-While all these projects propose contributions to manage
-geo-ditributed applications life cycle in a more software defined manner, they present two
+While all these projects propose contributions to manage the life cycle of
+geo-ditributed applications in a more software defined manner, they present two
 weaknesses. First, they become more and more complex to finally
 integrate most of the mechanisms that are already present in
 IaaS resource management systems~\cite{}.\AL{Fix ref}  Second,
@@ -105,7 +104,7 @@ present important reflections to consider before starting the development of suc
 Because there are as many edge infrastructures as use-cases, we
 highlight that the edge infrastructure we considered to conduct this
 study is composed from the hardware viewpoint of several
-geo-distributed micro DCs (up to hundreds), which are themselves
+geo-distributed micro DCs (up to hundreds)\FW{AL: only hundreds? I would have said up to several tens of thousands}, which are themselves
 composed of up to one hundred servers (up to two racks).
 Figure~\ref{fig:fogedge-archi} gives an overview of this
 infrastructure. The expected latency as well as the bandwidth between
@@ -126,12 +125,12 @@ organizations, including large groups, in particular key actors of
 edge infrastructures such as ATT, Verizon~\ldots.
 
 
-The remaining of the paper is organized as
+The remainder of the paper is organized as
 follows. Section~\ref{sec:requirements} presents major features
-expected by administrators and developers, higlightling in particular
+expected by administrators and developers, highlightling in particular
 the main differences w.r.t federated infrastructures.
 Section~\ref{sec:design_considerations} introduces two approaches that
-opensource communities could follow to design and develop a IaaS
+open source communities could follow to design and develop an IaaS
 toolkit, \aka a resource management system, dedicated to edge
 environments. Section~\ref{sec:design_discussion} discusses pros/cons
 of both approaches. Existing solutions that might serve as starting
