@@ -8,14 +8,28 @@
 %\label{design_considerations}
 
 \section{System Design}
-\label{system_design_considerations}
-This paper considers an Edge Infrastructure that is composed of
-hundreds of micro Data Centers named Edge Site. The first approach to operate such a massively distributed infrastructure is to take 
+\label{sec:system_design_considerations}
+As previously mentioned, the starting point for this study is an edge
+infrastructure composed of hundreds of micro DCs (\aka edge sites)
+operated by the OpenStack software suite.  Several deployments
+scenarios can be envisioned, including one or several OpenStack
+instances.  We discuss in this section two of them. This preliminary
+discussion enables us to justify why collaborations is mandatory to
+fulfill the requirements identified in Section~\ref{sec:requirements}.
+While OpenStack has been considered, we underline that alternatives
+such as OpenNebula or even Kubernetes would have been lead to the same
+conclusion in terms of resource management and collaboration needs.
+\AL{Put references for OpenNebula and Kubernetes}
+
+\subsection{Centralized Management and Remote Compute/Storage/Network Nodes}
+\label{subsec:centralized_os}
 
 
-\subsection{Considerations}
-\label{design_considerations}
- Each Edge Site
+\subsection{Segregate into Regions}
+
+
+\subsection{Effective Collaboration is Needed}
+Each Edge Site
 provides control and compute capabilities (see~\ref{sec:requirements})
 on top of dozens of servers. They \emph{collaborate} with each-other
 to shape up the Edge Infrastructure and a Wide Area Network (WAN)
