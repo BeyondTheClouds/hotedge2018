@@ -5,11 +5,10 @@
 %%% TeX-master: t
 %%% End:
 
-\section{Design Discussions}
+\subsection{Discussion}
 \label{sec:design_discussion}
-\AL[Fetahi/Joao]{Please start the discussion between top/down and bottom/up approaches}
 
-There are two fundamental ways to address the design of the system: 1) top-down, leveraging on existing VIMs as they are made available today (i.e. without modifications/extensions); 2) bottom-up, modifying/extending existing VIMs or even creating a completely new system. 
+%There are two fundamental ways to address the design of the system: 1) top-down, leveraging on existing VIMs as they are made available today (i.e. without modifications/extensions); 2) bottom-up, modifying/extending existing VIMs or even creating a completely new system. 
 
 In a top-down case, a system  would rely on existing VIM APIs and no modifications to the base code of a VIM would be made. For example, OpenStack provides a new release every six months and the code varies a lot between each release, however changes rarely impact the APIs. Such approach would give full independency to the development of VIMs as well as to remaining edge system components. Moreover, if designed to do so, the system can easily allow to mix different VIMs (e.g. OpenStack and OpenNebula) and different versions of a VIM (e.g. OpenStack Pike and OpenStack Queens release). 
 However, if one wants to operate a complete edge infrastructure through a single entry point, it means that certain VIM low-level services need to be reimplemented at a higher-level (e.g. authentication, resource scheduling, monitoring, etc). Moreover, if the latter case applies and if multiple VIMs are deployed, it might become impractical to provide a single VIM management-view to users as different VIMs might have specific features that need to be managed. It is also most certain that in this approach, a reduced/limited set of functionalities will be available compared to a single VIM instance functionalities. In other words, certain requirements cannot be fulfilled without changing the natice VIM (e.g. live migration across sites).
@@ -20,6 +19,8 @@ However, efficiency and freedom come at a cost. Writting a completely new system
 
 
 The above two approaches each have their pros and cons, and none individually can fullfil all requirements of an edge infrastructure. On the one hand, a top-down approach brings modularity and a certain level of independence between components, however it is limited by that same independence as it requires low-level features to be enabled. On the other hand, a bottom-up approach can be very costly without in the end being able to provide all required features. It becomes somehow easy to state that a system for the edge requires a two-side approach, where top-down bottom-up approaches meet. The real question becomes then, where shall these meet?
+~\cite{ericsson-p2p}
+
 \AL[Comment by Joao]{After reading this first draft, everything seems so obvious. Where is the value here? Can we further elaborate on the last question? i.e. where should the two approaches meet? Maybe we do not want to make a hard conclusion, but we can point that the community has not yet settled on one way and refer to the related work. But again, this would still leave the problem open...and again, would such statements value enough for the paper? 
 	
 	I am having at this point a hard time on finding our "punch line". What is the idea that we want to convey in this paper on which we want to get feedback? Because in the end we should have an idea over which we want feedback on - since HotEgde is about not well cooked ideas that want feedback}
