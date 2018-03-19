@@ -70,8 +70,7 @@ While all these projects propose contributions to manage
 geo-ditributed applications life cycle in a more software defined manner, they present two
 weaknesses. First, they become more and more complex to finally
 integrate most of the mechanisms that are already present in
-IaaS resource management systems such as OpenStack (the defacto open-source solution
-to operate and use Cloud Computing infrastructures)~\cite{}.\AL{Fix ref}  Second,
+IaaS resource management systems~\cite{}.\AL{Fix ref}  Second,
 they have been designed by focusing on the developer/end-user's
 requirements, that is without considering the administrator's
 perspective.
@@ -103,27 +102,41 @@ present important reflections to consider before starting the development of suc
   {\small{Composed of several micro DCs, it can be extended to Cloud Computing platforms when relevant (although they are farther, they provide more ICT resources).}}
 \end{figure}
 
-Because there are as many edge infrastructures as use-cases, we highlight that the edge infrastructure
-we considered to conduct this study is composed of several geo-distributed micro DCs (up to hundreds), which are themselves composed of up to one hundred
-servers (up to two racks).  Figure~\ref{fig:fogedge-archi} gives an overview of this
-infrastructure. The expected latency as
-well as the bandwidth between each element may fluctuate
-significantly, in particular because the network links can be either
-wired or wireless (represented by plain and dashed lines on the
-figure). Moreover, short disconnections between edge sites may occur leading to temporary network split brain situations\AL{Add INFOCom citations}.
-Finally, it might be possible to consider additional micro DCs deployed at the Extreme Edge, within private institutions or even public transports.
+Because there are as many edge infrastructures as use-cases, we
+highlight that the edge infrastructure we considered to conduct this
+study is composed from the hardware viewpoint of several
+geo-distributed micro DCs (up to hundreds), which are themselves
+composed of up to one hundred servers (up to two racks).
+Figure~\ref{fig:fogedge-archi} gives an overview of this
+infrastructure. The expected latency as well as the bandwidth between
+each element may fluctuate significantly, in particular because the
+network links can be either wired or wireless (represented by plain
+and dashed lines on the figure). Moreover, short disconnections
+between edge sites may occur leading to temporary network split brain
+situations\AL{Add INFOCom citations}.  Finally, it might be possible
+to consider additional micro DCs deployed at the Extreme Edge, within
+private institutions or even public transports.
+%
+From the software point of view, in order to simplify the model and
+without loss of generality, we mainly assume the OpenStack software
+suite.  After seven years of intensive developments, OpenStack has
+become the de facto open-source solution to operate, supervise and use
+IaaS infrastructures.  The OpenStack community gathers more than 500
+organizations, including large groups, in particular key actors of
+edge infrastructures such as ATT, Verizon\~ldots.
 
 
 The remaining of the paper is organized as
-follows. Section~\ref{sec:requirements} presents major features expected by administrators and developers, higlightling in particular the main differences
-w.r.t federated infrastructures.
-Section~\ref{sec:design_considerations} introduces two approaches
-that opensource communities could follow to design and develop a IaaS
+follows. Section~\ref{sec:requirements} presents major features
+expected by administrators and developers, higlightling in particular
+the main differences w.r.t federated infrastructures.
+Section~\ref{sec:design_considerations} introduces two approaches that
+opensource communities could follow to design and develop a IaaS
 toolkit, \aka a resource management system, dedicated to edge
 environments. Section~\ref{sec:design_discussion} discusses pros/cons
-of both approaches. Existing solutions that might serve as
-starting points, are discussed in
-Section~\ref{sec:related_work}. Finally, Section~\ref{sec:conclusion} concludes this paper.
+of both approaches. Existing solutions that might serve as starting
+points, are discussed in Section~\ref{sec:related_work}. Finally,
+Section~\ref{sec:conclusion} concludes this paper.
 
 
 % In this paper, we provide a list of expected features for both administrators and admins.
