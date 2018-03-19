@@ -2,18 +2,18 @@
 \section{Requirements}
 \label{sec:requirements}
 
-\begin{figure}[t]
-  \centering
-  \def\svgwidth{\columnwidth}
-  \input{figures/sites.pdf_tex}
-  \caption{Partial representation of the targeted edge infrastructure, composed
-    of multiple sites. Each site is composed of many servers (represented by
-    black bullets) and have a set of users (depicted by black squares). The red
-    dashed line depicts a split-brain situation that separates the
-    infrastructure into $2$ partitions, isolating \emph{Site 1} from \emph{Site
-    2} and \emph{3}.}
-  \label{fig:sites}
-\end{figure}
+% \begin{figure}[t]
+%   \centering
+%   \def\svgwidth{\columnwidth}
+%   \input{figures/sites.pdf_tex}
+%   \caption{Partial representation of the targeted edge infrastructure, composed
+%     of multiple sites. Each site is composed of many servers (represented by
+%     black bullets) and have a set of users (depicted by black squares). The red
+%     dashed line depicts a split-brain situation that separates the
+%     infrastructure into $2$ partitions, isolating \emph{Site 1} from \emph{Site
+%     2} and \emph{3}.}
+%   \label{fig:sites}
+% \end{figure}
 
 
 \begin{table*}
@@ -27,28 +27,26 @@
 %The network community proposed a few years ago a software architecture to operate Network Function Virtualization
 
 As previously mentioned, administrators and end-users of edge infrastructures
-expect to get a set of high level mechanisms whose assembly results in a system
-capable of operating a geo-distributed IaaS infrastructure. Those mechanisms
-are provided by different services, each of which is in charge of an aspect of
-the infrastructure management. In our study, we will only consider the $6$
-following primary services, required to operate and use on-demand
-resources~\cite{moreno2012csp}:
+% expect to get a set of high level mechanisms whose assembly results in a system
+% capable of operating and using a geo-distributed IaaS infrastructure. Those mechanisms
+% are provided by different services, each of which is in charge of an aspect of
+% the infrastructure management~\cite{moreno2012csp}:
 
-\begin{itemize}
-  \item The Compute manager is in charge of provisioning compute resources
-    (\ie virtual/bare-metal machines, containers), and managing their life cycle
-    (\eg configuration, scheduling, deployment, suspend/resume and shut down).
-  \item The Image manager is in charge of machine and container images that are
-    used to boot compute resources.
-  \item The Network manager provides connectivity to the infrastructure:
-    virtual networks for compute resources and external access for users.
-  \item The Storage manager provides persistent storage facilities to
-    compute resources.
-  \item The Administrative tools provide administrator and user interfaces to
-    operate and use the infrastructure.
-  \item Finally, the Information manager monitors data of the infrastructure for
-    auditing and accounting.
-\end{itemize}
+% \begin{itemize}
+%   \item The Compute manager is in charge of provisioning compute resources
+%     (\ie virtual/bare-metal machines, containers), and managing their life cycle
+%     (\eg configuration, scheduling, deployment, suspend/resume and shut down).
+%   \item The Image manager is in charge of machine and container images that are
+%     used to boot compute resources.
+%   \item The Network manager provides connectivity to the infrastructure:
+%     virtual networks for compute resources and external access for users.
+%   \item The Storage manager provides persistent storage facilities to
+%     compute resources.
+%   \item The Administrative tools provide administrator and user interfaces to
+%     operate and use the infrastructure.
+%   \item Finally, the Information manager monitors data of the infrastructure for
+%     auditing and accounting.
+% \end{itemize}
 
 In an edge computing infrastructure, servers located at the edge sites can
 include both management services, and compute resources.

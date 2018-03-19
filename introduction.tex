@@ -37,11 +37,8 @@ existing centralized clouds. However, their solution does not allow to
 run workloads in isolated environments such as containers or virtual
 machines (VMs). 
 %
-This is rather critical as administrators and end-users expect to find
-most features that makes the success of the Cloud Computing paradigm
-and even if Edge infrastructures significantly differ regarding
-heterogeneity, resiliency and the potential massive distribution of
-resources and networking environment.
+This is rather critical as developers/end-users expect to find
+most features that makes the success of current Cloud Computing solutions.
 
 In 2016, the European Telecommunications Standards Institute (ETSI) MEC
 Industry Specification Group defined  a software architecture
@@ -69,27 +66,33 @@ of a conceptual architecture and a vocabulary.
 %can be found at
 \footnote{\url{https://collaborate.nist.gov/twiki-cloud-computing/bin/view/CloudComputing/FederatedCloudPWGFC} (Valid on March 2018).}
 %
-While all these projects propose extensions to %current interfaces
-% (APIs) to turn location into a first-class citizen, and
-allow end-users/developers to manage edge applications life cycle,
-they do not provide a well-suited software stack to enable
-administrators to operate, and developers to use, distinct edge sites
-like a global Cloud Computing infrastructure. In other words, there is
-currently not well-suited solutions to easily deliver cloud computing
-services at the edge.
-%
-%
+While all these projects propose contributions to manage
+geo-ditributed applications life cycle in a more software defined manner, they present two
+weaknesses. First, they become more and more complex to finally
+integrate most of the mechanisms that are already present in
+IaaS resource management systems such as OpenStack (the defacto open-source solution
+to operate and use Cloud Computing infrastructures)~\cite{}.\AL{Fix ref}  Second,
+they have been designed by focusing on the developer/end-user's
+requirements, that is without considering the administrator's
+perspective.
 
-In this paper, we present preliminary reflexions regarding how such a
-system can be delivered. To this aim, we propose~:
+Designing and implementing a complete software stack to enable
+administrators to operate, and developers to use, distinct edge sites
+like a global Cloud Computing infrastructure is a difficult challenge
+for our community. However it is a challenge we should tackle soon to
+favor the advent of the Edge Computing paradigm.
+
+In this paper, we
+present important reflections to consider before starting the development of such a system.
 \begin{itemize}
-\item A classification of the features that are expected from both
-  administrators and end-users of edge computing infrastructures
-  ; %, which higlights in particular why edge infrastructures differ
-    %from federated ones ;
-\item An analyzis of pros and cons of possible design strategies
-  (top/down and bottom up).
-\end{itemize}
+\item First, we propose a classification of expected features from
+  both administrators and end-users. Although this classification might be extended, it is already valuable to drive the design and implementation of a resource management system for the edge computing.
+    \item Second, we discuss several design strategies. In particular, we
+  analyze pros and cons of top/down and bottom up approaches. The
+  former consists in interacting with each site only through the exposed APIs
+  while the latter aims at revising internal mechanisms to enable
+  native collaborations.
+  \end{itemize}
 
 \begin{figure}[]
   \centering
@@ -100,15 +103,15 @@ system can be delivered. To this aim, we propose~:
   {\small{Composed of several micro DCs, it can be extended to Cloud Computing platforms when relevant (although they are farther, they provide more ICT resources).}}
 \end{figure}
 
-The edge infrastructure we considered to conduct this study is
-composed of up to hundreds of micro DCs, which are themselves composed
-of up to one hundred servers (up to two racks).  Figure 1 gives an
-overview of this infrastructure with several micro/nano DCs. The
-expected latency as well as the bandwidth between each element may
-fluctuate significantly, in particular because the network links can
-be either wired or wireless (represented by plain and dashed lines on
-the figure). Finally, it might be possible to consider additional DCs
-deployed at the Extreme Edge, within a private institution.
+Because there are as many edge infrastructures as use-cases, we highlight that the edge infrastructure
+we considered to conduct this study is composed of several geo-distributed micro DCs (up to hundreds), which are themselves composed of up to one hundred
+servers (up to two racks).  Figure~\ref{fig:fogedge-archi} gives an overview of this
+infrastructure. The expected latency as
+well as the bandwidth between each element may fluctuate
+significantly, in particular because the network links can be either
+wired or wireless (represented by plain and dashed lines on the
+figure). Moreover, short disconnections between edge sites may occur leading to temporary network split brain situations\AL{Add INFOCom citations}.
+Finally, it might be possible to consider additional micro DCs deployed at the Extreme Edge, within private institutions or even public transports.
 
 
 The remaining of the paper is organized as
