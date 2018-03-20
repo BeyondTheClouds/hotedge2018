@@ -12,9 +12,8 @@
 %     dashed line depicts a split-brain situation that separates the
 %     infrastructure into $2$ partitions, isolating \emph{Site 1} from \emph{Site
 %     2} and \emph{3}.}
-%   \label{fig:sites}
+%   \label{fig:fogedge-archi}
 % \end{figure}
-
 
 \begin{table*}
     \centering
@@ -23,7 +22,6 @@
     computing infrastructures in $5$ levels.}
     \label{tab:requirements}
 \end{table*}
-
 
 As previously mentioned, administrators and end-users of edge
 infrastructures expect to get a set of high level mechanisms whose
@@ -47,7 +45,7 @@ in the following:
 This level contains all the requirements at the scope of a single site of the
 infrastructure. The second row of \cref{tab:requirements} lists those
 requirements expected from administrators and users. To operate a single site,
-like \emph{Site 1} depicted in \cref{fig:sites}, the resource management
+like \emph{Site 1} depicted in \cref{fig:fogedge-archi}, the resource management
 services defined previously must be installed (or upgraded) by an
 administrator. After what, admins can use those services to manage users,
 accesses, flavors (\ie available capacities of compute resources) or quotas,
@@ -91,7 +89,7 @@ workloads between sites, re-scheduling faulty resources across sites).
 \paragraph{L3: Robustness wrt split brains:}
 In this level, we now consider split brains which correspond to the situation
 where the infrastructure is partitioned due to communication failures.
-\Cref{fig:sites} depicts such situation where \emph{Site 1} is isolated from
+\Cref{fig:fogedge-archi} depicts such situation where \emph{Site 1} is isolated from
 \emph{Site 2} and \emph{3}. In such case, all operations defined in L1 must be
 guaranteed for a partition composed of a single site like \emph{Site 1}
 (supposing it is reachable). For instance, a user in \emph{Site 1} should be
