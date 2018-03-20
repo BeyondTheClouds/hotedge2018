@@ -8,50 +8,44 @@
 \subsection{Discussion}
 \label{sec:design_discussion}
 
-%There are two fundamental ways to address the design of the system: 1) top-down, leveraging on existing VIMs as they are made available today (i.e. without modifications/extensions); 2) bottom-up, modifying/extending existing VIMs or even creating a completely new system. 
-
-\AL[Comment by Joao]{Add more cross-reference to L1-L5}
 
 A \emph{top-down} system  relies on existing VIM APIs and on overlay components, with no modifications to the base code of a VIM.
-OpenStack, for example, provides a new release every six months and the code varies a lot between each release, however changes rarely impact the APIs. A \emph{top-down} approach gives independency to the VIM development and the remaining system components. Moreover, if designed to do so, the system can easily allow to mix different VIMs (e.g. OpenStack, Kubernetes) and different versions of a VIM (\eg OpenStack Pike and OpenStack Queens release). 
+OpenStack, for example, provides a new release every six months and the code varies a lot between each release, however changes rarely impact the APIs.  Therefore, a \emph{top-down} approach gives independence to both VIM development and overlay system components. 
+If designed to do so, the system can easily allow L4 requirements, \ie the support of different VIMs (e.g. OpenStack, Kubernetes) and different versions of a VIM (\eg OpenStack Pike and OpenStack Queens release) - \eg FogBow~\cite{brasileiro2016fogbow}.
 
-However, in order to operate a distributed edge infrastructure through a single entry point, it means that certain (low-level) VIM services need to be reimplemented at the overlay level (\eg authentication, resource scheduling, resource monitoring, etc). 
-Moreover, as of today, it is also certain that a reduced/limited set of functionalities will be available compared throughout the entire edge infrastructure as compared to a single VIM environment. In other words, certain requirements cannot be fulfilled without changing the natice VIM (\eg live migration and virtual networking across sites). For example, OpenStack Tricircle, a project that aims to allow virtual networking across different sites by introducing an overlay component ended up introducing new mechanisms into the core of OpenStack. On the other hand, FogBow~\cite{brasileiro2016fogbow} does not introduce any changes to the VIM core, however its support for cross site networking is limited to layer 3 networking using IPsec tunneling.
 
-An interesting fact about existing \emph{top-down} is that nearly all ...
+However, as of today, it is certain that a reduced/limited set of functionalities will be available throughout the entire edge infrastructure as compared to a single VIM environment. In other words, certain requirements cannot be fulfilled without changing the core of a VIM (\eg L2 type of requirements like live migration and virtual networking across sites). For example, OpenStack Tricircle~\cite{tricircle}, a project that aims to allow virtual networking across different sites by introducing an overlay component ended up introducing new mechanisms into the core of OpenStack in order to fulfil part of the requirements. On the other hand, FogBow~\cite{brasileiro2016fogbow} does not introduce any changes to the VIM core, but its support for cross site networking is very limited.
+Moreover, in order to operate a distributed edge infrastructure through a single logical entry point, it means that many low-level VIM services need to be reimplemented at the overlay level (\eg authentication, resource scheduling, resource monitoring, etc). Ultimately, one might end reimplementing the entire low level system at a higher level.
 
-\AL[Comment by Joao]{still need to work here}
+
+
+%An interesting fact about existing \emph{top-down} is that nearly all ...
 
 %------Moreover, if different VIM flavors are deployed, it might become impractical to provide a single VIM management-view to users as different VIMs might have specific features that need to be managed. 
 
 
-In a \emph{bottom-up} case, the system is not limited by what is made available through VIM APIs. This can allow the system to more easily support features across the entire edge infrastructure (\eg networking across sites). Moreover, such approach can lead to a more efficient system, one without the need to repeatedly implement features at different levels. %Moreover, it can potentially fullfil any and all (reasonable) requirements since any feature missing can be implemented. 
+In a \emph{bottom-up} case, the system is not limited by what is made available through its user APIs. This can allow the system to more easily support features across the entire edge infrastructure (\eg virtual networking across sites). Moreover, such approach can lead to a more efficient system, one without the need to repeatedly implement features at different levels. %Moreover, it can potentially fullfil any and all (reasonable) requirements since any feature missing can be implemented. 
+\JM{Ronan, can you add references of existing work?}
 
-However, efficiency and freedom come at a cost in this case. Most existing VIM systems were not designed with distribution, like the one of edge scenarios, in mind. This means that extending/modifying existing VIMs can be too expensive (time and resource wise). Moreover, a \emph{bottom-up} approach would certainly mean the entire edge infrastructure would rely on a specific platform/VIM (which seems today a very unrealistic scenario). The way to of course overcome this would be to have a complementary \emph{top-down} system.
-
-%Writting a completely new system will be expensive (time and resource wise). Equally, extending/modifying and existing system as similar cost. Moreover, a bottom-up approach would certainly mean the entire edge infrastructure would rely on a specific platform/VIM. 
-
-\AL[Comment by Joao]{Still need to improve this section}
-
-The above two approaches each have their pros and cons, and none individually can fullfil all requirements of an edge infrastructure. On the one hand, a \emph{top-down} approach brings modularity and a certain level of independence between components, however it is limited by that same independence as it requires low-level VIM features to be enabled. 
-On the other hand, a \emph{bottom-up} approach can be very costly without in the end being able to provide all required features (\eg L4 requirements - see \Cref{tab:requirements}).
-It becomes somehow easy to state that a system for the edge requires a two-side approach, where top-down bottom-up approaches meet. The real question becomes then, where shall these meet?
+However, the efficiency and ease to support new features comes at a cost. Most existing VIM systems were not designed with distribution, like the one of edge scenarios, in mind. With the high industry demand for a working edge system, this means that modifying or extending existing VIMs (or even creating a new system) is in most cases too expensive (time and resource wise).
+Moreover, a \emph{bottom-up} approach would certainly mean the entire edge infrastructure would rely on a specific platform/VIM, which seems to be a unrealistic scenario today due to the still fragmented VIM landscape. On a short-term, a way to overcome this would be to have a complementary \emph{top-down} system. On a longer perspective, the ideal scenario would be for the industry to agree on a standardized system in a similar way as it has done for mobile communications with 3GPP~\cite{3gpp}.
 
 
-\AL[Comment by Joao]{Table with major findings?}
-
-\AL[Comment by Joao]{Would a picture with a simplified view of a top-down system vs a bottom-up one help the reader?}
-
-NOTES:
-
-The way to go is bottom up. Top-down, fastest TTM, a quick fix. That is how everyone is doing it, and thatis the way. BUt that is no the way it should be designed. Short-medium term, top-down...long-run, bottom-up.
-
-http://ieeexplore.ieee.org/abstract/document/1334777/
-
-Top-down: requirements, then implement it
-Bottom-up: not all requirments, but implement something. Can top-down approaches be partially used and implemented in a bottom-up
+Both approaches have \emph{pros} and \emph{cons}, and none individually seems to fulfil all technical and business requirements of edge scenarios. 
+On a technical perspective, a \emph{top-down} approach brings modularity and independence between system components, however it is limited by that same independence as it requires low-level VIM features to be enabled to fulfil all requirements. Moreover, a full working system would be far from effient as several features need to be implemented at different levels.
+A \emph{bottom-up} approach can produce a more efficient system that can easily support additional requirements.
+On a business perspective, a \emph{top-down} approach can easily fulfil the short and medium-term Time-To-Market (TTM) requirements. In that sense, that is be the first working solution the community should aim for, and the way the community has been working so far. However, serious effort should also be put on a long-term solution that lays on a \emph{bottom-up} approach. As a starting point, early \emph{bottom-up} efforts
+\JM{Ronan, reference to your paper?}
+ can be taken into account along with mechanisms that have been developed to realize \emph{top-down} solutions but can be applied in a \emph{bottom-up} way~\cite{ericsson-p2p}.
 
 
-%\AL[Comment by Joao]{After reading this first draft, everything seems so obvious. Where is the value here? Can we further elaborate on the last question? i.e. where should the two approaches meet? Maybe we do not want to make a hard conclusion, but we can point that the community has not yet settled on one way and refer to the related work. But again, this would still leave the problem open...and again, would such statements value enough for the paper? 
-	
-%	I am having at this point a hard time on finding our "punch line". What is the idea that we want to convey in this paper on which we want to get feedback? Because in the end we should have an idea over which we want feedback on - since HotEgde is about not well cooked ideas that want feedback}
+\JM{Would a picture somewhere in the paper with a simplified view of a top-down system vs a bottom-up one help the reader? Maybe in section 3.3? I think it would be useful, but we would need to cut somewhere to make it fit in the 5 pages}
+
+%NOTES:
+%The way to go is bottom up. Top-down, fastest TTM, a quick fix. That is how everyone is doing it, and thatis the way. BUt that is no the way it should be designed. Short-medium term, top-down...long-run, bottom-up.
+%Refer to:
+%http://ieeexplore.ieee.org/abstract/document/1334777/
+%Top-down: requirements, then implement it
+%Bottom-up: not all requirments, but implement something. Can top-down approaches be partially used and implemented in a bottom-up.
+
+
