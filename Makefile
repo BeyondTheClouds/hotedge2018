@@ -6,10 +6,11 @@ READER = zathura
 LATEXMK := $(shell command -v latexmk 2> /dev/null)
 
 MAIN = hotedge2018
-OBJ = $(shell find . -not -path '*/\.*' \
+OBJS = $(shell find . -not -path '*/\.*' \
 	  	-type f -name "*.tex" \
 		! -name "$(MAIN).tex" \
 		! -name "original_template.tex")
+FIGS = $(shell find figures -type f -name "*.pdf")
 OPTIONS = -pdflatex="$(TEX) -interaction=nonstopmode"
 
 
@@ -19,14 +20,14 @@ else
 all: $(MAIN).pdf
 endif
 
-$(MAIN).pdf: $(MAIN).tex $(MAIN).bib $(OBJ) 
+$(MAIN).pdf: $(MAIN).tex $(MAIN).bib $(OBJS) $(FIGS)
 	@echo Compile the document with latexmk.
 	latexmk 		\
 		-pdf 		\
 		$(OPTIONS)  \
 		-use-make $<
 
-legacy: $(OBJ) $(MAIN).bib
+legacy: $(OBJS) $(FIGS) $(MAIN).bib
 	@echo [WARNING] latexmk should be installed - proceed with legacy process.
 	$(TEX) $(MAIN).tex
 	$(BIB) $(MAIN)
