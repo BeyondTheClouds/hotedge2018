@@ -1,4 +1,3 @@
-
 %%% Local Variables:
 %%% mode: latex
 %%% TeX-master: t
@@ -11,18 +10,63 @@
 \label{sec:system_design_considerations}
 As previously mentioned, the starting point for this study is an edge
 infrastructure composed of hundreds of micro DCs (\aka edge sites)
-operated by the OpenStack software suite.  Several deployments
-scenarios can be envisioned, including one or several OpenStack
-instances.  We discuss in this section two of them. This preliminary
-discussion enables us to justify why collaborations is mandatory to
+operated by the OpenStack software suite.
+%
+OpenStack is composed of two kinds
+of nodes: on the one hand, the compute/storage/network nodes are
+dedicated to deliver the XaaS capabilities, such as hosting VMs (\ie,
+data plane); on the other hand, the control nodes are in charge of
+executing the OpenStack services (\ie, control plane).
+%
+Although each edge site provides enough resources to host control and
+compute capabiliities, several deployments scenarios can be
+envisioned, including one global or several OpenStack instances. In
+this section, we discuss two particular scenarios. The first one
+consists in deploying all control services on one site of the
+infrastructure and considering remote resources as compute
+nodes.  The second one corresponds to the guidelines presented on the
+OpenStack website to supervise a multi-regions infrastructure.
+%
+This preliminary discussion, which considers two extreme deployment
+scenarios, enables us to justify why collaborations is mandatory to
 fulfill the requirements identified in Section~\ref{sec:requirements}.
-While OpenStack has been considered, we underline that alternatives
-such as OpenNebula or even Kubernetes would have been lead to the same
-conclusion in terms of resource management and collaboration needs.
-\AL{Put references for OpenNebula and Kubernetes}
+%
+We emphasize that although OpenStack has been considered, alternative
+systems such as Kubernetes would have been lead to the same conclusion
+in terms of resource management and collaboration needs.  \AL{Put
+  references Kubernetes}
 
 \subsection{Centralized Management and Remote Compute/Storage/Network Nodes}
 \label{subsec:centralized_os}
+At coarse-grained, the first scenario consists in operating an edge
+infrastructure like a traditional cloud computing one.  The ``only''
+difference is related to the wide-area network links between the
+control services and the compute nodes.  Futhermore, it might be
+possible to define multiple availability zones in order to make a
+distinction between each geographical location.
+%
+Technically speaking, OpenStack services are organized following the Shared Nothing
+principle. Each instance of a service (i.e., service worker) is
+exposed through an API accessible through a Remote Procedure Call
+(RPC) system implemented, on top of a messaging queue or via web
+services (REST). This enables a weak coupling between services and
+thus a large number of deployment possibilities such as this one.
+%
+øFrom the requirements viewpoint (see Section~\ref{sec:requirement}) L1
+and most of the L2 features~\footnote{Because the infrastructure can
+  be spread over several network domains, advanced network operations
+  cannot be satisfied without any change in the OpenStack codebase.}
+can be fulfilled in a straightforward way.  However, in addition to
+the scalability limitation that will prevent such a deployment of
+managing thousands of compute nodes, it is not possible to satisfy the
+L3 expectations.  Even if the organization of the OpenStack services
+respects the Shared Nothing principle, most services create and
+manipulate logical objects that are persisted in shared
+databases. While this enables service workers to easily collaborate,
+it imposes a permanent connectiviy between compute nodes, services and
+their DBs. In other ways, this scenario provides a Single Pane of
+Glass for the administrator viewpoint but at the same time is a Single
+Point of Failure).\AL{Fix this last sentence}
 
 
 \subsection{Segregate into Regions}
