@@ -63,14 +63,14 @@ of a conceptual architecture and a vocabulary.
 %The IEEE P2302 will
 %develop a standard based on the NIST model.  Additional information
 %can be found at
-\footnote{\url{https://collaborate.nist.gov/twiki-cloud-computing/bin/view/CloudComputing/FederatedCloudPWGFC} (Valid on March 2018).}
+\endnote{\url{https://collaborate.nist.gov/twiki-cloud-computing/bin/view/CloudComputing/FederatedCloudPWGFC} (Valid on March 2018).}
 %
 While all these projects propose contributions to manage the life cycle of
 geo-ditributed applications in a more software defined manner, they present two
 weaknesses. First, they become more and more complex to finally
 integrate most of the mechanisms that are already present in
-IaaS resource management systems~\cite{}.\AL{Fix ref}  Second,
-they have been designed by focusing on the developer/end-user's
+IaaS resource management systems~\cite{moreno2012csp, OpenStackCascading}.  Second,
+we claim they have been designed by focusing on the developer/end-user's
 requirements, that is without considering the administrator's
 perspective.
 
@@ -106,7 +106,8 @@ present important reflections to consider before starting the development of suc
 Because there are as many edge infrastructures as use-cases, we
 highlight that the edge infrastructure we considered to conduct this
 study is composed from the hardware viewpoint of several
-geo-distributed micro DCs (up to hundreds)\FW{AL: only hundreds? I would have said up to several tens of thousands}, which are themselves
+geo-distributed micro DCs (up to hundreds)
+\FW{AL: only hundreds? I would have said up to several tens of thousands}, which are themselves
 composed of up to one hundred servers (up to two racks).
 Figure~\ref{fig:fogedge-archi} gives an overview of this
 infrastructure. The expected latency as well as the bandwidth between
@@ -114,7 +115,7 @@ each element may fluctuate significantly, in particular because the
 network links can be either wired or wireless (represented by plain
 and dashed lines on the figure). Moreover, short disconnections
 between edge sites may occur leading to temporary network split brain
-situations\AL{Add INFOCom citations}.  Finally, it might be possible
+situations~\cite{4456903}. Finally, it might be possible
 to consider additional micro DCs deployed at the Extreme Edge, within
 private institutions or even public transports.
 %
