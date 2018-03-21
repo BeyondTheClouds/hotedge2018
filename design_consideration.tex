@@ -9,10 +9,9 @@
 \section{System Design}
 \label{sec:system_design_considerations}
 As previously mentioned, the starting point for this study is an edge
-infrastructure composed of hundreds of micro DCs (\aka edge sites)
-operated by the OpenStack software suite.
+infrastructure composed of hundreds of micro DCs (\aka edge sites) operated by OpenStack.
 %
-OpenStack is composed of two kinds
+Similarly to most of resource management systems, an OpenStack system consists of two kinds
 of nodes: on the one hand, the compute/storage/network nodes are
 dedicated to deliver the XaaS capabilities, such as hosting VMs (\ie,
 data plane); on the other hand, the control nodes are in charge of
@@ -20,20 +19,21 @@ executing the OpenStack services (\ie, control plane).
 %
 Although each edge site provides enough resources to host control and
 compute capabilities, several deployments scenarios can be
-envisioned. In
-this section, we discuss two particular scenarios. The first one
+envisioned.
+%
+In this section, we discuss two extreme cases. The first one
 consists in deploying all control services on one site of the
 infrastructure and considering all resources available on the other sites as compute
-nodes.  The second one corresponds to the multi-region deployment promoted by the OpenStack Foundation.
+nodes.  The second one corresponds to a specific multi-region deployment as promoted by the OpenStack Foundation.
 %
-This preliminary discussion, which considers two extreme deployment
-scenarios, enables us to justify why collaborations is mandatory to
-fulfill the requirements identified in Section~\ref{sec:requirements}.
+
+This preliminary discussion enables us to justify why collaborations is mandatory to
+fulfill at least the first three levels of requirements identified in Section~\ref{sec:requirements}.
 %
-We emphasize that although OpenStack has been considered, alternative
-systems such as Kubernetes would have been lead to the same conclusion
-in terms of resource management and collaboration needs.  \AL{Put
-  references Kubernetes}
+% We emphasize that although OpenStack has been considered, alternative
+% systems such as Kubernetes would have been lead to the same conclusion
+% in terms of resource management and collaboration needs.  \AL{Put
+%   references Kubernetes}
 
 \subsection{Centralized Management}
 \label{subsec:centralized_os}
@@ -41,7 +41,7 @@ At coarse-grained, the first scenario consists in operating an edge
 infrastructure like a traditional cloud computing one.  The ``only''
 difference is related to the wide-area network links between the
 control services and the compute nodes.  The distinction between the
-different edge sites is done by leveraging the concept of host
+different edge sites can be done by leveraging the concept of host
 aggregates (\aka availability zones) provided by OpenStack.
 
 %
@@ -53,7 +53,7 @@ or via web services (REST). This enables a weak coupling between
 services and thus a large number of deployment possibilities such as
 this one.
 %
-From the requirements viewpoint (see Section~\ref{sec:requirement}) only L1
+From the requirements' viewpoint, only L1
 and most L2 features~\footnote{Because the infrastructure can
   be spread over several network domains, advanced network operations
   cannot be satisfied without any change in the OpenStack codebase.}
@@ -69,36 +69,46 @@ workers to easily collaborate, it imposes a permanent connectiviy
 between compute nodes, services and their DBs. In other words, while
 this scenario provides a ``Single Pane of Glass'' from the
 administrator and end-users/developers viewpoint, it has the drawback
-of being a ``Single Point of Failure''.
+of being a ``Single Point of Failure'' preventing end-users/developers
+to use edge resources in case of network split brains.
 
 
 \subsection{Regions}
 In this second scenario, each edge site corresponds to a a
-\emph{Region} in the OpenStack terminology. it consists of a complete
-deployment of OpenStack including all control services but Keystone
-(\ie the identify and service provider) that is shared between all
-regions.
-In comparison to this scenario,.
-
+\emph{Region} in the OpenStack terminology; \ie a complete deployment
+of OpenStack including all control services with a ``shared'' Keystone
+(\ie the identify and service provider). In our scenario, we consider
+that the states of each Keystone are shared through an active/active
+prelication scheme leveraging the Galera solution~\cite{www:galera}.
+However, alternatives approaches such as federated keystone could have
+been considered.  The main advantage of this deployment is related to
+the independency of each site in case of network disconnections.  In
+other words, in case of a network split, each site can satisfy the L1
+features.  The downside is related to the fact that the current
+codebase does not provide any mechanism to allow the collaboration
+between several regions. In other words, each region can be seen as a
+private cloud system and additional mechanisms are required.
 
 \subsection{Effective Collaboration is Needed}
-Each Edge Site
-provides control and compute capabilities (see~\ref{sec:requirements})
-on top of dozens of servers. They \emph{collaborate} with each-other
-to shape up the Edge Infrastructure and a Wide Area Network (WAN)
-interconnects them through both wired and wireless network links. This
-results in up to 300ms of RTT between two Edge Sites and common
-disconnections.
+% Each Edge Site
+% provides control and compute capabilities (see~\ref{sec:requirements})
+% on top of dozens of servers. They \emph{collaborate} with each-other
+% to shape up the Edge Infrastructure and a Wide Area Network (WAN)
+% interconnects them through both wired and wireless network links. This
+% results in up to 300ms of RTT between two Edge Sites and common
+% disconnections.
 
 Despite the fallibility of the network, and frequent isolation risks
 of an Edge Site from the rest of the Infrastructure (\ie network
 split-brain), the Edge Infrastructure may be kept sustainable. This is
 achieved by supposing a collaboration a la peer-to-peer, that is, an
 Edge Site always serves local resources and collaborates with other
-Edge Sites if needed. Thus, a user can make a SSH on his VM during a
-network split-brain if he gets a local access to the Edge Site. The
+Edge Sites if needed. Thus, a user can make a SSH to his/her VM during a
+network split-brain if he/she gets a local access to the Edge Site. The
 same user can also start a VM using the VMI of an other Edge Site if
 the collaboration can be established.
+\AL{Should this last paragraph appear in Section II? Here we talk about a use-case not about design considerations.}
+\AL{IMHO, the subsection starts below. We can add something like. The two extreme scenarios (one global vs n independant openstack) show (i) each edge site should be able to deal with network split situations and (ii) the codebase should deliver mechanisms to allow distinct openstack instances to collaborate.}
 
 When it comes to develop this resource management system for the Edge
 computing, the developer has two fundamental design options: a \emph{top-down} or
