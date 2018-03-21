@@ -19,13 +19,12 @@ data plane); on the other hand, the control nodes are in charge of
 executing the OpenStack services (\ie, control plane).
 %
 Although each edge site provides enough resources to host control and
-compute capabiliities, several deployments scenarios can be
-envisioned, including one global or several OpenStack instances. In
+compute capabilities, several deployments scenarios can be
+envisioned. In
 this section, we discuss two particular scenarios. The first one
 consists in deploying all control services on one site of the
-infrastructure and considering remote resources as compute
-nodes.  The second one corresponds to the guidelines presented on the
-OpenStack website to supervise a multi-regions infrastructure.
+infrastructure and considering all resources available on the other sites as compute
+nodes.  The second one corresponds to the multi-region deployment promoted by the OpenStack Foundation.
 %
 This preliminary discussion, which considers two extreme deployment
 scenarios, enables us to justify why collaborations is mandatory to
@@ -36,40 +35,50 @@ systems such as Kubernetes would have been lead to the same conclusion
 in terms of resource management and collaboration needs.  \AL{Put
   references Kubernetes}
 
-\subsection{Centralized Management and Remote Compute/Storage/Network Nodes}
+\subsection{Centralized Management}
 \label{subsec:centralized_os}
 At coarse-grained, the first scenario consists in operating an edge
 infrastructure like a traditional cloud computing one.  The ``only''
 difference is related to the wide-area network links between the
-control services and the compute nodes.  Futhermore, it might be
-possible to define multiple availability zones in order to make a
-distinction between each geographical location.
+control services and the compute nodes.  The distinction between the
+different edge sites is done by leveraging the concept of host
+aggregates (\aka availability zones) provided by OpenStack.
+
 %
-Technically speaking, OpenStack services are organized following the Shared Nothing
-principle. Each instance of a service (i.e., service worker) is
-exposed through an API accessible through a Remote Procedure Call
-(RPC) system implemented, on top of a messaging queue or via web
-services (REST). This enables a weak coupling between services and
-thus a large number of deployment possibilities such as this one.
+Technically speaking, OpenStack services are organized following the
+Shared Nothing principle. Each instance of a service (i.e., service
+worker) is exposed through an API accessible through a Remote
+Procedure Call (RPC) system implemented, on top of a messaging queue
+or via web services (REST). This enables a weak coupling between
+services and thus a large number of deployment possibilities such as
+this one.
 %
-øFrom the requirements viewpoint (see Section~\ref{sec:requirement}) L1
-and most of the L2 features~\footnote{Because the infrastructure can
+From the requirements viewpoint (see Section~\ref{sec:requirement}) only L1
+and most L2 features~\footnote{Because the infrastructure can
   be spread over several network domains, advanced network operations
   cannot be satisfied without any change in the OpenStack codebase.}
-can be fulfilled in a straightforward way.  However, in addition to
-the scalability limitation that will prevent such a deployment of
-managing thousands of compute nodes, it is not possible to satisfy the
-L3 expectations.  Even if the organization of the OpenStack services
-respects the Shared Nothing principle, most services create and
-manipulate logical objects that are persisted in shared
-databases. While this enables service workers to easily collaborate,
-it imposes a permanent connectiviy between compute nodes, services and
-their DBs. In other ways, this scenario provides a Single Pane of
-Glass for the administrator viewpoint but at the same time is a Single
-Point of Failure).\AL{Fix this last sentence}
+can be fulfilled in a straightforward way.  In addition to
+the scalability limitation that will prevent such a deployment to 
+consider thousands of compute nodes, it is not possible to satisfy the
+L3 expectations.
+%
+Even if the organization of the OpenStack services respects the Shared
+Nothing principle, most services create and manipulate logical objects
+that are persisted in shared databases. While this enables service
+workers to easily collaborate, it imposes a permanent connectiviy
+between compute nodes, services and their DBs. In other ways, while
+this scenario provides a ``Single Pane of Glass'' from the
+administrator and end-users/developers viewpoint, it has the drawback
+of being a ``Single Point of Failure''.
 
 
-\subsection{Segregate into Regions}
+\subsection{Regions}
+In this second scenario, each edge site corresponds to a a
+\emph{Region} in the OpenStack terminology. it consists of a complete
+deployment of OpenStack including all control services but Keystone
+(\ie the identify and service provider) that is shared between all
+regions.
+In comparison to this scenario, \AL{TODO}.
 
 
 \subsection{Effective Collaboration is Needed}
