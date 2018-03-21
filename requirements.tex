@@ -1,5 +1,5 @@
 
-\section{Administrators/Developers' Requirements}
+\section{Administrators and Developers/End-users' Requirements}
 \label{sec:requirements}
 
 % \begin{figure}[t]
@@ -23,51 +23,58 @@
     \label{tab:requirements}
 \end{table*}
 
-As previously mentioned, administrators and end-users of edge
-infrastructures expect to get a set of high level mechanisms whose
-assembly results in a system capable of operating and using a
-geo-distributed IaaS infrastructure (Compute, Storage and Network
-managers, monitoring and administrative tools)~\cite{moreno2012csp}.
-However, considering each of these services independently is not
-sufficient enough to identify the challenges our community should deal with.
-%
-In this section, we consider and classify concrete actions administrators and
-developers/end-users expect to perform on edge computing infrastructures.
-\AL{Polish (in particular by adding a transition)}.
-The classification is based on $5$ \emph{levels},
-starting from the easiest aspects, \ie interacting with a single site
--- level 1 (L1) to more complex aspects like managing multiple
-sites (L2), up to considering they can be owned by different operators
-(L5).  \Cref{tab:requirements} summarizes the classification we detail
-in the following:
+As previously mentioned, administrators and users of edge infrastructures
+expect to get a set of high level mechanisms whose assembly results in a system
+capable of operating and using a geo-distributed IaaS infrastructure.
+Such mechanisms are provided various management services, each of which is in
+charge of an aspect of the infrastructure management. In this paper, we
+only consider a minimal set of a such services required to operate
+infrastructure resources: Compute, Storage and Network managers, monitoring and
+administrative tools~\cite{moreno2012csp}.
+%However, considering each of these services independently is not
+%sufficient enough to identify the challenges our community should deal with.
+In this section, we classify the features administrators and
+developers/end-users expect from those services, in the context of edge
+computing, highlighting the differences with federated Cloud infrastructures.
+\AL{Polish (in particular by adding a transition)}
+Our classification is based on $5$ \emph{levels}, starting from the easiest
+aspects, \ie interacting with a single site (considered in level 1 or L1), to
+more complex aspects like managing multiple sites (L2), up to considering that
+sites can be owned by different operators (L5).
+\Cref{tab:requirements} summarizes the classification we detail in the following. 
 
 \paragraph{L1: Operate/use any site}
-This level contains all the requirements at the scope of a single site of the
-infrastructure. The second row of \cref{tab:requirements} lists those
-requirements expected from administrators and users. To operate a single site,
-like \emph{Site 1} depicted in \cref{fig:fogedge-archi}, the resource management
-services defined previously must be installed (or upgraded) by an
-administrator. After what, admins can use those services to manage users,
-accesses, flavors (\ie available capacities of compute resources) or quotas,
-regarding \emph{Site 1}.
-% edge sites are remote & unmanned and should administrated remotely
-% tools need to support intermittent network access to the site
+As depicted in the second row of \cref{tab:requirements}, this level considers
+the actions both administrators and users expect to perform on a single site.
+Regarding the administration side, operating a single site like \emph{Site 1},
+illustrated in \cref{fig:fogedge-archi}, requires that admins are able to
+install and upgrade the resource management services presented previously.
+After what, admins expect to use those services to manage users, accesses,
+flavors (\ie available capacities of compute resources) or quotas, regarding
+\emph{Site 1}.
 
-Any end-user of the infrastructure expects to be able to provision compute,
-network or storage resources on any single site, supposing he is authorized to.
-For instance, a user located at \emph{Site 1} should be able to boot a VM in
-\emph{Site 2}, using images, flavors or networks defined in \emph{Site 2} -- as
-long as the site is reachable.
+Regarding end-users, they expect to be able to provision compute, network or
+storage resources on any single site, supposing they are authorized to. For
+instance, a user of \emph{Site 1} should be able to boot a VM in \emph{Site 2},
+using images, flavors or networks defined in \emph{Site 2} -- as long as the
+site is reachable.
 
-Furthermore, administrators and users expect metrics to be monitored (\eg
-related to resources, users, and projects) from any single site. This is used
-for instance for respectively managing quotas and listing existing resources.
-As mentioned, Edge infrastructures are dynamic, \ie sites can join and leave the
-infrastructure (on purpose or due to intermittent network access). As a
-consequence, tools also need to support this churn effect.
-Regarding the security aspect, one requirement expected by both admins and
-users is that the communications in the infrastructure are secured (\eg
-isolated, encrypted) and that actions are logged for auditing.
+In addition, admins and users share a set of expectations.
+% collect metrics
+First they expect metrics to be monitored (\eg metrics related to resources,
+users, and projects) from any single site. This is used for instance for
+respectively managing quotas and listing existing resources.
+% security
+Regarding the security aspects, communications are expected to be secured (\eg
+isolated, encrypted) and actions must be logged for auditing. Compared to
+federated Clouds, Edge sites are potentially unmanned. As a consequence,
+physical and application integrity must be monitored at each site, autonomous
+corrective actions should be triggered when required.
+% resiliency
+Furthermore, compared to federated infrastructures, Edge infrastructures are
+dynamic, \ie sites can join and leave the infrastructure, on purpose or due to
+intermittent network access. As a consequence, tools need to resilient to this
+churn effect.
 
 \paragraph{L2: Operate/use several sites:}
 We now consider in this level that the operations previously defined in L1
