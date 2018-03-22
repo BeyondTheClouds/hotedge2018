@@ -48,7 +48,7 @@ As depicted in the second row of \cref{tab:requirements}, this level considers
 the actions both administrators and users expect to perform on a single site.
 Regarding the administration side, operating a single site like \emph{Site 1},
 illustrated in \cref{fig:fogedge-archi}, requires that admins are able to
-install and upgrade the resource management services presented previously.
+install and upgrade the resource management services mentioned previously.
 After what, admins expect to use those services to manage users, accesses,
 flavors (\ie available capacities of compute resources) or quotas, regarding
 \emph{Site 1}.
@@ -59,47 +59,58 @@ instance, a user of \emph{Site 1} should be able to boot a VM in \emph{Site 2},
 using images, flavors or networks defined in \emph{Site 2} -- as long as the
 site is reachable.
 
-In addition, admins and users share a set of expectations.
+In addition, admins and users share common expectations.
 % collect metrics
 First they expect metrics to be monitored (\eg metrics related to resources,
 users, and projects) from any single site. This is used for instance for
 respectively managing quotas and listing existing resources.
 % security
 Regarding the security aspects, communications are expected to be secured (\eg
-isolated, encrypted) and actions must be logged for auditing. Compared to
-federated Clouds, Edge sites are potentially unmanned. As a consequence,
-physical and application integrity must be monitored at each site, autonomous
-corrective actions should be triggered when required.
+isolated, encrypted) and actions must be logged for \emph{auditing}. Compared
+to federated Clouds, Edge sites are potentially unmanned. As a consequence,
+physical and application \emph{integrity} must be monitored at each site, and
+autonomous corrective actions should be triggered when required.
 % resiliency
 Furthermore, compared to federated infrastructures, Edge infrastructures are
-dynamic, \ie sites can join and leave the infrastructure, on purpose or due to
-intermittent network access. As a consequence, tools need to resilient to this
-churn effect.
+dynamic, \ie sites can join and leave the infrastructure, either on purpose, or
+due to intermittent network access. As a consequence, tools must support
+\emph{resiliency} regarding this churn effect.
 
 \paragraph{L2: Operate/use several sites:}
 We now consider in this level that the operations previously defined in L1
 cover at least two sites. For instance, an administrator might desire to
-configure users access on a per-site basis. Regarding users, they also expect
-a collaboration between sites to boot, for instance, a VM on \emph{Site 1},
-using an image defined in \emph{Site 2}. To that end both administrators and
-users require to collect data that belong to several sites. We define here two
-sub-levels as depicted in \cref{tab:requirements}. Such collaboration between
-sites can be either explicit (\ie the targeted sites are explicitly specified),
-referenced as the sub-level L2.1, or implicit (L2.2). The implicit manner
-suggests that policies (\eg performance objectives, energy consumption) and
-constraints (\eg affinity, underlying hardware) are provided by admins and users so
-that an edge-aware orchestrator takes the right decisions regarding the users'
-desiderata and the state of the infrastructure (\eg auto-scaling, relocating
-workloads between sites, re-scheduling faulty resources across sites).
+configure users' access on a per-site basis. Regarding users, they expect
+services from different sites to collaborate.
+% is the following interesting regarding the scope of this paper?
+% a reflection would need deeper analysis/explanations
+Operations can be either intra-services (same service from different sites) or
+inter-services (different services from different sites).
+%
+For instance, users might desire to boot a VM on \emph{Site 1}, using an image
+defined in \emph{Site 2} (inter-service operation) or list VMs from multi-sites
+(intra-service operation). Similarly to L1, they both expect metrics collected
+from several sites and collaborated mechanisms regarding the security (\eg
+secret key sharing).
+
+We define here two sub-levels as depicted in \cref{tab:requirements}. Such
+collaboration between sites can be either explicit (\ie the targeted sites are
+explicitly specified), referenced as the sub-level L2.1, or implicit (L2.2).
+The implicit manner suggests that policies (\eg performance objectives, energy
+consumption) and constraints (\eg affinity, underlying hardware) are provided
+by admins and users so that an edge-aware orchestrator takes the right
+decisions regarding the users' desiderata and the state of the infrastructure
+(\eg auto-scaling, relocating workloads between sites, re-scheduling faulty
+resources across sites).
 % should be elaborated and/or refs should be given here
 
-\paragraph{L3: Robustness wrt split brains:}
+\paragraph{L3: Robustness \wrt split brains:}
 In this level, we now consider split brains which correspond to the situation
 where the infrastructure is partitioned due to communication failures.
-\Cref{fig:fogedge-archi} depicts such situation where \emph{Site 1} is isolated from
-\emph{Site 2} and \emph{3}. In such case, all operations defined in L1 must be
-guaranteed for a partition composed of a single site like \emph{Site 1}
-(supposing it is reachable). For instance, a user in \emph{Site 1} should be
+\Cref{fig:fogedge-archi} depicts such situation where \emph{Site 1} can be
+isolated from the other sites. In such case, we distinguish two cases: (i) when
+a partition is composed of an single site, like \emph{Site 1} in the figure,
+all operations defined in L1 must be guaranteed regarding this site, supposing
+it is reachable). For instance, a user in \emph{Site 1} must be
 able to use \emph{Site 1}'s resources despite the split brain. Regarding
 partitions containing several sites, L1 and L2 operations must be guaranteed
 for any set of sites inside the partition.
@@ -108,9 +119,9 @@ for any set of sites inside the partition.
 % determine its global consumption in case of split-brains?
 Two sub-levels are proposed here: L3.1 considers the robustness of already
 deployed resources (\eg a user should be able to access a deployed application
-despite the split brain, if he can reach the related site), while the
-robustness of management services, treated in L3.2, is required for both admins
-and users.
+despite the split brain, if he can reach the related site), and is thus limited
+to users, while the robustness of management services, treated in L3.2, is
+required for both admins and users.
 % tricky issue: management of split brain between collaborative services in
 % different sites
 
@@ -127,10 +138,22 @@ their compatibilities. For instance, it is not possible to migrate a VM from
 orchestrator.
 
 \paragraph{L5: Multiple operators:}
-We now consider that sites can be owned by different operators. As depicted in
-\cref{tab:requirements}, no requirements is expected by administrators since an
-operator should not be able to administrate another operator's sites. However,
-operators should be able to collaborate to offer their resources to users.
-Specific metrics should be collected at the scope of operators to manage for
-instance billing between them.
+We now consider L3, plus the possibility that sites can be owned by different
+operators. As depicted in \cref{tab:requirements}, no requirements is expected
+by administrators since an operator would not share administrative rights to
+their sites with other operators. However,
+operators should be able to collaborate to offer their sites' resources to
+users. Specific metrics should be collected at the scope of operators to
+manage for instance billing between them.\\
+
+%footer
+Our classification of the requirements expected by both admins and users
+highlights that the complexity to develop an edge infrastructure manager
+significantly increases at each level. In fact, since L4 and L5 extends L3
+respectively with multiple manager environments, and multiple operators, they
+can be considered at the same level in our classification (and can be swapped
+as a consequence).
+Considering now that the challenges are already numerous with L1, L2 and L3, we
+propose in the rest of the paper to limit our study about the system design to
+these levels (thus leaving L4 and L5 for future works).
 
