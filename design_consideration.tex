@@ -9,13 +9,13 @@
 \section{System Design}
 \label{sec:system_design_considerations}
 As previously mentioned, the starting point for this study is an edge
-infrastructure composed of hundreds of micro DCs (\aka edge sites) operated by OpenStack.
+infrastructure composed of hundreds of even thousands of micro DCs (\aka edge sites) operated by OpenStack.
 %
 Similarly to most of resource management systems, an OpenStack system consists of two kinds
 of nodes: on the one hand, the compute/storage/network nodes are
-dedicated to deliver the XaaS capabilities, such as hosting VMs (\ie,
+dedicated to deliver the XaaS capabilities, such as hosting VMs (\ie
 data plane); on the other hand, the control nodes are in charge of
-executing the OpenStack services (\ie, control plane).
+executing the OpenStack services (\ie control plane).
 %
 Although each edge site provides enough resources to host control and
 compute capabilities, several deployments scenarios can be
@@ -24,7 +24,7 @@ envisioned.
 In this section, we discuss two extreme cases. The first one
 consists in deploying all control services on one site of the
 infrastructure and considering all resources available on the other sites as compute
-nodes.  The second one corresponds to a specific multi-region deployment as promoted by the OpenStack Foundation.
+nodes.  The second one corresponds to a specific multi-region deployment.
 %
 
 This preliminary discussion enables us to justify why collaborations is mandatory to
@@ -35,7 +35,7 @@ fulfill at least the first three levels of requirements identified in Section~\r
 % in terms of resource management and collaboration needs.  \AL{Put
 %   references Kubernetes}
 
-\subsection{Centralized Management}
+\subsection{Centralized (Remote) Management}
 \label{subsec:centralized_os}
 At coarse-grained, the first scenario consists in operating an edge
 infrastructure like a traditional cloud computing one.  The ``only''
@@ -105,7 +105,7 @@ achieved by supposing a collaboration a la peer-to-peer, that is, an
 Edge Site always serves local resources and collaborates with other
 Edge Sites if needed. Thus, a user can make a SSH to his/her VM during a
 network split-brain if he/she gets a local access to the Edge Site. The
-same user can also start a VM using the VMI of an other Edge Site if
+same user can also start a VM using an image stored in another Edge Site if
 the collaboration can be established.
 \AL{Should this last paragraph appear in Section II? Here we talk about a use-case not about design considerations.}
 \AL{IMHO, the subsection starts below. We can add something like. The two extreme scenarios (one global vs n independant openstack) show (i) each edge site should be able to deal with network split situations and (ii) the codebase should deliver mechanisms to allow distinct openstack instances to collaborate.}
@@ -123,4 +123,4 @@ federating IaaS managers' API. In other words, it leverages on existing IaaS pla
 \paragraph{Bottom-Up Collaboration} Design option that lays on making IaaS mechanisms/services directly collaborative. For example, having two OpenStack Nova services able to cooperate and communicate directly would be a realization of a \emph{bottom-up} design. Such design option implies either the modification/extension of existing IaaS platforms or the creation of a completely new system. Examples of approaches following a \emph{bottom-up} design are:
 \AL[Comment by Joao]{Any reference to existing approaches? Guys, do you have, for example, references to your keystone shared db work? Could cells be considered as an example? }
 
-On the one hand, \emph{top-down} options have been the most explored, but can these alone fulfil all expected requirements? On the other hand, \emph{bottom-up} options seem to disruptive the design principles of most existing IaaS platform, but is that in fact the case?
+On the one hand, \emph{top-down} options have been the most explored, but can these alone fulfil all expected requirements? On the other hand, \emph{bottom-up} options seem to disruptive the design principles of most existing IaaS platform, but should it be discarded?
