@@ -5,8 +5,47 @@
 %%% TeX-master: t
 %%% End:
 
-\subsection{Discussion}
+\section{Design Discussion}
 \label{sec:design_discussion}
+
+
+\subsection{Effective Collaboration is Needed}
+% Each Edge Site
+% provides control and compute capabilities (see~\ref{sec:requirements})
+% on top of dozens of servers. They \emph{collaborate} with each-other
+% to shape up the Edge Infrastructure and a Wide Area Network (WAN)
+% interconnects them through both wired and wireless network links. This
+% results in up to 300ms of RTT between two Edge Sites and common
+% disconnections.
+
+Despite the fallibility of the network, and frequent isolation risks
+of an Edge Site from the rest of the Infrastructure (\ie network
+split-brain), the Edge Infrastructure may be kept sustainable. This is
+achieved by supposing a collaboration a la peer-to-peer, that is, an
+Edge Site always serves local resources and collaborates with other
+Edge Sites if needed. Thus, a user can make a SSH to his/her VM during a
+network split-brain if he/she gets a local access to the Edge Site. The
+same user can also start a VM using an image stored in another Edge Site if
+the collaboration can be established.
+\AL{Should this last paragraph appear in Section II? Here we talk about a use-case not about design considerations.}
+\AL{IMHO, the subsection starts below. We can add something like. The two extreme scenarios (one global vs n independant openstack) show (i) each edge site should be able to deal with network split situations and (ii) the codebase should deliver mechanisms to allow distinct openstack instances to collaborate.}
+
+When it comes to develop this resource management system for the Edge
+computing, the developer has two fundamental design options: a \emph{top-down} or
+\emph{bottom-up}. Both designs impact how to handle the
+collaboration needed by such a system.
+
+\paragraph{Top-Down Collaboration}
+Design option that implements the collaboration required by
+federating IaaS managers' API. In other words, it leverages on existing IaaS platforms as they are made available today without introducing modifications/extensions. Examples of approaches following a \emph{top-down} design are: ONAP~\cite{onap}, Kingbird~\cite{kingbird}, FogBow~\cite{brasileiro2016fogbow} and p2p-OpenStack~\cite{ericsson-p2p}
+
+
+\paragraph{Bottom-Up Collaboration} Design option that lays on making IaaS mechanisms/services directly collaborative. For example, having two OpenStack Nova services able to cooperate and communicate directly would be a realization of a \emph{bottom-up} design. Such design option implies either the modification/extension of existing IaaS platforms or the creation of a completely new system. Examples of approaches following a \emph{bottom-up} design are:
+\AL[Comment by Joao]{Any reference to existing approaches? Guys, do you have, for example, references to your keystone shared db work? Could cells be considered as an example? }
+
+On the one hand, \emph{top-down} options have been the most explored, but can these alone fulfil all expected requirements? On the other hand, \emph{bottom-up} options seem to disruptive the design principles of most existing IaaS platform, but should it be discarded?
+
+
 
 
 A \emph{top-down} system  relies on existing VIM APIs and on overlay components, with no modifications to the base code of a VIM.
