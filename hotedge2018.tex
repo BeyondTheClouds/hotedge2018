@@ -54,7 +54,31 @@ Ericsson Research, Canada \& Sweden\\
 
 
 \subsection*{Abstract}
-Driven by several use-cases related to IoT and NFV, a cloud computing platform that leverages edge infrastructures has currently garnered a lot of attention. Despite the attention however, a management platform that is suitable for such an infrastructure is yet to be developed. In this paper, we introduce requirements that edge infrastructures and their users put on a cloud management system. We identify two approaches, \emph{top-down} and \emph{bottom-up}, for building a cloud management that fulfills the requirements. We discuss \emph{pros} and \emph{cons} of each approach, and finally give our recommendation moving forward.         
+While it is clear now that Edge infrastructures are required for emerging
+use-cases related to IoT, VR or NFV, there is currently no resource management
+platform that is able to deliver all the features that make the success of
+Cloud Computing, for Edge infrastructures (\eg an OpenStack for the Edge).
+%
+Since building such a platform from scratch is impossible for our community,
+this paper provides reflections regarding how we can leverage existing
+resource management solutions to design it.
+%
+To that end, we provide a list of the features required to administrate and use
+Edge Computing resources, and investigate how existing IaaS managers (\ie
+OpenStack) satisfy these requirements. Finally, we identify from this study two
+approaches to design an Edge infrastructure manager that fulfills our
+requirements, and discuss their related pros and cons.
+
+%Driven by several use-cases related to IoT and NFV, a cloud computing platform
+%that leverages edge infrastructures has currently garnered a lot of attention.
+%Despite the attention however, a management platform that is suitable for such
+%an infrastructure is yet to be developed. In this paper, we introduce
+%requirements that edge infrastructures and their users put on a cloud
+%management system. We identify two approaches, \emph{top-down} and
+%\emph{bottom-up}, for building a cloud management that fulfills the
+%requirements. We discuss \emph{pros} and \emph{cons} of each approach, and
+%finally give our recommendation moving forward.
+
 \input{introduction.tex}
 \input{requirements.tex}
 \input{design_consideration.tex}
