@@ -1,40 +1,44 @@
-
 \section{Introduction}
 \label{sec:intro}
 
 
 % Edge Infrastructures are the next platform
-With the emergence of Internet of Things (IoT) and augmented/virtual reality (AR/VR)
-applications, as well as the new usages related to Network Function
-Virtualization (NFV) technologies, Cloud and Network communities are now advocating
-for going towards massively distributed small sized infrastructures
-that are deployed at the edge of the network.
+With the emergence of Network Function Virtualization (NFV)
+technologies as well as Internet of Things (IoT) and augmented/virtual
+reality (AR/VR) applications, Cloud and Network communities are
+advocating for going towards massively distributed small sized
+infrastructures that are deployed at the edge of the network.
 %
-Referred to as the Edge Computing paradigm, this model enables delivering Cloud
-Computing capabilities closer to end-users, their related devices, and applications.
+Referred to as the Edge Computing paradigm, this model aims at
+delivering Cloud Computing capabilities closer to end-users, their
+related devices, and applications.
 %
 
-%% A lot of academics works focus on how to leverage these
-%% infrastructures to address specicifc use-cases
-Several academic studies highlight the advantages of Edge Computing
-paradigm in various
+While Several academic studies have been highlighting the advantages
+of Edge Computing paradigm in various
 domains~\cite{bonomi2012fog,zhang2015cloud,yi2015fog,shi2016edge,satyanarayanan2017emergence},
 %%
-and provide solutions to operate the infrastructure that serves it. As
-an example, one solution may allow IoT applications to run on
-infrastructures composed of NFV-enabled hardware (at the edge) and
-centralized clouds~\cite{bonomi2012fog}. Unfortunately, these
-solutions are specific to a domain and do not allow, for instance, to
-run workloads in isolated environments like containers or virtual
-machines (VMs). They lack a general resource management system to
-operate and use Edge Computing infrastructure. Something that will
-first, let an operator aggregates, supervises and exposes the
-massively distributed resources of the infrastructure and second, let
-a developer implements new kinds of services on top of that
-infrastructure that may be deployed and managed on demand. This lack
-is a rather critical problem as administrators and developers expect
-to find most features that make the success of current Cloud Computing
-solutions.
+progress on how operating and using infrastructures that serve it are
+only marginal.  As an example, current solutions such as Amazon
+Lambda@Edge~\cite{amazon:lambda-edge} or Akamai
+Cloudlet~\cite{akamai:cloudlets} to name a few are rather close to the
+initial fog proposal that allowed to run specific domain applications
+on infrastructures composed of NFV-enabled hardware (at the edge) and
+centralized clouds~\cite{bonomi2012fog}.  In other words, current Edge
+Infrastructure-as-a-Service solutions do not allow to run stateful
+workloads in isolated environments such as containers or virtual
+machines (VMs).
+%
+This is surprising as devops expect to find most features that make the sucess of
+current Cloud Computing solutions.
+
+% Our community should tackle the challenge of delivering a general
+% resource management system to operate and use Edge Computing
+% infrastructure. Something that will first, let an operator aggregates,
+% supervises and exposes the massively distributed resources of the
+% infrastructure and second, let a developer implements new kinds of
+% services on top of that infrastructure that may be deployed and
+% managed on demand.
 
 %% Thus, the development of a general resource management system to
 %% operate and use Edge Computing infrastructures is still an open
@@ -72,66 +76,75 @@ solutions.
 %% discussion avec Adrien) alors que un VRAIE IaaS manager doit
 %% considérer plus de chose (donner un exemple de req).
 
-On this basis,
+%On this basis,
 %
-the ETSI Mobile Edge Computing~(MEC)
-Industry Specification Group defines in 2016 a software architecture
-to orchestrate distinct independent Cloud systems or, in their terminology, Virtual
+The ETSI Mobile Edge Computing~(MEC) Industry Specification Group
+defined in 2016 a software architecture to orchestrate distinct
+independent Cloud systems or, in their terminology, Virtual
 Infrastructure Managers (VIM)~\cite{7574435}.
 %
-The orchestration federates VIMs of the several Data Centers that
-compose the Edge infrastructure. The reusing of VIMs thus produces an
-edge computing resource management that behaves in a same fashion as
-Cloud Computing.
+The idea consists in federating VIMs of the several Data Centers that
+compose the Edge infrastructure.  By Reusing VIMs, the ETSI group targets an Edge
+Computing resource management that behaves in a same fashion as Cloud
+Computing, while mitigating development requirements.
 %
-Although, there is no implementation available, the idea seams promising since an industry-driven consortium proposed
-the ONAP framework~\cite{onap} that enables the orchestration and
-automation of virtual network functions across distinct VIMs. From
-the academic side, similar approaches have been investigated.
-For instance, the FogBow proposal~\cite{brasileiro2016fogbow} aims to
-support large federations of Infrastructure-as-a-service (IaaS)
-providers. More recently, NIST %Cloud Computing Program (NCCP)
-%Public Working Group has recognized the importance of advancement and development of
-%frameworks to support seamless implementation of federated community
-%cloud environments. In August 2017, the NCCP
-%Public Working Group
-% (PWG) on Federated Cloud (PWGFC)
-initiated a collaborative effort with the IEEE
-%P2302 group (Standards for Intercloud Interoperability and Federation),
-to advance Federated Cloud through the development
-of a conceptual architecture and a vocabulary\endnote{\url{https://collaborate.nist.gov/twiki-cloud-computing/bin/view/CloudComputing/FederatedCloudPWGFC} (Valid on March 2018).}.
-%The IEEE P2302 will
-%develop a standard based on the NIST model.  Additional information
-%can be found at
+Although, there is no implementation available, the idea of federating
+VIMs seems promising since several projects have been built on similar
+concepts. The ONAP framework~\cite{onap}, an industry-driven solution,
+enables the orchestration and automation of virtual network functions
+across distinct VIMs. From the academic side, the FogBow
+solution~\cite{brasileiro2016fogbow} aims to support large federations
+of Infrastructure-as-a-service (IaaS) providers. More recently, NIST
+initiated a collaborative effort with the IEEE to advance Federated
+Cloud through the development of a conceptual architecture and a
+vocabulary\endnote{\url{https://collaborate.nist.gov/twiki-cloud-computing/bin/view/CloudComputing/FederatedCloudPWGFC}
+  (Valid on March 2018).}.
+
+While all these projects provided valuable contributions, they have
+been all designed by considering the devops' perspective: they provide
+abstractions to manage the life cycle of geo-distributed applications
+but do not address administrators' requirements.
+%
+Edge Computing infrastructures differ from federated cloud systems
+under various aspects~\cite{openstack:whitepaper}.  For instance, Edge
+sites are potentially unmanned, and therefore must be administered
+remotely. The resource management system should also be designed to
+cope with intermittent network access to the site~\ldots
+%
+Ultimately, distinct operators might be interested in interconnecting their infrastructures (like network peering).
 %
 
-While all these projects propose contributions to manage the life cycle of
-geo-ditributed applications in a more software defined manner, they present two
-limitations. First, they become more and more complex to finally
-integrate most of the mechanisms that are already present in
-IaaS resource management systems~\cite{moreno2012csp, OpenStackCascading}.  Second,
-we claim they have been designed by focusing on the developer/end-user's
-requirements, that is without considering the administrator's
-perspective.
+To favor the advent of Edge Computing, our community should take part
+to current discussions and actions in order to deliver a well-suited
+resource management system:~A system that will first, let an operator
+aggregates, supervises and exposes the massively distributed resources
+of the infrastructure and second, let devops implement new kinds
+of services on top of that infrastructure that may be deployed and
+managed on demand.
 
-Designing and implementing a complete software stack to enable
-administrators to operate, and developers to use, distinct edge sites
-like a global Cloud Computing infrastructure is a difficult challenge
-for our community. However it is a challenge we should tackle soon to
-favor the advent of the Edge Computing paradigm.
+% Designing and implementing a complete software stack to enable
+% administrators to operate, and developers to use, distinct edge sites
+% like a global Cloud Computing infrastructure is a difficult challenge
+% for our community. However it is a challenge we should tackle soon to
+% favor the advent of the Edge Computing paradigm.
 
-In this paper, we
-present important reflections to consider before starting the development of such a system.
-
+In this paper, we present reflections to initiate discussions through our community.
 
 \begin{itemize}
-\item First, we propose a classification of expected features from
-  both administrators and end-users. Although this classification might be extended, it is already valuable to drive the design and implementation of a resource management system for the edge computing.
-    \item Second, we discuss several design strategies. In particular, we
-  analyze \emph{pros} and \emph{cons} of \emph{top-down} and \emph{bottom-up} approaches. The
-  former consists in interacting with each site only through the exposed APIs
-  while the latter aims at revising internal mechanisms to enable
-  native collaborations.
+\item First, we introduce a classification of expected features from
+  both administrators and devops. This classification is valuable to
+  identify missing mechanisms in opensource resource management systems.
+ % Moreover, it should deliver significant insights on the
+ % design and implementation of a resource management system for the
+ % edge computing.
+\item Second, on the basis of the identified requirements, we discuss
+  insights regarding how an edge computing resource management system
+  should be designed. In particular, we study \emph{pros} and
+  \emph{cons} of \emph{top-down} and \emph{bottom-up} approaches. The
+  former consists in interacting with each site only through the
+  exposed APIs such as the aforementioned federated approaches. The
+  latter aims at revising internal mechanisms of VIMs to enable native
+  collaborations.
   \end{itemize}
 
 \begin{figure}[t]
@@ -148,8 +161,8 @@ present important reflections to consider before starting the development of suc
 Because there are as many edge infrastructures as use-cases, we
 highlight that the edge infrastructure we considered to conduct this
 study is composed from the hardware viewpoint of several
-geo-distributed micro DCs (up to thousands)
-composed of up to one hundred servers (up to two racks).
+geo-distributed micro DCs (up to hundreds)
+composed of up to one hundred servers (approximately two racks in terms of space).
 Figure~\ref{fig:fogedge-archi} gives an overview of this
 infrastructure. The expected latency as well as the bandwidth between
 each element may fluctuate significantly, in particular because the
@@ -162,24 +175,26 @@ private institutions or even public transports.
 %
 From the software point of view, in order to simplify the model and
 without loss of generality, we mainly assume the OpenStack software
-suite.  After seven years of intensive developments, OpenStack has
+suite~\cite{openstack:www} as the default VIM.  After seven years of intensive developments, OpenStack has
 become the de facto open-source solution to operate, supervise and use
-IaaS infrastructures. More recentely it has increased its effort to address edge computing cases.
-
+IaaS infrastructures.
+%More recently it has increased its effort to address edge computing cases.
 %The OpenStack community gathers more than 500
 %organizations, including large groups, in particular key actors of
 %edge infrastructures such as ATT, Verizon~\ldots.
 
 The remainder of the paper is organized as
 follows. Section~\ref{sec:requirements} presents major features
-expected by administrators and developers, highlightling in particular
+expected by administrators and devops, highlighting in particular
 the main differences w.r.t federated infrastructures.
-Section~\ref{sec:system_design_considerations} describes two obvious deployment scnearios based on the today's system capabilities. It then builds the case for effective system collaboration across the entire edge infrastructure, introducing two approaches that
-%introduces two approaches that
-open source communities could follow to design and develop an IaaS
-toolkit, \aka a resource management system, dedicated to edge
-environments. Section~\ref{sec:design_discussion} discusses \emph{pros}/\emph{cons}
-of both approaches and points out a way forward. Finally,
+Section~\ref{sec:system_design_considerations} deals with two
+deployment scenarios based on the today's system capabilities,
+highlighting the need for an effective system collaboration across the
+entire edge infrastructure. Section~\ref{sec:design_discussion}
+introduces two approaches that open source communities could follow to
+design and develop a resource management system dedicated to edge
+environments. It discusses in particular \emph{pros}/\emph{cons} of
+both approaches and points out a way forward. Finally,
 Section~\ref{sec:conclusion} concludes this paper.
 
 
