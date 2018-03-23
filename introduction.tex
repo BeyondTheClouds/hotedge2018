@@ -95,7 +95,7 @@ enables the orchestration and automation of virtual network functions
 across distinct VIMs. From the academic side, the FogBow
 solution~\cite{brasileiro2016fogbow} aims to support large federations
 of Infrastructure-as-a-service (IaaS) providers. More recently, NIST
-initiated a collaborative effort with the IEEE to advance Federated
+initiated a collaborative effort with IEEE to advance Federated
 Cloud through the development of a conceptual architecture and a
 vocabulary\endnote{\url{https://collaborate.nist.gov/twiki-cloud-computing/bin/view/CloudComputing/FederatedCloudPWGFC}
   (Valid on March 2018).}.
@@ -137,8 +137,8 @@ In this paper, we present reflections to initiate discussions through our commun
  % Moreover, it should deliver significant insights on the
  % design and implementation of a resource management system for the
  % edge computing.
-\item Second, on the basis of the identified requirements, we discuss
-  insights regarding how an edge computing resource management system
+\item Second, based on the identified requirements, we discuss
+  how an edge computing resource management system
   should be designed. In particular, we study \emph{pros} and
   \emph{cons} of \emph{top-down} and \emph{bottom-up} approaches. The
   former consists in interacting with each site only through the
@@ -151,30 +151,27 @@ In this paper, we present reflections to initiate discussions through our commun
   \centering
   \includegraphics[width=\columnwidth]{./figures/figure_fog.pdf}
   \caption{Edge Computing Infrastructure~\cite{7923796}.}
-    {\small It can be extended with Cloud Computing
-    platforms when relevant.  The red dashed lines depicts a split-brain situation that isolates
+    {\small The red dashed lines depict a split-brain situation that isolates
     \emph{Site 1} from other sites.}
   \label{fig:fogedge-archi}
 \end{figure}
 
 Because there are as many edge infrastructures as use-cases, we
-highlight that the edge infrastructure we considered to conduct this
+highlight that the edge infrastructure we considered in this
 study is composed from the hardware viewpoint of several
-geo-distributed micro DCs (up to hundreds)
-composed of up to one hundred servers (approximately two racks in terms of space).
+geo-distributed micro DCs (up to thousands)
+composed of up to one hundred servers (nearly two racks).
 Figure~\ref{fig:fogedge-archi} gives an overview of this
-infrastructure. The expected latency as well as the bandwidth between
+infrastructure. The expected latency and bandwidth between
 each element may fluctuate significantly, in particular because the
-network links can be either wired or wireless (represented by plain
-and dashed lines on the figure). Moreover, short disconnections
-between edge sites may occur leading to temporary network split brain
+network links can be wired or wireless. Moreover, short disconnections
+between edge sites may occur leading to network split brain
 situations~\cite{4456903}. Finally, it might be possible
 to consider additional micro DCs deployed at the Extreme Edge, within
 private institutions or even public transports.
 %
-From the software point of view, in order to simplify the model and
-without loss of generality, we mainly assume the OpenStack software
-suite~\cite{openstack:www} as the default VIM.  After seven years of intensive developments, OpenStack has
+From the software viewpoint, in order to simplify the model and
+without loss of generality, we mainly assume OpenStack ~\cite{openstack:www} as the default VIM.  After years of intensive developments, OpenStack has
 become the de facto open-source solution to operate, supervise and use
 IaaS infrastructures.
 %More recently it has increased its effort to address edge computing cases.
@@ -183,17 +180,16 @@ IaaS infrastructures.
 %edge infrastructures such as ATT, Verizon~\ldots.
 
 The remainder of the paper is organized as
-follows. Section~\ref{sec:requirements} presents major features
+follows. Section~\ref{sec:requirements} presents the major features
 expected by administrators and devops, highlighting in particular
-the main differences w.r.t federated infrastructures.
+differences \wrt federated infrastructures.
 Section~\ref{sec:system_design_considerations} deals with two
-deployment scenarios based on the today's system capabilities,
+deployment scenarios based on today's system capabilities,
 highlighting the need for an effective system collaboration across the
 entire edge infrastructure. Section~\ref{sec:design_discussion}
-introduces two approaches that open source communities could follow to
-design and develop a resource management system dedicated to edge
-environments. It discusses in particular \emph{pros}/\emph{cons} of
-both approaches and points out a way forward. Finally,
+introduces and discusses two approaches that communities can follow to
+design/develop a resource management system for edge
+environments, and points out a way forward. Finally,
 Section~\ref{sec:conclusion} concludes this paper.
 
 
