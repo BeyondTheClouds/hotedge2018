@@ -2,19 +2,19 @@
 \label{sec:intro}
 
 
-% Edge Infrastructures are the next platform
-With the emergence of Network Function Virtualization (NFV)
-technologies as well as Internet of Things (IoT) and augmented/virtual
-reality (AR/VR) applications, Cloud and Network communities are
-advocating for going towards massively distributed small sized
-infrastructures that are deployed at the edge of the network.
-%
-Referred to as the Edge Computing paradigm, this model aims at
-delivering Cloud Computing capabilities closer to end-users, their
-related devices, and applications.
-%
+% % Edge Infrastructures are the next platform
+% With the emergence of Network Function Virtualization (NFV)
+% technologies as well as Internet of Things (IoT) and augmented/virtual
+% reality (AR/VR) applications, Cloud and Network communities are
+% advocating for going towards massively distributed small sized
+% infrastructures that are deployed at the edge of the network.
+% %
+% Referred to as the Edge Computing paradigm, this model aims at
+% delivering Cloud Computing capabilities closer to end-users, their
+% related devices, and applications.
+% %
 
-While Several academic studies have been highlighting the advantages
+While several academic studies have been highlighting the advantages
 of Edge Computing paradigm in various
 domains~\cite{bonomi2012fog,zhang2015cloud,yi2015fog,shi2016edge,satyanarayanan2017emergence},
 %%
@@ -78,13 +78,13 @@ current Cloud Computing solutions.
 
 %On this basis,
 %
-The ETSI Mobile Edge Computing~(MEC) Industry Specification Group
+The ETSI Mobile Edge Computing Industry Specification Group
 defined in 2016 a software architecture to orchestrate distinct
 independent Cloud systems or, in their terminology, Virtual
 Infrastructure Managers (VIM)~\cite{7574435}.
 %
 The idea consists in federating VIMs of the several Data Centers that
-compose the Edge infrastructure.  By Reusing VIMs, the ETSI group targets an Edge
+compose the Edge infrastructure.  By reusing VIMs, the ETSI group targets an Edge
 Computing resource management that behaves in a same fashion as Cloud
 Computing, while mitigating development requirements.
 %
@@ -150,10 +150,9 @@ In this paper, we present reflections to initiate discussions through our commun
 \begin{figure}[t]
   \centering
   \includegraphics[width=\columnwidth]{./figures/figure_fog.pdf}
-  \caption{An Edge Computing infrastructure composed of $4$ sites, built around
-    micro/nano DCs~\cite{7923796}. It can be extended with Cloud Computing
-    platforms when relevant (while farther, they provide more resources).
-    The red dashed lines depicts a split-brain situation that isolates
+  \caption{Edge Computing Infrastructure~\cite{7923796}.}
+    {\small It can be extended with Cloud Computing
+    platforms when relevant.  The red dashed lines depicts a split-brain situation that isolates
     \emph{Site 1} from other sites.}
   \label{fig:fogedge-archi}
 \end{figure}
