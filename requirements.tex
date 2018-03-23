@@ -31,14 +31,18 @@ more complex aspects like managing multiple sites (L2), up to considering that
 sites can be owned by different operators (L5).
 \Cref{tab:requirements} summarizes the classification we detail in the following. 
 
-As previously mentioned, the assembly of these features results in a
-system capable of operating and using a geo-distributed IaaS
-infrastructure.  Such mechanisms are provided by various services,
-each of which is in charge of the management of a particular aspect of
-the infrastructure. In this paper, we consider the Compute, Storage
-and Network managers as well as the monitoring and administrative
-tools~\cite{moreno2012csp}.
-\RACm{Maybe this paragraph can be removed}
+As previously mentioned, a large part of these features are common to
+the ones offered by current IaaS resource management systems. They are
+implemented by various services, each of which is in charge of the
+management of a particular aspect of the infrastructure
+%.In this paper, we consider the Compute, Storage and
+%Network managers as well as the monitoring and administrative
+%tools
+~\cite{moreno2012csp}.
+\AL{Not sure whether we should introduce
+  service here. Maybe this is something we should only put at the end
+  of this section to make a transition with the other ones. The issue
+  is that we need it for the moment in L2.}
 
 \paragraph{L1: Operate/use any site}
 As depicted in the second row of \cref{tab:requirements}, this level
@@ -77,36 +81,35 @@ interactions with the equipment should be considered.
 
 %% TODO
 % For instance, a user of \emph{Site 1} 
-In L2, L1 operations are considered but over multiple sites (at least
-two).  This includes operations such as gathering information of
-several sites, creating a new resource one a particular site using
-resources from another one~\ldots.
-%
-Concrete operations might consist for administrators in configuring users' access on a per-site basis.
-
-
-Regarding users, they expect
-services from different sites to collaborate.
-% is the following interesting regarding the scope of this paper?
-% a reflection would need deeper analysis/explanations
+In L2, L1 features are considered but over multiple sites (at least
+two).  This includes operations such as creating a new resource on a
+particular site using resources from another one, managing several
+resources or gathering information from various sites simultaneously.
+%(interconnecting two VMs with a dedicated network).
 Operations can be either intra-services (same service from different sites) or
 inter-services (different services from different sites).
-%
-For instance, users might desire to boot a VM on \emph{Site 1}, using an image
-defined in \emph{Site 2} (inter-service operation) or list VMs from multi-sites
-(intra-service operation). Similarly to L1, they both expect metrics collected
-from several sites and collaborated mechanisms regarding the security (\eg
-secret key sharing).
 
-We define here two sub-levels as depicted in \cref{tab:requirements}. Such
-collaboration between sites can be either explicit (\ie the targeted sites are
-explicitly specified), referenced as the sub-level L2.1, or implicit (L2.2).
-The implicit manner suggests that policies (\eg performance objectives, energy
-consumption) and constraints (\eg affinity, underlying hardware) are provided
-by admins and users so that an edge-aware orchestrator takes the right
-decisions regarding the users' desiderata and the state of the infrastructure
-(\eg auto-scaling, relocating workloads between sites, re-scheduling faulty
-resources across sites).
+%
+Concrete operations might consist for instance in configuring users'
+access on a per-site basis, listing available VM images or pushing new
+ones on multiple sites (intra-service operations)~\ldots From the
+devops viewpoint, a user should be able to boot a VM on \emph{Site 1},
+using an image defined in \emph{Site 2} (inter-service
+operation). Similarly to L1, they both expect metrics collected from
+several sites and collaborated mechanisms regarding the security (\eg
+secret key sharing, network encryption).
+
+Because collaboration between sites can be either explicit (\ie the
+targeted sites are explicitly specified in the operation), or implicit
+(\ie the resource management system is in charge of selecting
+resources), we have defined two sub-levels as depicted in
+\cref{tab:requirements} L2.1 and L2.2 respectively.  The implicit
+manner suggests that policies (\eg performance objectives, energy
+consumption) and constraints (\eg affinity, underlying hardware) are
+provided by admins and users so that the resource management system takes
+the right decisions regarding the defined desiderata and the state of
+the infrastructure (\eg auto-scaling, relocating workloads between
+sites, re-scheduling faulty resources across sites).
 % should be elaborated and/or refs should be given here
 
 \paragraph{L3: Robustness \wrt split brains:}
