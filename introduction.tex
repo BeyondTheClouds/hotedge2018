@@ -25,15 +25,15 @@ an example, one solution may allow IoT applications to run on
 infrastructures composed of NFV-enabled hardware (at the edge) and
 centralized clouds~\cite{bonomi2012fog}. Unfortunately, these
 solutions are specific to a domain and do not allow, for instance, to
-run workloads in an isolated environments like containers or virtual
-machines (VMs). They lack of a general resource management system to
-operate and use Edge Computing infrastructure. Something that will,
-first let an operator aggregates, supervises and exposes the massively
-distributed resources of the infrastructure and second, let a
-developer implements new kinds of services on top of that
-infrastructure that may be deployed and managed on demand. This is a
-rather critical problem as administrators and developers expect to
-find most features that make the success of current Cloud Computing
+run workloads in isolated environments like containers or virtual
+machines (VMs). They lack a general resource management system to
+operate and use Edge Computing infrastructure. Something that will
+first, let an operator aggregates, supervises and exposes the
+massively distributed resources of the infrastructure and second, let
+a developer implements new kinds of services on top of that
+infrastructure that may be deployed and managed on demand. This lack
+is a rather critical problem as administrators and developers expect
+to find most features that make the success of current Cloud Computing
 solutions.
 
 %% Thus, the development of a general resource management system to
@@ -57,14 +57,37 @@ solutions.
 %% %
 %% This is rather critical as developers/end-users expect to find
 %% most features that makes the success of current Cloud Computing solutions.
-In 2016, the ETSI Mobile Edge Computing (MEC)
-Industry Specification Group defined  a software architecture
-to orchestrate distinct independent cloud systems, \aka Virtual
-Infrastructure Managers (VIM) in their terminology~\cite{7574435}. However, there is no implementation available yet.  At the
-same time, an industry-driven consortium proposed
+
+%% Requirements:
+%%
+%% 1. il y a des fonctionnalités spécifiques au edge
+%%
+%% 2. on a étudié différentes stratégies de design d'une IaaS manager
+%%    qui implementerait nos requieremtn avec comme *contraintes de
+%%    réutilier au plus les VIM*.
+
+%% Les implem essaye de réutiliser les VIM pour minimiser l'effort de
+%% dvlp. Elle font ceci par aggrega des API, mais le problème est
+%% qu'elles se limite à être des gestionnaires de resources (cf k8s
+%% discussion avec Adrien) alors que un VRAIE IaaS manager doit
+%% considérer plus de chose (donner un exemple de req).
+
+On this basis,
+%
+the ETSI Mobile Edge Computing~(MEC)
+Industry Specification Group defines in 2016 a software architecture
+to orchestrate distinct independent Cloud systems or, in their terminology, Virtual
+Infrastructure Managers (VIM)~\cite{7574435}.
+%
+The orchestration federates VIMs of the several Data Centers that
+compose the Edge infrastructure. The reusing of VIMs thus produces an
+edge computing resource management that behaves in a same fashion as
+Cloud Computing.
+%
+Although, there is no implementation available, the idea seams promising since an industry-driven consortium proposed
 the ONAP framework~\cite{onap} that enables the orchestration and
-automation of virtual network functions across distinct VIMs.  From
-the academic side, federated approaches have been investigated.
+automation of virtual network functions across distinct VIMs. From
+the academic side, similar approaches have been investigated.
 For instance, the FogBow proposal~\cite{brasileiro2016fogbow} aims to
 support large federations of Infrastructure-as-a-service (IaaS)
 providers. More recently, NIST %Cloud Computing Program (NCCP)
@@ -76,12 +99,12 @@ providers. More recently, NIST %Cloud Computing Program (NCCP)
 initiated a collaborative effort with the IEEE
 %P2302 group (Standards for Intercloud Interoperability and Federation),
 to advance Federated Cloud through the development
-of a conceptual architecture and a vocabulary
+of a conceptual architecture and a vocabulary\endnote{\url{https://collaborate.nist.gov/twiki-cloud-computing/bin/view/CloudComputing/FederatedCloudPWGFC} (Valid on March 2018).}.
 %The IEEE P2302 will
 %develop a standard based on the NIST model.  Additional information
 %can be found at
-\endnote{\url{https://collaborate.nist.gov/twiki-cloud-computing/bin/view/CloudComputing/FederatedCloudPWGFC} (Valid on March 2018).}.
 %
+
 While all these projects propose contributions to manage the life cycle of
 geo-ditributed applications in a more software defined manner, they present two
 limitations. First, they become more and more complex to finally
@@ -99,6 +122,8 @@ favor the advent of the Edge Computing paradigm.
 
 In this paper, we
 present important reflections to consider before starting the development of such a system.
+
+
 \begin{itemize}
 \item First, we propose a classification of expected features from
   both administrators and end-users. Although this classification might be extended, it is already valuable to drive the design and implementation of a resource management system for the edge computing.
