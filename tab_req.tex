@@ -8,92 +8,82 @@
     \midrule
 
     L1: Operate/use any site &
-    Manage any site: &
-    Provision on-demand on any site: &
-    Collect metrics regarding a single site: \\ 
+    Manage any site: install, upgrade site's&
+    Provision compute, storage, network&
+    Collect metrics and ensure security,\\ 
 
-    (all operations are based in single site) &
-    - install services &
-    - compute resources&
-    Security (secured communications, \\
-
-    &
-    - use services (users, flavors, quotas)&
-    - network resources&
-    auditing, integrity)\\
-
-    &
-    - upgrade services&
-    - storage resources&
-    Resiliency\\
+    (all operations are based in single site)&
+    services; manage users, flavors, quotas&
+    resources on-demand on any site &
+    integrity and resiliency for any site\\
     %\\% add space between levels
 
     \rowcolor{black!20}[0pt][0pt]
     L2: Operate/use several sites &
-    &
-    &
+    Manage multiple sites simultaneously&
+    Cross-site collaborative resources&
     L1 but over a set of sites\\
 
     \rowcolor{black!20}[0pt][0pt]
     (all operations cover at least two sites) &
     &
     &
-    Collect metrics regarding many sites\\
+    Aggregated metrics from multiple sites\\
 
     \rowcolor{black!20}[0pt][0pt]
-    - L2.1 Explicit manner&
+    - L2.1 Explicit manner:&
     Manage a specific set of sites &
     Provision on a specific set of sites &
-    \\
+    and collaborative security mechanisms\\
     
     \rowcolor{black!20}[0pt][0pt]
-    - L2.2 Implicit manner&
-    Cross-site Autonomous management&
-    Cross-site Autonomous provisioning&
+    - L2.2 Implicit manner:&
+    Cross-site autonomous management&
+    Cross-site autonomous provisioning&
     \\
     %\\% add space between levels
 
     L3: Robustness \wrt split brains &
     &
     &
-    L1 for an isolated site\\ 
+    L1 for an isolated site; L1 and L2 for\\
 
     (all operations cover one or many sites) &
     &
     &
-    L1 and L2 for an isolated set of sites\\
+    isolated sets of sites\\
 
-    - L3.1 Application robustness&
+    - L3.1 Application robustness:&
     \hfill ------ \hfill &
-    Access user's applications&
-    Collect metrics regarding one or many sites\\
+    Access reachable applications&
+    Support intermittent network\\
 
-    - L3.2 Management service robustness&
-    Manage one or many sites &
-    Provision on one or many sites&
-    \\
+    - L3.2 Management service robustness:&
+    Manage reachable site(s) &
+    Provision on reacheable site(s)&
+    connectivity and churn effect\\
     %\\% add space between levels
 
     \rowcolor{black!20}[0pt][0pt]
     L4: Multiple Cloud environments &
     &
     &
-    L3 with different types of IaaS managers\\ 
+    L3 with different IaaS environments\\
 
     \rowcolor{black!20}[0pt][0pt]
     (all operations cover one or many sites) &
     &
     &
-    Discover sites' capabilities/compatibilities\\
+    Discover sites' capabilities and\\
 
     \rowcolor{black!20}[0pt][0pt]
-    - L4.1 Different IaaS versions&
+    - L4.1 Different IaaS versions:&
     Manage different IaaS versions&
     Provision on different IaaS versions&
-    \\
+    compatibility\\
     
     \rowcolor{black!20}[0pt][0pt]
-    - L4.2 Different IaaS technologies&
+    - L4.2 Different IaaS technologies:&
     Manage different IaaS technos&
     Provision on different IaaS technos&
     \\
@@ -107,7 +97,7 @@
     (all operations cover one or many sites) &
     &
     &
-    Collect metrics from different operators\\
+    Collect metrics for billing\\
     \bottomrule
 
 \end{tabular}

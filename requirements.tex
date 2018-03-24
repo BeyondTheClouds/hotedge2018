@@ -6,7 +6,7 @@
 %   \centering
 %   \def\svgwidth{\columnwidth}
 %   \input{figures/sites.pdf_tex}
-%   \caption{Partial representation of the targeted edge infrastructure, composed
+%   \caption{Partial representation of the targeted Edge infrastructure, composed
 %     of multiple sites. Each site is composed of many servers (represented by
 %     black bullets) and have a set of users (depicted by black squares). The red
 %     dashed line depicts a split-brain situation that separates the
@@ -18,8 +18,8 @@
 \begin{table*}
     \centering
         \input{tab_req.tex}
-    \caption{Classification of the requirements to administrate and use edge
-    computing infrastructures in $5$ levels.}
+    \caption{Classification of the requirements to administrate and use Edge
+    Computing infrastructures in $5$ levels.}
     \label{tab:requirements}
 \end{table*}
 
@@ -39,7 +39,7 @@ management of a particular aspect of the infrastructure
 %Network managers as well as the monitoring and administrative
 %tools
 ~\cite{moreno2012csp}.
-\AL{Not sure whether we should introduce
+\ALm{Not sure whether we should introduce
   service here. Maybe this is something we should only put at the end
   of this section to make a transition with the other ones. The issue
   is that we need it for the moment in L2.}
@@ -49,14 +49,14 @@ As depicted in the second row of \cref{tab:requirements}, this level
 considers actions both administrators and users expect to perform
 when considering a single site, supposing the site is reachable.
 %
-Most operations are elementary from the Edge viewpoint because they
-correspond to the ones already provided by OpenStack for both administrators and devops.  In other words,
-each Edge site can be considered as an independent Cloud at this
-level. The unmanned aspect only impacts this level by requiring to perform all operations
-remotely if needed.
+Most operations are elementary from the Edge viewpoint because they correspond
+to the ones already provided by OpenStack for both administrators and devops.
+In other words, each Edge site can be considered as an independent Cloud at
+this level. The unmanned aspect only impacts this level by requiring to perform
+all operations remotely if needed.
 %security
 Furthermore, the resource management system should provide means to
-ensure the integrity of the hardware resources taking part to the edge
+ensure the integrity of the hardware resources taking part to the Edge
 infrastructure. Strategies such as enabling/disabling physical
 interactions with the equipment should be considered.
 
@@ -81,77 +81,70 @@ interactions with the equipment should be considered.
 
 %% TODO
 % For instance, a user of \emph{Site 1} 
-In L2, L1 features are considered but over multiple sites (at least
-two).  This includes operations such as creating a new resource on a
-particular site using resources from another one, managing several
-resources or gathering information from various sites simultaneously.
+In L2, L1 features are considered but over multiple sites (at least two). This
+includes operations such as provisioning a resource on a site using resources
+from another one, managing several resources or gathering information from
+various sites simultaneously.
 %(interconnecting two VMs with a dedicated network).
 Operations can be either intra-services (same service from different sites) or
 inter-services (different services from different sites).
 
-%
-Concrete operations might consist for instance in configuring users'
+Concrete operations consist for instance in configuring users'
 access on a per-site basis, listing available VM images or pushing new
-ones on multiple sites (intra-service operations)~\ldots From the
-devops viewpoint, a user should be able to boot a VM on \emph{Site 1},
-using an image defined in \emph{Site 2} (inter-service
-operation). Similarly to L1, they both expect metrics collected from
-several sites and collaborated mechanisms regarding the security (\eg
+ones on multiple sites (intra-service operations). From the
+devops viewpoint, a user should be able to boot a VM on \emph{Site 1} (depicted
+on \cref{fig:fogedge-archi}) using an image defined in \emph{Site 2}
+(inter-service operation). Similarly to L1, they both expect metrics collected
+from several sites and collaborated mechanisms regarding the security (\eg
 secret key sharing, network encryption).
 
 Because collaboration between sites can be either explicit (\ie the
 targeted sites are explicitly specified in the operation), or implicit
 (\ie the resource management system is in charge of selecting
 resources), we have defined two sub-levels as depicted in
-\cref{tab:requirements} L2.1 and L2.2 respectively.  The implicit
+\cref{tab:requirements}, respectively called L2.1 and L2.2. The implicit
 manner suggests that policies (\eg performance objectives, energy
-consumption) and constraints (\eg affinity, underlying hardware) are
-provided by admins and users so that the resource management system takes
-the right decisions regarding the defined desiderata and the state of
-the infrastructure (\eg auto-scaling, relocating workloads between
-sites, re-scheduling faulty resources across sites).
+consumption) and constraints (\eg affinity rules, underlying hardware
+requirements) are provided by admins and devops so that the resource management
+system takes the right decisions regarding the defined desiderata and the state
+of the infrastructure (\eg auto-scaling, relocating workloads between sites,
+re-scheduling faulty resources across sites).
 % should be elaborated and/or refs should be given here
 
 \paragraph{L3: Robustness \wrt network split brains:}
 The next level we define is related to the limited or intermittent
-network connections between sites.  Similarly to the previous level,
+network connections between sites. Similarly to the previous level,
 L3 includes all L2 operations but with the possibility to face
-\emph{network split brains} situations that (\ie, situations where the
-infrastructure is partitioned due to communication failures).
+\emph{network split brains} (\ie, situations where the infrastructure is
+partitioned due to communication failures).
 %
-\Cref{fig:fogedge-archi} depicts such a case where \emph{Site 1} for
-instance is isolated from the other sites.  In this scenario, L1
-operations should be feasible for administrators/devops that can reach
-the site:~Although Site 1 is isolated from the rest of
-the infrastructure, it should be possible for administrators/devops in
-the same geographical area to perform L1 operations. Such a requirement make sense
-as L1 operations are only related to one site and thus do not impact the other ones.
+\Cref{fig:fogedge-archi} depicts such a case where \emph{Site 1} is isolated
+from the other sites. In this scenario, administrators/devops that can reach
+the site (\ie located in the same geographical area) should be able to perform
+L1 operations regarding \emph{Site 1}, even if it is isolated from other sites.
+Such a requirement make sense as L1 operations are only related to one site and
+thus do not impact the other ones.
 %
-Regarding the other partition, \ie the one containing
-several sites, L1 and L2 operations must be guaranteed for any set of
-sites inside the partition.
-%
+Regarding the second partition which contains the other sites, L1 and L2
+operations must be guaranteed for any subset of sites inside the partition.
 
-We decided to refine L3 in two sub-classes in order to make a
-distinction between the penalty a split brain can cause to resources
-that have been already provisioned vs the management services that
-enable to provision new resources or change existing ones. L3.1 is
-related to features that allow existing workloads to continue to serve
-local requests without being impacted (\eg. an apache server or a
-storage backend should be able to satisfy requests coming from the
-same geographical area even if their hosting servers cannot reach some
-of the management services). L3.2 features are related to the
-provisioning of new resources and other management operations as
-described in the previous paragraph.
+Split brains have a distinct impact on already-provisioned resources and on the
+management services that enable to provision new resources or change existing
+ones. As a consequence, we decided to refine L3 into two sub-classes. L3.1 is
+related to the features that allow already-deployed applications to continue to
+serve local requests without being impacted. For instance, an \emph{apache}
+server or a storage backend should be able to satisfy requests coming from the
+same geographical area, even if management services cannot be reached. L3.2
+features are related to the provisioning of new resources and other management
+operations as described in the previous paragraph.
 %
-It is noteworthy to mention that delivering all L2
-features will not be always possible at the L3.2 level because information
-cannot be gathered in case of a disconnection.  For instance,
-guaranteeing quotas across the infrastructure overall is impossible
-without relaxing the consistency of the information. New approaches
-will have to be proposed for such operations.
+Note that guaranteeing L2 features will not be always possible at the L3.2
+level because information cannot be gathered in case of a disconnection. For
+instance, guaranteeing quotas across the infrastructure overall is impossible
+without relaxing the consistency of the information. New approaches will have
+to be proposed for such operations.
 
-Finally, the intermittent network connectivity between edge resources
+Finally, the possibly intermittent network connectivity between Edge resources
 requires to have operations that enable sites to join and leave the
 infrastructure.
 
@@ -160,14 +153,14 @@ infrastructure.
 % determine its global consumption in case of split-brains?
 
 \paragraph{L4: Multiple Cloud environments:}
-Delivering a resource management system at large scale in a unified
-manner is not conceivable from the software viewpoint.  Different
-versions of each service will co-exist at the same time across the
-whole infrastructure.  It is thus important to consider specific
-requirements to deal with such a constraint.  L4 class gathers these
-requirements.
+Delivering a resource management system at large scale in a unified manner is
+not conceivable from the software viewpoint. Different versions of each
+service, and potentially different infrastructure managers in charge of
+different sites, will co-exist at the same time across the whole
+infrastructure. It is thus important to consider specific requirements to deal
+with such a constraint, which we gather in L4.
 %
-More precisely, L4.1 considers L3 features when edge sites might be
+More precisely, L4.1 considers L3 features when Edge sites can be
 operated by different versions of the same software stack.
 %
 L4.2 increases the complexity by adding into the big picture the
@@ -175,38 +168,38 @@ possibility to deal with different resource management systems,
 including possibly different concepts (\eg OpenStack for VMs and
 Kubernetes for Containers).
 
-As a consequence, it is necessary to discover site's capabilities to
-determine their relationship in order to only allow operations that are
-possible.
+As a consequence, it is necessary to discover sites' capabilities to
+determine their relationship in order to only allow possible operations.
 
 \paragraph{L5: Multiple operators:}
-L5 corresponds to the holy grail in terms of expected features.  In
+L5 corresponds to the holy grail in terms of expected features. In
 addition to L4 features, it includes the possibility to use sites
 owned by different operators. As depicted in \cref{tab:requirements},
 we do not specify any requirement for administrators because an
 operator would not share administrative rights to their sites with
 other operators at the first sight. However, operators should be able
 to collaborate to offer their sites' resources to any devops like it has
-been done for a while for cellular networks. Requirements are more related to the collect and share
-of relevant metrics enabling each operator to correctly establish bills.
+been done for a while for cellular networks. The requirements here are more
+related to the collect and share of relevant metrics enabling each operator to
+correctly establish bills.
 
 %footer
 \paragraph{Summary:}
 As noticed in the beginning of this section, we choose to classify the
 requirements through 5 levels, each one increasing the complexity in
-terms of design and development constraints.  We underline that since
+terms of design and development constraints. We underline that since
 L4 and L5 both extend L3 respectively with multiple manager
 environments, and multiple operators, they can be considered at the
 same level in our classification and can be swapped as a consequence.
 
 Although we tried to be exhaustive, this list of features could
-probably be extended, in particular by considering different edge
-infrastructure scenarios including smaller and limited devices.
+probably be extended, in particular, by considering different Edge
+infrastructure scenarios including for instance smaller and limited devices.
 However, we believe it is already valuable to deliver significant
 insights on the design and implementation of a resource management
-system for the edge computing. In the next section, we study whether a
+system for the Edge Computing. In the next section, we study whether a
 system such as OpenStack can fulfill the L1, L2, and L3 levels.
-The discussion of L4 and L5 is let as future work. 
+The discussion of L4 and L5 is let as future work.
 
 %Considering now that the challenges are already numerous with L1, L2 and L3, we
 %propose to drive the system design regarding these levels in the rest of the
