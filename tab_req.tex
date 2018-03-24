@@ -12,7 +12,7 @@
     Provision compute, storage, network&
     Collect metrics and ensure security,\\ 
 
-    (all operations are based in single site)&
+    &
     services; manage users, flavors, quotas&
     resources on-demand on any site &
     integrity and resiliency for any site\\
@@ -25,22 +25,16 @@
     L1 but over a set of sites\\
 
     \rowcolor{black!20}[0pt][0pt]
-    (all operations cover at least two sites) &
-    &
-    &
-    Aggregated metrics from multiple sites\\
-
-    \rowcolor{black!20}[0pt][0pt]
     - L2.1 Explicit manner:&
     Manage a specific set of sites &
     Provision on a specific set of sites &
-    and collaborative security mechanisms\\
+    Aggregated metrics from multiple sites\\
     
     \rowcolor{black!20}[0pt][0pt]
     - L2.2 Implicit manner:&
     Cross-site autonomous management&
     Cross-site autonomous provisioning&
-    \\
+    and collaborative security mechanisms\\
     %\\% add space between levels
 
     L3: Robustness \wrt split brains &
@@ -48,20 +42,16 @@
     &
     L1 for an isolated site; L1 and L2 for\\
 
-    (all operations cover one or many sites) &
-    &
-    &
-    isolated sets of sites\\
 
     - L3.1 Application robustness:&
     \hfill ------ \hfill &
     Access reachable applications&
-    Support intermittent network\\
+    isolated sets of sites\\
 
     - L3.2 Management service robustness:&
     Manage reachable site(s) &
     Provision on reacheable site(s)&
-    connectivity and churn effect\\
+    Support intermittent connectivity\\
     %\\% add space between levels
 
     \rowcolor{black!20}[0pt][0pt]
@@ -71,22 +61,18 @@
     L3 with different IaaS environments\\
 
     \rowcolor{black!20}[0pt][0pt]
-    (all operations cover one or many sites) &
-    &
-    &
-    Discover sites' capabilities and\\
 
     \rowcolor{black!20}[0pt][0pt]
     - L4.1 Different IaaS versions:&
     Manage different IaaS versions&
     Provision on different IaaS versions&
-    compatibility\\
+    Discover sites' capabilities and\\
     
     \rowcolor{black!20}[0pt][0pt]
     - L4.2 Different IaaS technologies:&
     Manage different IaaS technos&
     Provision on different IaaS technos&
-    \\
+    compatibility\\
     %\\% add space between levels
 
     L5: Multiple operators &
@@ -94,10 +80,6 @@
     Provision on one or many sites&
     L4 with multiple operators\\ 
 
-    (all operations cover one or many sites) &
-    &
-    &
-    Collect metrics for billing\\
     \bottomrule
 
 \end{tabular}
