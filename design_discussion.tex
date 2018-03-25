@@ -9,39 +9,8 @@
 \label{sec:design_discussion}
 
 
-\subsection{Effective Collaboration is Needed}
-% Each Edge Site
-% provides control and compute capabilities (see~\ref{sec:requirements})
-% on top of dozens of servers. They \emph{collaborate} with each-other
-% to shape up the Edge Infrastructure and a Wide Area Network (WAN)
-% interconnects them through both wired and wireless network links. This
-% results in up to 300ms of RTT between two Edge Sites and common
-% disconnections.
 
-Despite the fallibility of the network, and frequent isolation risks
-of an Edge Site from the rest of the Infrastructure (\ie network
-split-brain), the Edge Infrastructure may be kept sustainable. This is
-achieved by supposing a collaboration a la peer-to-peer, that is, an
-Edge Site always serves local resources and collaborates with other
-Edge Sites if needed. Thus, a user can make a SSH to his/her VM during a
-network split-brain if he/she gets a local access to the Edge Site. The
-same user can also start a VM using an image stored in another Edge Site if
-the collaboration can be established.
-\AL{Should this last paragraph appear in Section II? Here we talk about a use-case not about design considerations.}
-\AL{IMHO, the subsection starts below. We can add something like. The two extreme scenarios (one global vs n independant openstack) show (i) each edge site should be able to deal with network split situations and (ii) the codebase should deliver mechanisms to allow distinct openstack instances to collaborate.}
-
-When it comes to develop this resource management system for the Edge
-computing, the developer has two fundamental design options: a \emph{top-down} or
-\emph{bottom-up}. Both designs impact how to handle the
-collaboration needed by such a system.
-
-\paragraph{Top-Down Collaboration}
-Design option that implements the collaboration required by
-federating IaaS managers' API. In other words, it leverages on existing IaaS platforms as they are made available today without introducing modifications/extensions. Examples of approaches following a \emph{top-down} design are: ONAP~\cite{onap}, Kingbird~\cite{kingbird}, FogBow~\cite{brasileiro2016fogbow} and p2p-OpenStack~\cite{ericsson-p2p}
-
-
-\paragraph{Bottom-Up Collaboration} Design option that lays on making IaaS mechanisms/services directly collaborative. For example, having two OpenStack Nova services able to cooperate and communicate directly would be a realization of a \emph{bottom-up} design. Such design option implies either the modification/extension of existing IaaS platforms or the creation of a completely new system. Examples of approaches following a \emph{bottom-up} design are:
-\AL[Comment by Joao]{Any reference to existing approaches? Guys, do you have, for example, references to your keystone shared db work? Could cells be considered as an example? }
+% Du code à rajouter vs du code à refaire
 
 On the one hand, \emph{top-down} options have been the most explored, but can these alone fulfil all expected requirements? On the other hand, \emph{bottom-up} options seem to disruptive the design principles of most existing IaaS platform, but should it be discarded?
 
@@ -49,7 +18,7 @@ On the one hand, \emph{top-down} options have been the most explored, but can th
 
 
 A \emph{top-down} system  relies on existing VIM APIs and on overlay components, with no modifications to the base code of a VIM.
-OpenStack, for example, provides a new release every six months and the code varies a lot between each release, however changes rarely impact the APIs.  Therefore, a \emph{top-down} approach gives independence to both VIM development and overlay system components. 
+OpenStack, for example, provides a new release every six months and the code varies a lot between each release, however changes rarely impact the APIs.  Therefore, a \emph{top-down} approach gives independence to both VIM development and overlay system components.
 If designed to do so, the system can easily allow L4 requirements, \ie the support of different VIMs and different versions of a VIM - \eg FogBow~\cite{brasileiro2016fogbow}.
 
 
@@ -60,17 +29,17 @@ Moreover, in order to operate a distributed edge infrastructure through a single
 
 %An interesting fact about existing \emph{top-down} is that nearly all ...
 
-%------Moreover, if different VIM flavors are deployed, it might become impractical to provide a single VIM management-view to users as different VIMs might have specific features that need to be managed. 
+%------Moreover, if different VIM flavors are deployed, it might become impractical to provide a single VIM management-view to users as different VIMs might have specific features that need to be managed.
 
 
-In a \emph{bottom-up} case, the system is not limited by what is made available through VIM APIs. This can allow the system to more easily support features across the entire edge infrastructure (\eg virtual networking across sites). Moreover, such approach can lead to a more efficient system, one without the need to repeatedly implement features at different levels. %Moreover, it can potentially fullfil any and all (reasonable) requirements since any feature missing can be implemented. 
+In a \emph{bottom-up} case, the system is not limited by what is made available through VIM APIs. This can allow the system to more easily support features across the entire edge infrastructure (\eg virtual networking across sites). Moreover, such approach can lead to a more efficient system, one without the need to repeatedly implement features at different levels. %Moreover, it can potentially fullfil any and all (reasonable) requirements since any feature missing can be implemented.
 \JM{Ronan, can you add references of existing work?}
 
 However, the efficiency and ease to support new features comes at a cost. Most existing systems, \eg OpenStack, were not designed with distribution, like the one of edge scenarios, in mind. With the high industry demand for a working edge system, this means that modifying or extending existing systems (or even creating a new system) is in most cases too expensive (time and resource wise).
 Moreover, a \emph{bottom-up} approach would certainly mean the entire edge infrastructure would rely on a specific platform/VIM, which seems to be a unrealistic scenario today due to the still fragmented VIM landscape. On a short-term, a way to overcome this would be to have a complementary \emph{top-down} system. On a longer perspective, the ideal scenario would be for the industry to agree on a standardized system in a similar way as it has done for mobile communications with 3GPP~\cite{3gpp}.
 
 
-In the end, there are \emph{pros} and \emph{cons} in both approaches, and none individually seems to fulfil all technical and business requirements of edge scenarios. 
+In the end, there are \emph{pros} and \emph{cons} in both approaches, and none individually seems to fulfil all technical and business requirements of edge scenarios.
 On a technical perspective, a \emph{top-down} approach brings modularity and independence between system components, however it is limited by that same independence as it requires low-level features to be enabled to fulfil all requirements. Moreover, a full working system would be far from effient as several features need to be implemented at different levels.
 A \emph{bottom-up} approach can produce a more efficient system that can easily support additional requirements.
 On a business perspective, a \emph{top-down} approach can easily fulfil the short and medium-term Time-To-Market (TTM) requirements. In that sense, \emph{top-down} is the working solution the community needs to aim for first, and is in fact the one it has been working towards so far. However, serious effort needs to be put on a long-term solution that lays on a \emph{bottom-up} approach. As a starting point, early \emph{bottom-up} efforts
@@ -86,5 +55,3 @@ On a business perspective, a \emph{top-down} approach can easily fulfil the shor
 %http://ieeexplore.ieee.org/abstract/document/1334777/
 %Top-down: requirements, then implement it
 %Bottom-up: not all requirments, but implement something. Can top-down approaches be partially used and implemented in a bottom-up.
-
-

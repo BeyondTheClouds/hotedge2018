@@ -1,0 +1,88 @@
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% End:
+\section{OpenStack for the Edge Study}
+\label{sec:system_design_considerations}
+Using VIMs to build an Edge Computing resource management that behaves
+like Cloud Computing seams a good idea. A VIM is a sophisticated piece
+of software that already manages virtual resources at DC level. So,
+why not using it to manage an Edge Computing infrastructure? This
+section studies the use of OpenStack to control an Edge infrastructure
+similar to the one described in the introduction (hundreds of micro
+DCs named Edge sites with fluctuating latency and intermittent
+disconnections). It evaluates the system in regards to the
+requirements of the previous section (see~\ref{sec:requirements}) with
+the purpose of identifying missing building blocks of current VIMs
+when it comes to managing Edge infrastructures.
+
+An OpenStack system consists of two kinds of nodes. On the one hand,
+there are compute/storage/network nodes which deliver the XaaS
+capabilities, such as hosting VMs (\ie data plane). On the other
+hand, they are control nodes which execute the OpenStack services,
+such as the \verb|nova-scheduler| (\ie control plane). In OpenStack,
+every time an administrator or a DevOps performs an action, that
+action goes through the control plane and ends in
+compute/storage/network nodes.
+
+Each Edge site provides enough resources to host control and compute
+capabilities, which supposes an OpenStack multiple regions deployment
+with one OpenStack per Edge site. But, OpenStack comes with several
+deployments scenarios. This section discusses the aforementioned
+multiple regions deployment and a basic deployment. The basic
+deployment mimics the infrastructure of the Cloud Computing by
+deploying all control services on one Edge site and uses remaining
+resources on other sites as compute nodes.
+
+\subsection{Multiple Regions}
+In this first scenario, each Edge site corresponds to a \emph{region}
+in the OpenStack terminology, which is a complete deployment of
+OpenStack including all control services with a ``shared'' Keystone
+(\ie the identify and service provider). The main advantage of this
+deployment is related to the independency of each site in case of
+network disconnections. In other words, in case of a network split,
+each site can satisfy the L1 features. The downside is related to the
+fact that the current codebase does not provide any mechanism to allow
+the collaboration between several regions and thus requirements L2
+cannot be met.
+
+\subsection{Centralized (Remote) Management}
+\label{subsec:centralized_os}
+In this second scenario, OpenStack operates an Edge infrastructure
+like a traditional Cloud Computing one. The ``only'' difference is
+related to the wide-area network links between the control services
+and the compute nodes. The distinction between the different Edge
+sites can be done by leveraging the concept of host aggregates
+provided by OpenStack.
+%
+From the requirements' viewpoint, L1 and most L2 requirements can be
+fulfilled in a straightforward way. Note however that because the
+infrastructure can be spread over several network domains, advanced
+network operations cannot be satisfied. In addition, the scalability
+limitation of this deployment will prevent it to consider thousands of
+compute nodes.
+%
+Requirements of L3 cannot be met. Most OpenStack services create and
+manipulate logical objects that are persisted in shared databases.
+While this enables service to easily collaborate, it imposes a
+permanent connectiviy between compute nodes, services and their DBs.
+In other words, while this scenario provides a ``Single Pane of
+Glass'' from the administrator and end-users/developers viewpoint, it
+has the drawback of being a ``Single Point of Failure'' preventing
+DevOps to use Edge resources in case of network split brains.
+
+\subsection{Effective Collaboration is Needed}
+Despite the fallibility of the network, and frequent isolation risks
+of an Edge site from the rest of the Infrastructure, the Edge
+infrastructure may be kept sustainable to meet L3 requirements. This
+is achieved by supposing a collaboration a la \emph{peer-to-peer},
+that is, an Edge site always serves local resources and collaborates
+with other Edge sites if need be. When it comes to develop such
+resource management system, the developer has two fundamental design
+options: \emph{top-down} or \emph{bottom-up}. Both designs impact how
+to handle the collaboration needed by the system.
+
+A top-down collaboration design implements the collaboration required by
+federating IaaS managers' API. In other words, it leverages on existing IaaS platforms as they are made available today without introducing modifications/extensions. Examples of approaches following a \emph{top-down} design are: ONAP~\cite{onap}, Kingbird~\cite{kingbird}, FogBow~\cite{brasileiro2016fogbow} and p2p-OpenStack~\cite{ericsson-p2p}
+
+A bottom-up collaboration design option lays on making IaaS mechanisms/services directly collaborative. For example, having two OpenStack Nova services able to cooperate and communicate directly would be a realization of a \emph{bottom-up} design. Such design option implies either the modification/extension of existing IaaS platforms or the creation of a completely new system.
