@@ -15,19 +15,16 @@
 % %
 
 While several academic studies have been highlighting the advantages
-of Edge Computing paradigm in various
+of the Edge Computing paradigm in various
 domains~\cite{bonomi2012fog,zhang2015cloud,yi2015fog,shi2016edge,satyanarayanan2017emergence},
 %%
-progress on how operating and using infrastructures that serve it are
-only marginal.  As an example, current solutions such as Amazon
-Lambda@Edge~\cite{amazon:lambda-edge} or Akamai
-Cloudlet~\cite{akamai:cloudlets} to name a few are rather close to the
-initial fog proposal that allowed to run specific domain applications
-on infrastructures composed of NFV-enabled hardware (at the edge) and
-centralized clouds~\cite{bonomi2012fog}.  In other words, current Edge
-Infrastructure-as-a-Service (IaaS) solutions do not allow to run stateful
-workloads in isolated environments such as containers or virtual
-machines (VMs).
+progress on how operating and using infrastructures that serve it are marginal.  
+Current solutions~\cite{amazon:lambda-edge}~\cite{akamai:cloudlets} are rather close to the
+initial fog proposal that allows to run domain-specific applications
+on  NFV-enabled infrastructures (at the edge) and
+centralized clouds~\cite{bonomi2012fog}.  In other words, %current Edge Infrastructure-as-a-Service (IaaS) 
+these solutions do not allow to run stateful
+workloads in isolated environments, \eg{ containers or virtual	machines (VMs)}.
 %
 This is surprising as DevOps expect to find most features that make the sucess of
 current Cloud Computing solutions.
@@ -79,48 +76,41 @@ current Cloud Computing solutions.
 %On this basis,
 %
 The ETSI Mobile Edge Computing Industry Specification Group
-defined in 2016 a software architecture to orchestrate distinct
-independent Cloud systems or, in their terminology, Virtual
-Infrastructure Managers (VIM)~\cite{7574435}.
+defined in 2016 an architecture to orchestrate distinct
+independent Cloud systems, \aka Virtual
+Infrastructure Managers (VIM) ~\cite{7574435}.
 %
-The idea consists in federating VIMs of the several Data Centers that
-compose the Edge infrastructure.  By reusing VIMs, the ETSI group targets an Edge
+The idea consists in federating VIMs of the several Data Centers (DCs) that
+compose the Edge infrastructure.  By reusing VIMs, ETSI targets an Edge
 Computing resource management that behaves in a same fashion as Cloud
 Computing, while mitigating development requirements.
 %
-Although, there is no implementation available, the idea of federating
-VIMs seems promising since several projects have been built on similar
-concepts. The ONAP framework~\cite{onap}, an industry-driven solution,
+Although there is no implementation available, the idea of federating
+VIMs seems promising as several projects have been built on similar
+concepts. ONAP~\cite{onap}, an industry-driven solution,
 enables the orchestration and automation of virtual network functions
-across distinct VIMs. From the academic side, the FogBow
-solution~\cite{brasileiro2016fogbow} aims to support large federations
-of IaaS providers. More recently, NIST
+across distinct VIMs. From the academic side, FogBow~\cite{brasileiro2016fogbow} aims to support federations
+of Infrastructure-as-a-Service (IaaS) providers. More recently, NIST
 initiated a collaborative effort with IEEE to advance Federated
 Cloud through the development of a conceptual architecture and a
 vocabulary\footnote{\url{https://collaborate.nist.gov/twiki-cloud-computing/bin/view/CloudComputing/FederatedCloudPWGFC}
-  (Valid on March 2018).}.
+  (March 2018).}.
 
-All these projects provided valuable contributions, unfortunately they have
+All these projects provide valuable contributions, unfortunately they have
 been all designed by only considering the DevOps' perspective. They provide
 abstractions to manage the life cycle of geo-distributed applications,
-but do not address administrators' requirements.
+but do not address administrative requirements.
 %
-Edge Computing infrastructures differ from federated cloud systems
-under various aspects~\cite{openstack:whitepaper}.  For instance, Edge
-sites are potentially unmanned, and therefore must be administered
-remotely. The resource management system should also be designed to
-cope with intermittent network access to the site~\ldots
-%
-Ultimately, distinct operators might be interested in interconnecting their infrastructures (like network peering).
+However, Edge Computing infrastructures differ from federated cloud systems
+in various aspects~\cite{openstack:whitepaper}, for instance: 
+Edge sites are potentially unmanned and therefore must be administered remotely; 
+management systems should be designed to cope with intermittent network access to sites; distinct operators might be interested in interconnecting their infrastructures (like network peering).
 %
 
 To favor the advent of Edge Computing, our community should take part
-to current discussions and actions in order to deliver a well-suited
-resource management system:~A system that will first, let an operator
-aggregates, supervises and exposes the massively distributed resources
-of the infrastructure and second, let DevOps implement new kinds
-of services on top of that infrastructure that may be deployed and
-managed on demand.
+of current discussions and actions in order to deliver a well-suited
+resource management system. A system that will first, let an operator aggregate, supervise and expose the massively distributed resources of the infrastructure, 
+and second, let DevOps implement new kinds of services on top of that infrastructure that may be deployed and managed on-demand.
 
 % Designing and implementing a complete software stack to enable
 % administrators to operate, and developers to use, distinct edge sites
@@ -138,11 +128,11 @@ In this paper, we present reflections to initiate discussions through our commun
  % design and implementation of a resource management system for the
  % edge computing.
 \item Second, based on the identified requirements, we discuss
-  how an Edge Computing resource management system
+  how an Edge resource management system
   should be designed. In particular, we study \emph{pros} and
   \emph{cons} of \emph{top-down} and \emph{bottom-up} approaches. The
-  former consists in interacting with each site only through the
-  exposed APIs such as the aforementioned federated approaches. The
+  former consists in interacting with each site only through
+  exposed VIM APIs, such as in federated approaches. The
   latter aims at revising internal mechanisms of VIMs to enable native
   collaborations.
   \end{itemize}
@@ -156,23 +146,22 @@ In this paper, we present reflections to initiate discussions through our commun
   \label{fig:fogedge-archi}
 \end{figure}
 
-Because there are as many Edge infrastructures as use-cases, we
-highlight that the Edge infrastructure we considered in this
-study is composed from the hardware viewpoint of several
+Since there are as many Edge infrastructures as use-cases, we
+highlight that the infrastructure considered in this
+study - see Figure~\ref{fig:fogedge-archi} - is composed
+%, from the hardware viewpoint,
+ of several
 geo-distributed micro DCs (up to thousands)
 composed of up to one hundred servers (nearly two racks).
-Figure~\ref{fig:fogedge-archi} gives an overview of this
-infrastructure. The expected latency and bandwidth between
-each element may fluctuate significantly, in particular because the
-network links can be wired or wireless. Moreover, short disconnections
-between Edge sites may occur leading to network split brain
-situations~\cite{4456903}. Finally, it might be possible
-to consider additional micro DCs deployed at the Extreme Edge, within
-private institutions or even public transports.
+%Figure~\ref{fig:fogedge-archi} gives an overview of the infrastructure. 
+The expected latency and bandwidth between elements may fluctuate, in particular because
+networks can be wired or wireless. Moreover, disconnections
+between sites may occur leading to network split brain
+situations~\cite{4456903}. 
+Finally, it is possible to consider additional DCs at the Extreme Edge, within private institutions or public transports.
 %
-From the software viewpoint, in order to simplify the model and
-without loss of generality, we mainly assume OpenStack ~\cite{openstack:www} as the default VIM.  After years of intensive developments, OpenStack has
-become the de facto open-source solution to operate, supervise and use
+From the software viewpoint, to simplify the model and
+without loss of generality, we mainly assume OpenStack ~\cite{openstack:www} as the default VIM.  After years of development, OpenStack is today the de facto open-source solution to operate, supervise and use
 IaaS infrastructures.
 %More recently it has increased its effort to address edge computing cases.
 %The OpenStack community gathers more than 500
@@ -181,16 +170,13 @@ IaaS infrastructures.
 
 The remainder of the paper is organized as
 follows. Section~\ref{sec:requirements} presents the major features
-expected by administrators and DevOps, highlighting in particular
-differences \wrt federated infrastructures.
-Section~\ref{sec:system_design_considerations} deals with two
-deployment scenarios based on today's system capabilities,
-highlighting the need for an effective system collaboration across the
+expected by administrators and DevOps. 
+%highlighting in particular differences \wrt federated infrastructures.
+Section~\ref{sec:system_design_considerations} studies use of OpenStack for the Edge,
+highlighting the need for effective collaboration across the
 entire Edge infrastructure. Section~\ref{sec:design_discussion}
-introduces and discusses two approaches that communities can follow to
-design/develop a resource management system for Edge
-environments, and points out a way forward. Finally,
-Section~\ref{sec:conclusion} concludes this paper.
+discusses two approaches that can be followed to
+design a resource management system for the Edge, and points out a way forward. Section~\ref{sec:conclusion} concludes the paper.
 
 
 % In this paper, we provide a list of expected features for both administrators and admins.
