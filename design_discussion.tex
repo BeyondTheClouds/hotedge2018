@@ -1,4 +1,3 @@
-
 %%% Local Variables:
 %%% mode: latex
 %%% TeX-master: t
@@ -8,17 +7,19 @@
 \label{sec:design_discussion}
 
 In this section, we discuss the pros and cons of the \emph{top-down} and
-\emph{bottom-up} designs targeted at the end of the previous section to extend
-OpenStack with multi-site collaboration. More precisely, our discussion is
-driven by the following questions: (i) On the one hand, while the top-down
-design is the most common approach, can it fulfill all the expected
-requirements listed in our classification? (ii) On the other hand, while the
-bottom-up design seems to disrupt the design principles of most existing VIMs,
-should it be discarded?
- 
+\emph{bottom-up} designs targeted at the end of the previous section.
+% to extend OpenStack with multi-site collaboration.
+More precisely, our discussion is driven by the following questions:
+(i) On the one hand, while the top-down design is the most common
+approach, can it fulfill all the expected requirements listed in our
+classification without requiring changes in the VIM codebase? (ii) On the other hand, while the bottom-up design
+seems to disrupt the design principles by requiring \emph{a la
+  peer-to-peer} strategies in VIM's internal mechanisms, should it be
+discarded?
+
 \paragraph{Top-Down Design}
 In the top-down design, the system relies on existing VIM APIs and overlay
-components, with no modifications to the codebase of the VIM. This
+components, with the goal of not modifying VIM codebases. This
 absence of modifications is of particular importance in OpenStack,
 since it provides a new release every six months with a lot of changes
 in the codebase, whereas changes rarely impact the APIs. Therefore, a
@@ -27,71 +28,100 @@ system components. If designed to do so, the system can easily allow
 L4 requirements, \ie the support of different VIMs and different
 versions of a VIM - \eg FogBow~\cite{brasileiro2016fogbow}.
 
-However, requirements cannot be fulfilled without changing the core of
-a VIM (\eg L2 type of requirements like live migration and virtual
-networking across sites). For example, OpenStack
-Tricircle~\cite{tricircle}, a project that aims to allow virtual
-networking across different sites by introducing an overlay component,
-ended up "breaking" the core of OpenStack by introducing non-standard
-mechanisms to fulfill the requirements. Missing Edge relative VIM
-features such as a fined authorization management with different
-rights in different Edge sites means that many low-level VIM services
-need to be reimplemented at the overlay level (\eg authentication,
-resource scheduling, resource monitoring, etc). Ultimately, one might
-end reimplementing repeatedly the entire low-level system at higher
-levels.
+Unfortunately, a top-down design cannot satisfy all requirements
+without extending or revising the existing VIM codebase.  For example,
+OpenStack Tricircle~\cite{tricircle}, a top-down project to allow
+virtual networking across different sites, ended up "breaking" the
+core of OpenStack by introducing non-standard mechanisms. Such
+intrusive modifications negate the aforementioned independency.
+%
+Moreover, collaboration features such as L2 would require to
+re-implement many low-level VIM services at the overlay level. For
+instance, the OpenStack ``boot a VM'' process looks as follow from a
+bird's-eye view: (1) Get the URL of the image by looking up into the
+database, (2) Schedule and boot the VM. Thus, booting a VM on
+\emph{Site 1} using an image defined in \emph{Site 2} would require to
+implement a dedicated workflow at the overlay level in order to
+interact with both sites and copy the image from the image manager
+(\ie Glance) of \emph{Site 2} in the one of \emph{Site 1} before booting the VM. 
+%
+This is valid for most L2 features such as a fined authorization management
+with different rights in different Edge sites.
+%
+Finally, this top-down overlay should be developed \emph{a la
+  peer-to-peer} to cope with L3 requirements (\ie network split brain
+issues).
 
-%% Moreover, in order to operate a distributed Edge infrastructure through a single logical entry point, it means that many low-level VIM services need to be reimplemented at the overlay level (\eg authentication, resource scheduling, resource monitoring, etc). Ultimately, one might end reimplementing repeatedly the entire low level system at higher levels.
-
-
-
-%An interesting fact about existing \emph{top-down} is that nearly all ...
 
 %------Moreover, if different VIM flavors are deployed, it might become impractical to provide a single VIM management-view to users as different VIMs might have specific features that need to be managed.
 
 
 \paragraph{Bottom-Up Design}
-In bottom-up design, the system is not limited by what is
-made available through VIM APIs. If one can make OpenStack natively
+In bottom-up design, the system is not limited by what is made
+available through VIM APIs. If one can make OpenStack natively
 collaborative, this can allow supporting features across the entire
-Edge infrastructure for free. For instance, the OpenStack ``boot a
-VM'' process looks as follow from a bird's-eye view: (1) Get the URL
-of the image by looking up into the database, (2) Schedule and boot
-the VM. Thus, booting a VM on \emph{Site 1} using an image defined in
-\emph{Site 2} is the same workflow as booting a VM on \emph{Site 1}
-using an image defined in \emph{Site 1} if both sites shared the same
-data (\ie database backend).
+Edge infrastructure for free. For instance, the aforementioned
+OpenStack ``boot a VM on Site 1 with image on Site 2'' process would
+be feasible without any additional piece of code if \emph{Site 1} can
+either directly contact the image manager of \emph{Site 2} or share
+the same database backend with \emph{Site 2}.
 
 However, the efficiency and ease to support collaboration come at a
-cost. OpenStack has not been designed with distribution, like one of
-the edge scenarios, in mind. This kind of collaboration may be
-achieved with a collaborative backend that relies on a notion of
-\emph{space}. \emph{Space} says in which space the OpenStack lookup
-and write data. It could be an Edge site or a combination of Edge
-sites if the collaboration is needed. It leads to a more efficient
-system, one without the need to repeatedly implement features at
-different levels. But, implementing a backend based on a notion of
-space represents a scientific challenge. With the high industry demand
-for a working Edge system, this means that modifying or extending
-OpenStack is in most cases too expensive (time and resource wise).
-Note also that such backend will not free the developer to implement
-specific workflows for intra-services scenarios\RACm{For instance the
-  ``list of actually scheduling VM'' could not be reused from vanilla
-  code}.
+cost. Most mechanisms must be revised to consider possible
+side-effects related to collaboration operations since OpenStack has
+not been designed to be collaborative.
+%, like one of the edge scenarios, in mind.
+%
+For instance, a boot process of a VM initiated on \emph{Site 1} can
+finally be completed on \emph{Site 2}. The question is then to define
+where the states related to this VM should be stored, keeping in mind the split brain challenge. 
 
-%Moreover, it can potentially fullfil any and all (reasonable) requirements since any feature missing can be implemented.
-%% \JM{Ronan, can you add references of existing work?}
+Finally, it is obvious that L4 and L5 requirements cannot be addressed through this approach. 
 
-%% However, the efficiency and ease to support new features comes at a cost. Most existing systems, \eg OpenStack, were not designed with distribution, like the one of edge scenarios, in mind. With the high industry demand for a working Edge system, this means that modifying or extending existing systems (or even creating a new system) is in most cases too expensive (time and resource wise).
-%% Moreover, a \emph{bottom-up} approach would certainly mean the entire Edge infrastructure would rely on a specific platform/VIM, which seems to be a unrealistic scenario today due to the still fragmented VIM landscape. On a short-term, a way to overcome this would be to have a complementary \emph{top-down} system. On a longer perspective, the ideal scenario would be for the industry to agree on a standardized system in a similar way as it has done for mobile communications with 3GPP~\cite{3gpp}.
+% This kind of collaboration may be achieved with a collaborative
+% backend that relies on a notion of \emph{space}. \emph{Space} says in
+% which space the OpenStack lookup and write data. It could be an Edge
+% site or a combination of Edge sites if the collaboration is needed. It
+% leads to a more efficient system, one without the need to repeatedly
+% implement features at different levels.  However, implementing a
+% backend based on a notion of space represents a scientific challenge.
+%
+
+% With the high industry demand
+% for a working Edge system, this means that modifying or extending
+% OpenStack is in most cases too expensive (time and resource wise).
+% Note also that such backend will not free the developer to implement
+% specific workflows for intra-services scenarios\RACm{For instance the
+%   ``list of actually scheduling VM'' could not be reused from vanilla
+%   code}.
+
 
 \paragraph{Summary}
-In the end, there are \emph{pros} and \emph{cons} in both approaches, and none individually seems to meet all technical and business requirements of edge scenarios.
-On a technical perspective, a top-down approach brings modularity and independence between system components. However, it is limited by that same independence as it requires low-level features to be enabled to fulfill all requirements. Moreover, a full working system would be far from effient as several features need to be implemented at different levels.
-A bottom-up approach can produce a more efficient system that can easily support additional requirements.
-On a business perspective, a top-down approach can easily fulfil the short and medium-term Time-To-Market (TTM) requirements. In that sense, top-down is the working solution the community needs to aim for first, and is in fact the one it has been working towards so far. However, serious effort needs to be put on a long-term solution that lays on a bottom-up approach.
+In the end, there are \emph{pros} and \emph{cons} in both approaches,
+and none individually seems to meet all technical and business
+requirements of edge scenarios.
+On the technical perspective, the bottom-up
+design seems to be the most appropriate to cope with L1, L2 and L3
+requirements while the top-down strategy is the only one to satisfy L4
+and L5.
+%
+On a business perspective, a top-down approach can easily fulfil the
+short and medium-term Time-To-Market (TTM) requirements. In that
+sense, top-down is the working solution the community needs to aim for
+first, and is in fact the one it has been working towards so
+far. However, our community should investigate a long-term solution
+that lays on a bottom-up approach, tackling general scientific
+challenges such as the definition of a reference architecture for a
+resource management system for Edge Infrastructures and more specific ones
+like the share of the internal states in an Edge context.
 
-%% As a starting point, early \emph{bottom-up} efforts
+
+
+
+
+
+
+%%As a starting point, early \emph{bottom-up} efforts
 %% \JM{Ronan, reference to your paper?}
 %%  can be taken into account along with mechanisms that have been implemented in \emph{top-down} solutions but can be applied in a \emph{bottom-up} way~\cite{ericsson-p2p}.
 
