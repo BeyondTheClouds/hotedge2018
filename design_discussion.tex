@@ -76,8 +76,10 @@ completed on \emph{Site 2}. The question is then to define where the states
 related to this VM should be stored, keeping in mind the split brain
 challenge.
 
-Finally, it is obvious that L4 and L5 requirements cannot be addressed through
-the bottom-up approach. 
+Finally, L4 requirements cannot be intrinsically satisfied by the
+bottom-up approach while L5 implies strong limitations regarding how
+collaborations should be implemented (for instance sharing internal
+states of different edge sites between operators look unlikely).
 
 % This kind of collaboration may be achieved with a collaborative
 % backend that relies on a notion of \emph{space}. \emph{Space} says in
@@ -106,14 +108,15 @@ design seems to be the most appropriate to cope with L1, L2 and L3
 requirements while the top-down strategy is the only one to satisfy L4
 and L5.
 %
-On a business perspective, a top-down approach can easily fulfill the short and
-medium-term Time-To-Market (TTM) requirements. In that sense, top-down is the
-working solution the community should consider first, and is in fact the one it
-has been working towards so far. However, our community should investigate a
-long-term solution that lays on a bottom-up approach, tackling general
-scientific challenges such as the definition of a reference architecture for a
-resource management system for Edge infrastructures and more specific ones like
-the share of the internal states in an Edge context.
+On a business perspective, a top-down approach can easily fulfill the
+short and medium-term Time-To-Market (TTM) requirements. In that
+sense, top-down is the working solution people consider first, and is
+in fact the one the opensource community has been working towards so
+far. However, our community should investigate a long-term solution
+that lays on a bottom-up approach, tackling general scientific
+challenges such as the definition of a reference architecture for a
+resource management system for Edge infrastructures and more specific
+ones like the share of the internal states in an Edge context.
 
 
 
