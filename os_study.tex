@@ -4,46 +4,37 @@
 %%% End:
 \section{OpenStack for the Edge Study}
 \label{sec:system_design_considerations}
-Using a VIM to deliver all the features that make the success of Cloud
-Computing for the Edge seems a good idea.
+%Using a VIM to deliver all the features that make the success of Cloud Computing for the Edge seems a good idea.
 %
-\AL{Why? here we should probably explained that people have look to a
-  federation of VIM but what about a more straightforward way of using
-  a VIM. Why people did not do that?}
+
+%\AL{Why? here we should probably explained that people have look to a federation of VIM but what about a more straightforward way of using a VIM. Why people did not do that?}
 %
-A VIM is a sophisticated
-piece of software that already manages virtual resources at DC level.
-So, why not using it to manage an Edge Computing infrastructure? This
+A VIM is a sophisticated piece of software that manages resources at DC level.
+So, why not use it to manage an Edge infrastructure? This
 section studies the use of OpenStack to control an Edge infrastructure
-similar to the one described in the introduction (hundreds of micro
-DCs named Edge sites with fluctuating latency and intermittent
-disconnections). It evaluates the system in regards to the
-requirements of the previous section (see~\ref{sec:requirements}) with
+similar to the one described in Section~\ref{sec:intro}. 
+%(hundreds of micro DCs named Edge sites with fluctuating latency and intermittent disconnections). 
+It evaluates the system in regards to the
+requirements listed in Section~\ref{sec:requirements} with
 the purpose of identifying missing building blocks of current VIMs
 when it comes to managing Edge infrastructures.
 
-An OpenStack system consists of two kinds of nodes. On the one hand,
-there are compute/storage/network nodes which deliver the XaaS
-capabilities, such as hosting VMs (\ie data plane). On the other hand,
-they are control nodes which execute the OpenStack services, such as
-the \verb|nova-scheduler| (\ie control plane)
-\AL{Why giving such a level of detail?}. Every time an
-administrator or a DevOps performs an action on OpenStack, the control
-plane processes that action which ends on compute/storage/network
-nodes.
+OpenStack has two types of nodes: compute/storage/network nodes delivering the XaaS
+capabilities %, such as hosting VMs 
+(\ie data plane); nodes executing OpenStack services, \eg
+ \verb|nova-scheduler| (\ie control plane).
+%\AL{Why giving such a level of detail?}
+Whenever an user performs an action on OpenStack, the control
+plane processes that action which ends on the data plane.
+%compute/storage/network nodes.
 
-An Edge site provides enough resources to host control and compute
-capabilities.
-\AL{I miss the transition to the fact to OpenStack can be multiple regions or not. What is a region by the way?}
+%An Edge site provides enough resources to host control and compute capabilities.
+%\AL{I miss the transition to the fact to OpenStack can be multiple regions or not. What is a region by the way?}
+%This supposes an OpenStack multiple regions deployment with one OpenStack per Edge site to manage the Edge infrastructure. But, OpenStack comes with several deployments scenarios. This section discusses the aforementioned multiple regions deployment and a basic deployment. The basic deployment mimics the infrastructure of the Cloud Computing by deploying all control services on one Edge site and uses remaining resources on other sites as compute nodes.
+%\AL[RAC]{Why did you swap both sections. Actually the aforementioned preamble seems to introduce first centralized and second multiple regions...We should discuss this organisation at least from my side ;)}
 
-This supposes an OpenStack multiple regions deployment
-with one OpenStack per Edge site to manage the Edge infrastructure.
-But, OpenStack comes with several deployments scenarios. This section
-discusses the aforementioned multiple regions deployment and a basic
-deployment. The basic deployment mimics the infrastructure of the
-Cloud Computing by deploying all control services on one Edge site and
-uses remaining resources on other sites as compute nodes.
-\AL[RAC]{Why did you swap both sections. Actually the aforementioned preamble seems to introduce first centralized and second multiple regions...We should discuss this organisation at least from my side ;)}
+Deploying OpenStack throughout an Edge infrastructure can be done in different ways. We focus on what we believe are the most natural deployment scenarios: Centralized (Remote) Management and Multiple Regions. 
+
 
 \subsection{Multiple Regions}
 In this first scenario, each Edge site corresponds to a \emph{region}
