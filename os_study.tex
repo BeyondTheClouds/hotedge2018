@@ -4,10 +4,10 @@
 %%% End:
 \section{OpenStack for the Edge Study}
 \label{sec:system_design_considerations}
-Using VIMs to build an Edge Computing resource management that behaves
-like Cloud Computing seams a good idea. A VIM is a sophisticated piece
-of software that already manages virtual resources at DC level. So,
-why not using it to manage an Edge Computing infrastructure? This
+Using a VIM to deliver all the features that make the success of Cloud
+Computing for the Edge seams a good idea. A VIM is a sophisticated
+piece of software that already manages virtual resources at DC level.
+So, why not using it to manage an Edge Computing infrastructure? This
 section studies the use of OpenStack to control an Edge infrastructure
 similar to the one described in the introduction (hundreds of micro
 DCs named Edge sites with fluctuating latency and intermittent
@@ -18,21 +18,21 @@ when it comes to managing Edge infrastructures.
 
 An OpenStack system consists of two kinds of nodes. On the one hand,
 there are compute/storage/network nodes which deliver the XaaS
-capabilities, such as hosting VMs (\ie data plane). On the other
-hand, they are control nodes which execute the OpenStack services,
-such as the \verb|nova-scheduler| (\ie control plane). In OpenStack,
-every time an administrator or a DevOps performs an action, that
-action goes through the control plane and ends in
-compute/storage/network nodes.
+capabilities, such as hosting VMs (\ie data plane). On the other hand,
+they are control nodes which execute the OpenStack services, such as
+the \verb|nova-scheduler| (\ie control plane). Every time an
+administrator or a DevOps performs an action on OpenStack, the control
+plane processes that action which ends on compute/storage/network
+nodes.
 
-Each Edge site provides enough resources to host control and compute
-capabilities, which supposes an OpenStack multiple regions deployment
-with one OpenStack per Edge site. But, OpenStack comes with several
-deployments scenarios. This section discusses the aforementioned
-multiple regions deployment and a basic deployment. The basic
-deployment mimics the infrastructure of the Cloud Computing by
-deploying all control services on one Edge site and uses remaining
-resources on other sites as compute nodes.
+An Edge site provides enough resources to host control and compute
+capabilities. This supposes an OpenStack multiple regions deployment
+with one OpenStack per Edge site to manage the Edge infrastructure.
+But, OpenStack comes with several deployments scenarios. This section
+discusses the aforementioned multiple regions deployment and a basic
+deployment. The basic deployment mimics the infrastructure of the
+Cloud Computing by deploying all control services on one Edge site and
+uses remaining resources on other sites as compute nodes.
 
 \subsection{Multiple Regions}
 In this first scenario, each Edge site corresponds to a \emph{region}
@@ -43,7 +43,7 @@ deployment is related to the independency of each site in case of
 network disconnections. In other words, in case of a network split,
 each site can satisfy the L1 features. The downside is related to the
 fact that the current codebase does not provide any mechanism to allow
-the collaboration between several regions and thus requirements L2
+the collaboration between several regions and thus L2 requirements
 cannot be met.
 
 \subsection{Centralized (Remote) Management}
@@ -67,9 +67,9 @@ manipulate logical objects that are persisted in shared databases.
 While this enables service to easily collaborate, it imposes a
 permanent connectiviy between compute nodes, services and their DBs.
 In other words, while this scenario provides a ``Single Pane of
-Glass'' from the administrator and end-users/developers viewpoint, it
-has the drawback of being a ``Single Point of Failure'' preventing
-DevOps to use Edge resources in case of network split brains.
+Glass'' for administrator and DevOps, it has the drawback of being a
+``Single Point of Failure'' preventing DevOps to use Edge resources in
+case of network split brains.
 
 \subsection{Effective Collaboration is Needed}
 Despite the fallibility of the network, and frequent isolation risks
@@ -77,12 +77,12 @@ of an Edge site from the rest of the Infrastructure, the Edge
 infrastructure may be kept sustainable to meet L3 requirements. This
 is achieved by supposing a collaboration a la \emph{peer-to-peer},
 that is, an Edge site always serves local resources and collaborates
-with other Edge sites if need be. When it comes to develop such
-resource management system, the developer has two fundamental design
-options: \emph{top-down} or \emph{bottom-up}. Both designs impact how
-to handle the collaboration needed by the system.
+with other Edge sites if need be. To develop such a resource
+management system, the developer has two fundamental design options:
+\emph{top-down} or \emph{bottom-up}. Both designs impact how to handle
+the collaboration needed by the system.
 
-A top-down collaboration design implements the collaboration required by
-federating IaaS managers' API. In other words, it leverages on existing IaaS platforms as they are made available today without introducing modifications/extensions. Examples of approaches following a \emph{top-down} design are: ONAP~\cite{onap}, Kingbird~\cite{kingbird}, FogBow~\cite{brasileiro2016fogbow} and p2p-OpenStack~\cite{ericsson-p2p}
+A top-down collaboration design implements the collaboration by
+federating VIMs' API. It leverages on existing VIMs as they are made available today without introducing modifications/extensions. Examples of approaches following a \emph{top-down} design are: ONAP~\cite{onap}, Kingbird~\cite{kingbird}, FogBow~\cite{brasileiro2016fogbow} and p2p-OpenStack~\cite{ericsson-p2p}
 
-A bottom-up collaboration design option lays on making IaaS mechanisms/services directly collaborative. For example, having two OpenStack Nova services able to cooperate and communicate directly would be a realization of a \emph{bottom-up} design. Such design option implies either the modification/extension of existing IaaS platforms or the creation of a completely new system.
+A bottom-up collaboration design lays on making VIMs mechanisms/services directly collaborative. For example, having two OpenStack Nova services able to cooperate and communicate directly would be a realization of a bottom-up design. Such design implies either the modification/extension of existing VIMs or the creation of a completely new system.

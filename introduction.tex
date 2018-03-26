@@ -18,11 +18,11 @@ While several academic studies have been highlighting the advantages
 of the Edge Computing paradigm in various
 domains~\cite{bonomi2012fog,zhang2015cloud,yi2015fog,shi2016edge,satyanarayanan2017emergence},
 %%
-progress on how operating and using infrastructures that serve it are marginal.  
+progress on how operating and using infrastructures that serve it are marginal.
 Current solutions~\cite{amazon:lambda-edge}~\cite{akamai:cloudlets} are rather close to the
 initial fog proposal that allows to run domain-specific applications
 on  NFV-enabled infrastructures (at the edge) and
-centralized clouds~\cite{bonomi2012fog}.  In other words, %current Edge Infrastructure-as-a-Service (IaaS) 
+centralized clouds~\cite{bonomi2012fog}.  In other words, %current Edge Infrastructure-as-a-Service (IaaS)
 these solutions do not allow to run stateful
 workloads in isolated environments, \eg{ containers or virtual	machines (VMs)}.
 %
@@ -93,7 +93,7 @@ across distinct VIMs. From the academic side, FogBow~\cite{brasileiro2016fogbow}
 of Infrastructure-as-a-Service (IaaS) providers. More recently, NIST
 initiated a collaborative effort with IEEE to advance Federated
 Cloud through the development of a conceptual architecture and a
-vocabulary\footnote{\url{https://collaborate.nist.gov/twiki-cloud-computing/bin/view/CloudComputing/FederatedCloudPWGFC}
+vocabulary\endnote{\url{https://collaborate.nist.gov/twiki-cloud-computing/bin/view/CloudComputing/FederatedCloudPWGFC}
   (March 2018).}.
 
 All these projects provide valuable contributions, unfortunately they have
@@ -102,14 +102,14 @@ abstractions to manage the life cycle of geo-distributed applications,
 but do not address administrative requirements.
 %
 However, Edge Computing infrastructures differ from federated cloud systems
-in various aspects~\cite{openstack:whitepaper}, for instance: 
-Edge sites are potentially unmanned and therefore must be administered remotely; 
+in various aspects~\cite{openstack:whitepaper}, for instance:
+Edge sites are potentially unmanned and therefore must be administered remotely;
 management systems should be designed to cope with intermittent network access to sites; distinct operators might be interested in interconnecting their infrastructures (like network peering).
 %
 
 To favor the advent of Edge Computing, our community should take part
 of current discussions and actions in order to deliver a well-suited
-resource management system. A system that will first, let an operator aggregate, supervise and expose the massively distributed resources of the infrastructure, 
+resource management system. A system that will first, let an operator aggregate, supervise and expose the massively distributed resources of the infrastructure,
 and second, let DevOps implement new kinds of services on top of that infrastructure that may be deployed and managed on-demand.
 
 % Designing and implementing a complete software stack to enable
@@ -153,11 +153,11 @@ study - see Figure~\ref{fig:fogedge-archi} - is composed
  of several
 geo-distributed micro DCs (up to thousands)
 composed of up to one hundred servers (nearly two racks).
-%Figure~\ref{fig:fogedge-archi} gives an overview of the infrastructure. 
+%Figure~\ref{fig:fogedge-archi} gives an overview of the infrastructure.
 The expected latency and bandwidth between elements may fluctuate, in particular because
 networks can be wired or wireless. Moreover, disconnections
 between sites may occur leading to network split brain
-situations~\cite{4456903}. 
+situations~\cite{4456903}.
 Finally, it is possible to consider additional DCs at the Extreme Edge, within private institutions or public transports.
 %
 From the software viewpoint, to simplify the model and
@@ -170,7 +170,7 @@ IaaS infrastructures.
 
 The remainder of the paper is organized as
 follows. Section~\ref{sec:requirements} presents the major features
-expected by administrators and DevOps. 
+expected by administrators and DevOps.
 %highlighting in particular differences \wrt federated infrastructures.
 Section~\ref{sec:system_design_considerations} studies use of OpenStack for the Edge,
 highlighting the need for effective collaboration across the
