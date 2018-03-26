@@ -20,13 +20,13 @@ domains~\cite{bonomi2012fog,satyanarayanan2017emergence,shi2016edge,yi2015fog,zh
 %%
 progress on how operating and using infrastructures that serve it are marginal.
 Current solutions~\cite{akamai:cloudlets}~\cite{amazon:lambda-edge} are rather close to the
-initial fog proposal that allows to run domain-specific applications
+initial Fog proposal that allows to run domain-specific applications
 on  NFV-enabled infrastructures (at the edge) and
 centralized clouds~\cite{bonomi2012fog}.  In other words, %current Edge Infrastructure-as-a-Service (IaaS)
 these solutions do not allow to run stateful
 workloads in isolated environments, \eg{ containers or virtual	machines (VMs)}.
 %
-This is surprising as DevOps expect to find most features that make the sucess of
+This is surprising as DevOps expect to find most features that make the success of
 current Cloud Computing solutions.
 
 % Our community should tackle the challenge of delivering a general
@@ -80,7 +80,7 @@ defined in 2016 an architecture to orchestrate distinct
 independent Cloud systems, \aka Virtual
 Infrastructure Managers (VIM) ~\cite{7574435}.
 %
-The idea consists in federating VIMs of the several Data Centers (DCs) that
+The idea consists in federating VIMs of the different Data Centers (DCs) that
 compose the Edge infrastructure.  By reusing VIMs, ETSI targets an Edge
 Computing resource management that behaves in a same fashion as Cloud
 Computing, while mitigating development requirements.
@@ -96,12 +96,12 @@ Cloud through the development of a conceptual architecture and a
 vocabulary\endnote{\url{https://collaborate.nist.gov/twiki-cloud-computing/bin/view/CloudComputing/FederatedCloudPWGFC}
   (March 2018).}.
 
-All these projects provide valuable contributions, unfortunately they have
-been all designed by only considering the DevOps' perspective. They provide
+All these projects provide valuable contributions, unfortunately they all have
+been designed by only considering the DevOps' perspective. They provide
 abstractions to manage the life cycle of geo-distributed applications,
 but do not address administrative requirements.
 %
-However, Edge Computing infrastructures differ from federated cloud systems
+However, Edge Computing infrastructures differ from federated Cloud systems
 in various aspects~\cite{openstack:whitepaper}, for instance:
 Edge sites are potentially unmanned and therefore must be administered remotely;
 management systems should be designed to cope with intermittent network access to sites; distinct operators might be interested in interconnecting their infrastructures (like network peering).
@@ -121,7 +121,7 @@ and second, let DevOps implement new kinds of services on top of that infrastruc
 In this paper, we present reflections to initiate discussions through our community.
 
 \begin{itemize}[noitemsep, topsep=0pt]
-\item First, we introduce a classification of expected features from
+\item First, we introduce a classification of features expected by 
   both administrators and DevOps. This classification is valuable to
   identify missing mechanisms in resource management systems.
  % Moreover, it should deliver significant insights on the
@@ -140,12 +140,12 @@ In this paper, we present reflections to initiate discussions through our commun
 \begin{figure}[t]
   \centering
   \includegraphics[width=.95\columnwidth]{./figures/figure_fog.pdf}
-    \vspace*{-.4cm}
+    \vspace*{-.2cm}
   \caption{Edge Computing Infrastructure~\cite{7923796}.}
     {\small The red dashed lines depict a split-brain situation that isolates
     \emph{Site 1} from other sites.}
   \label{fig:fogedge-archi}
-  \vspace*{-.5cm}
+  \vspace*{-.3cm}
 \end{figure}
 
 Since there are as many Edge infrastructures as use-cases, we
@@ -158,7 +158,7 @@ composed of up to one hundred servers (nearly two racks).
 Figure~\ref{fig:fogedge-archi} depictes such an infrastructure.
 The expected latency and bandwidth between elements may fluctuate, in particular because
 networks can be wired or wireless. Moreover, disconnections
-between sites may occur leading to network split brain
+between sites may occur, leading to network split-brain
 situations~\cite{4456903}.
 Finally, it is possible to consider additional DCs at the Extreme Edge, within private institutions or public transports.
 %
@@ -170,16 +170,15 @@ IaaS infrastructures.
 %organizations, including large groups, in particular key actors of
 %edge infrastructures such as ATT, Verizon~\ldots.
 
-The remainder of the paper is organized as
-follows. Section~\ref{sec:requirements} presents the major features
-expected by administrators and DevOps.
+The remainder of the paper is organized as follows.
+Section~\ref{sec:requirements} provides a list of features expected by administrators
+and DevOps.
 %highlighting in particular differences \wrt federated infrastructures.
-Section~\ref{sec:system_design_considerations} studies use of OpenStack for the Edge,
-highlighting the need for effective collaboration across the
-entire Edge infrastructure. Section~\ref{sec:design_discussion}
-discusses two approaches that can be followed to
-design a resource management system for the Edge, and points out a way forward. Section~\ref{sec:conclusion} concludes the paper.
-
+Section~\ref{sec:system_design_considerations} studies how OpenStack satisfies
+these features, highlighting the need for collaboration across the
+entire Edge infrastructure. Section~\ref{sec:design_discussion} discusses two
+approaches to design a resource management system for the Edge.
+Section~\ref{sec:conclusion} concludes the paper.
 
 % In this paper, we provide a list of expected features for both administrators and admins.
 % We investigate whether a stack such as OpenStack, the defacto open-source standard can fullfil these requirements
