@@ -1,5 +1,4 @@
 
-
 %%% Local Variables:
 %%% mode: latex
 %%% TeX-master: t
@@ -7,10 +6,18 @@
 
 \section{Design Discussion}
 \label{sec:design_discussion}
-On the one hand, the top-down design has been the most explored, but can these alone fulfill all expected requirements? On the other hand, bottom-up design seems to disruptive the design principles of most existing VIMs, but should it be discarded?
 
+In this section, we discuss the pros and cons of the \emph{top-down} and
+\emph{bottom-up} designs targeted at the end of the previous section to extend
+OpenStack with multi-site collaboration. More precisely, our discussion is
+driven by the following questions: (i) On the one hand, while the top-down
+design is the most common approach, can it fulfill all the expected
+requirements listed in our classification? (ii) On the other hand, while the
+bottom-up design seems to disrupt the design principles of most existing VIMs,
+should it be discarded?
+ 
 \paragraph{Top-Down Design}
-In top-down design, the system relies on existing VIM APIs and overlay
+In the top-down design, the system relies on existing VIM APIs and overlay
 components, with no modifications to the codebase of the VIM. This
 absence of modifications is of particular importance in OpenStack,
 since it provides a new release every six months with a lot of changes
