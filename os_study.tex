@@ -4,28 +4,34 @@
 %%% End:
 \section{OpenStack at The Edge}
 \label{sec:system_design_considerations}
-\AL{We should add one sentence that justify why we have this section}
+%\AL{We should add one sentence that justify why we have this section}
 %
 This section studies the use of OpenStack to control an Edge
-infrastructure.  It evaluates the system in regards to the
-requirements defined in the previous section, highlighting why changes
-are mandatory in its codebase.
+infrastructure.  Such an analysis is meaningful as the OpenStack
+codebase has been evolving to deal with large scale and multi-site
+objectives for the two last years.  Precisely, the section evaluates
+OpenStack with respect to its latest improvements regarding the requirements
+defined in the previous section.
+%in
+%regards to the requirements defined in the previous section,
+%highlighting why changes are mandatory despite recent improvements.
 
-%At coarse-grained, an OpenStack system consists of two kinds of nodes. On the one hand, there are compute/storage/network nodes which deliver the XaaS capabilities, such as hosting VMs (\ie data plane). On the other hand, they are control nodes which execute the OpenStack services (\ie control plane).
-%
-%Administrator or a DevOps performs an action on OpenStack, the control plane processes that action which ends on compute/storage/network nodes.
 
-At coarse-grained, OpenStack has two types of nodes: data nodes delivering XaaS capabilities (compute/storage/network, \ie data plane); control nodes executing OpenStack services (\ie control plane). Whenever users perform an action on OpenStack, the control
-plane processes that action which ends on the data plane.
-Among the most important control plane services, one can cite
-\verb|keystone|, \verb|nova|, \verb|glance|, and \verb|neutron|, whose respectively are in charge of
-authentification, VM life cycle, their images and associated networking.
+At coarse-grained, OpenStack has two types of nodes: data nodes
+delivering XaaS capabilities (compute/storage/network, \ie data
+plane); control nodes executing OpenStack services (\ie control
+plane). Whenever users perform an action on OpenStack, the control
+plane processes that action which ends on the data plane.  Among the
+most important control plane services, one can cite \verb|keystone|,
+\verb|nova|, \verb|glance|, and \verb|neutron|, whose respectively are
+in charge of authentification, VM life cycle, their images and
+associated networking.
 
 Because OpenStack comes with several deployment alternatives and
-because the edge sites considered in our study can host
-data and control nodes, we discuss two scenarios. The first tries to mimic a single DC  environment by having a single OpenStack with all control services on one site 
-and data nodes on other sites.
-The second
+because the edge sites considered in our study can host data and
+control nodes, we discuss two scenarios. The first tries to mimic a
+single DC environment by having a single OpenStack with all control
+services on one site and data nodes on other sites.  The second
 corresponds to a specific multi-region deployment, where one OpenStack
 per Edge site is deployed.
 
@@ -35,40 +41,38 @@ In this scenario, OpenStack operates an Edge infrastructure
 like a traditional single DC environment. %Cloud Computing one. 
 The ``only'' difference is
 related to the wide-area networking between the control nodes
-and the compute nodes. The distinction between the different Edge
+and the compute nodes~\cite{www:openstack-wanwide}. The distinction between the different Edge
 sites can be done by leveraging the concept of host aggregates
 within OpenStack.
-%
+
 From the requirements' viewpoint, L1 and most L2 requirements can be
-fulfilled in a straightforward way. Note however that because the
-infrastructure can be spread over several network domains, advanced
-network operations cannot be satisfied. 
-\JMm{What do you mean here with advanced network operations?}
-In addition, the scalability
-limitation of this deployment prevents it to consider thousands of
-compute nodes, and L3 requirements cannot be met. Most OpenStack services create and
-manipulate logical objects that are persisted in shared databases (DBs).
-While this enables services to easily collaborate, it imposes a
-permanent connectivity between compute nodes, services and their DBs.
-In other words, while this scenario provides a ``Single Pane of
+fulfilled in a straightforward way (because the infrastructure can be
+spread over several network domains, some L2 operations including
+specific network actions cannot be satisfied).  For L3, only L3.1
+requirements can be satisfied, L3.2 expectations cannot be met due to
+the considered deployment scenario. Most OpenStack services create and
+manipulate logical objects that are persisted in shared databases
+(DBs).  While this enables services to easily collaborate, it imposes
+a permanent connectivity between compute nodes, services and their
+DBs.  In other words, while this scenario provides a ``Single Pane of
 Glass'' for administrator and DevOps, it has the drawback of being a
 ``Single Point of Failure'' preventing DevOps to use Edge resources in
 case of network split brains.
-
-
 
 \subsection{Multiple Regions}
 In this scenario, each Edge site corresponds to a \emph{region}
 in OpenStack terminology, which is a complete deployment of
 OpenStack with all control services and a ``shared'' Keystone.
 % (\ie the identify and service provider).
-The main advantage of this
-deployment is related to the independency of each site in case of
-network disconnections. In other words, in case of a network split,
-each site can satisfy L1 features. The downside relates to the
-fact that the current codebase does not provide any mechanism to allow
-the collaboration between several regions and thus L2 requirements
-cannot be met.
+The main advantage of this deployment is related to the independency
+of each site in case of network disconnections. In other words, in
+case of a network split, each site can satisfy L1 features. The
+downside relates to the fact that the current codebase does not
+provide any mechanism to allow the collaboration between several
+regions and thus L2 requirements cannot be met.~\endnote{Due to space
+  limitation, we did not discuss a third scenario leveraging the
+  OpenStack \emph{cells} concept. However, we underline that such an approach
+  has the drawback of the two discussed scenarios.}
 
 
 \subsection{Effective Collaboration is Needed}
