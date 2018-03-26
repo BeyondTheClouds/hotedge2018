@@ -1,4 +1,3 @@
-
 \section{Conclusion}
 \label{sec:conclusion}
 
@@ -17,20 +16,19 @@ infrastructure puts on a cloud management system.
 %e also identified existing efforts in this area and which may be used as a starting point to a full-blown solution.
 We briefly studied the use of existing IaaS managers (\ie OpenStack)
 to control an Edge infrastructure to illustrate the need for an
-effective collaboration between the Edge sites.  We then discussed
+effective collaboration between the Edge sites.  
+We then discussed
 pros and cons of two possible strategies to follow when designing a
 solution: (1) a \emph{top-down} approach that keeps existing software
 untouched and attempts to implement features by software that runs on
 the top and (2) a \emph{bottom-up} approach that extensively improves
-existing software in order to fulfill the requirements. We concluded
-that from the long-term viewpoint, both approaches should be adressed
-simulatneously. The former to address collaborations between different stacks and operators leveraging contributions made by the latter.
-\AL{Last sentence to be fixed}
+existing software in order to fulfill the requirements. 
+We concluded that on the short-term, a \emph{top-down} approach is required in order to have a timely working solution available. On a long-term, both approaches should be considered simultaneously: \emph{bottom-up} to realize a native and efficient system for the edge; \emph{top-down} to enable collaboration between different cloud stacks (\eg OpenStack, Kubernetes).
 
-Finally, it is important to note that our study lies on one kind of
-edge infrastructure. Other variants can be envisions where, for
-example, hardware resources can dynamicaly join and leave the edge
-infrastructure. For such cases, this study needs to be further
+Finally, it is noteworthy that our study lies on one kind of edge
+infrastructure. Other variants can be envision where, for example,
+hardware resources provided by third-party users can dynamicaly join
+and leave the infrastructure. For such cases, this study needs to be
 extended to integrate additional features not discussed in this paper.
 
 %\AL{We should highlight that we conducted our study on one kind of  edge infrastructure. People start to envision more advanced scenarios where third party entities might provided hardware resources that can join the infrastructure. In such a case, our resource managmeent system will have to integrate additional features not discussed in the paper}
