@@ -2,28 +2,35 @@
 \section{Conclusion}
 \label{sec:conclusion}
 
-The popularity of IoT, the NFV trend as well as the new breed of applications
-like AR/VR, heralds a new era of cloud computing where cloud
-platforms need to leverage Edge infrastructures in order to be able to
-give an acceptable level of cost and performance to users and
-operators.  Despite this growing need however, there does not seem to
-be any cloud management system that is designed having such an
-infrastructure in mind. 
+The emergence of Network Function Virtualization (NFV) technologies as
+well as Internet of Things (IoT) and augmented/virtual reality (AR/VR)
+applications herald a new era of Cloud Computing where infrastructures
+need to leverage resources at the edge of the network in order to cope
+with latency requirements.  Despite this growing need, there is no
+Cloud management system that is designed with such an infrastructure
+in mind.
 
-In this paper, we outline a systematic
-grouping of the features that end-users expect and the requirements an
-edge infrastructure puts on a cloud management system. 
+In this paper, we presented reflections to initiate discussions on this
+hot topic. We outlined a systematic grouping of the features that
+administrators/DevOps expect and the requirements an edge
+infrastructure puts on a cloud management system.
 %e also identified existing efforts in this area and which may be used as a starting point to a full-blown solution.
-We study the use of existing IaaS managers (\ie OpenStack) to control an Edge infrastructure, and motivate the need for an  effective collaboration of the resource management system accross the entire Edge.
-We then proceed to describe two possible strategies to follow when designing a solution: (1) a
-\emph{top-down} approach that keeps existing software untouched and
-attempts to implement features by software that runs on the top and (2)
-a \emph{bottom-up} approach that extensively improves existing
-software in order to fulfill the requirements. We discuss the pros and
-cons of each strategy and give our recommendation on how we believe we
-should move forward in designing a cloud system for an edge
-infrastructure.
+We briefly studied the use of existing IaaS managers (\ie OpenStack)
+to control an Edge infrastructure to illustrate the need for an
+effective collaboration between the Edge sites.  We then discussed
+pros and cons of two possible strategies to follow when designing a
+solution: (1) a \emph{top-down} approach that keeps existing software
+untouched and attempts to implement features by software that runs on
+the top and (2) a \emph{bottom-up} approach that extensively improves
+existing software in order to fulfill the requirements. We concluded
+that from the long-term viewpoint, both approaches should be adressed
+simulatneously. The former to address collaborations between different stacks and operators leveraging contributions made by the latter.
+\AL{Last sentence to be fixed}
 
-Finally, it is important to note that our study lies on one kind of edge infrastructure. Other variants can be envisions where, for example, hardware resources can dynamicaly join and leave the edge infrastructure. For such cases, this study needs to be further extended to integrate additional features not discussed in this paper.
+Finally, it is important to note that our study lies on one kind of
+edge infrastructure. Other variants can be envisions where, for
+example, hardware resources can dynamicaly join and leave the edge
+infrastructure. For such cases, this study needs to be further
+extended to integrate additional features not discussed in this paper.
 
 %\AL{We should highlight that we conducted our study on one kind of  edge infrastructure. People start to envision more advanced scenarios where third party entities might provided hardware resources that can join the infrastructure. In such a case, our resource managmeent system will have to integrate additional features not discussed in the paper}
