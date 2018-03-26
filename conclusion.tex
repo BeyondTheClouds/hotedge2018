@@ -2,32 +2,37 @@
 \label{sec:conclusion}
 
 The emergence of Network Function Virtualization (NFV) technologies as
-well as Internet of Things (IoT) and augmented/virtual reality (AR/VR)
+well as Internet of Things (IoT) and Augmented/Virtual Reality (AR/VR)
 applications herald a new era of Cloud Computing where infrastructures
-need to leverage resources at the edge of the network in order to cope
+need to leverage resources at the Edge of the network in order to cope
 with latency requirements.  Despite this growing need, there is no
 Cloud management system that is designed with such an infrastructure
 in mind.
 
 In this paper, we presented reflections to initiate discussions on this
-hot topic. We outlined a systematic grouping of the features that
-administrators/DevOps expect and the requirements an edge
-infrastructure puts on a cloud management system.
+hot topic. 
+%[Dim] I'm not sure this sentence is correct:
+We outlined a systematic grouping of the features that administrators/DevOps
+expect and the requirements an Edge infrastructure puts on a Cloud management
+system.
 %e also identified existing efforts in this area and which may be used as a starting point to a full-blown solution.
 We briefly studied the use of existing IaaS managers (\ie OpenStack)
-to control an Edge infrastructure to illustrate the need for an
+to control an Edge infrastructure highlighting the need for an
 effective collaboration between the Edge sites.  
-We then discussed
-pros and cons of two possible strategies to follow when designing a
-solution: (1) a \emph{top-down} approach that keeps existing software
-untouched and attempts to implement features by software that runs on
-the top and (2) a \emph{bottom-up} approach that extensively improves
-existing software in order to fulfill the requirements. 
-We concluded that on the short-term, a \emph{top-down} approach is required in order to have a timely working solution available. On a long-term, both approaches should be considered simultaneously: \emph{bottom-up} to realize a native and efficient system for the edge; \emph{top-down} to enable collaboration between different cloud stacks (\eg OpenStack, Kubernetes).
+We then discussed pros and cons of two possible strategies to follow when
+designing a solution: (1) a \emph{top-down} approach which designs overlay
+components that interact with underlying IaaS managers without modifying their
+codebase; (2) a \emph{bottom-up} approach that extensively
+improves existing software to fulfill the requirements. We concluded
+that on the short-term, a \emph{top-down} approach is required to have
+a timely working solution available. On a long-term, both approaches should be
+considered simultaneously: \emph{bottom-up} to realize a native and efficient
+system for the Edge; \emph{top-down} to enable collaboration between different
+Cloud stacks (\eg OpenStack, Kubernetes).
 
-Finally, it is noteworthy that our study lies on one kind of edge
-infrastructure. Other variants can be envision where, for example,
-hardware resources provided by third-party users can dynamicaly join
+Finally, it is noteworthy that our study lies on one kind of Edge
+infrastructure. Other variants can be envisioned where, for example,
+hardware resources provided by third-party users can dynamically join
 and leave the infrastructure. For such cases, this study needs to be
 extended to integrate additional features not discussed in this paper.
 
