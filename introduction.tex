@@ -16,10 +16,10 @@
 
 While several academic studies have been highlighting the advantages
 of the Edge Computing paradigm in various
-domains~\cite{bonomi2012fog,zhang2015cloud,yi2015fog,shi2016edge,satyanarayanan2017emergence},
+domains~\cite{bonomi2012fog,satyanarayanan2017emergence,shi2016edge,yi2015fog,zhang2015cloud},
 %%
 progress on how operating and using infrastructures that serve it are marginal.
-Current solutions~\cite{amazon:lambda-edge}~\cite{akamai:cloudlets} are rather close to the
+Current solutions~\cite{akamai:cloudlets}~\cite{amazon:lambda-edge} are rather close to the
 initial fog proposal that allows to run domain-specific applications
 on  NFV-enabled infrastructures (at the edge) and
 centralized clouds~\cite{bonomi2012fog}.  In other words, %current Edge Infrastructure-as-a-Service (IaaS)
@@ -120,7 +120,7 @@ and second, let DevOps implement new kinds of services on top of that infrastruc
 
 In this paper, we present reflections to initiate discussions through our community.
 
-\begin{itemize}
+\begin{itemize}[noitemsep, topsep=0pt]
 \item First, we introduce a classification of expected features from
   both administrators and DevOps. This classification is valuable to
   identify missing mechanisms in resource management systems.
@@ -140,20 +140,22 @@ In this paper, we present reflections to initiate discussions through our commun
 \begin{figure}[t]
   \centering
   \includegraphics[width=\columnwidth]{./figures/figure_fog.pdf}
+    \vspace*{-.5cm}
   \caption{Edge Computing Infrastructure~\cite{7923796}.}
     {\small The red dashed lines depict a split-brain situation that isolates
     \emph{Site 1} from other sites.}
   \label{fig:fogedge-archi}
+  \vspace*{-.3cm}
 \end{figure}
 
 Since there are as many Edge infrastructures as use-cases, we
 highlight that the infrastructure considered in this
-study - see Figure~\ref{fig:fogedge-archi} - is composed
+study is composed
 %, from the hardware viewpoint,
  of several
 geo-distributed micro DCs (up to thousands)
 composed of up to one hundred servers (nearly two racks).
-%Figure~\ref{fig:fogedge-archi} gives an overview of the infrastructure.
+Figure~\ref{fig:fogedge-archi} depictes such an infrastructure.
 The expected latency and bandwidth between elements may fluctuate, in particular because
 networks can be wired or wireless. Moreover, disconnections
 between sites may occur leading to network split brain
