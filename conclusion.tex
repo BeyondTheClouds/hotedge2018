@@ -2,31 +2,28 @@
 \section{Conclusion}
 \label{sec:conclusion}
 
-The popularity of the Internet of Things, the current trend of
-virtualizing network functions as well as a new breed of applications
-such as AR/VR, heralds a new era of cloud computing where cloud
-platforms need to leverage edge infrastructures in order to be able to
+The popularity of IoT, the NFV trend as well as the new breed of applications
+like AR/VR, heralds a new era of cloud computing where cloud
+platforms need to leverage Edge infrastructures in order to be able to
 give an acceptable level of cost and performance to users and
 operators.  Despite this growing need however, there does not seem to
-be any cloud management platform that is designed having such an
-infrastructure in mind. In this paper, we outlined a systematic
+be any cloud management system that is designed having such an
+infrastructure in mind. 
+
+In this paper, we outline a systematic
 grouping of the features that end-users expect and the requirements an
-edge infrastructure puts on a cloud management system. We also
-identified existing efforts in this area and which may be used as a
-starting point to a full-blown solution. We then proceed to describe
-two possible strategies to follow when designing a solution: (1) a
+edge infrastructure puts on a cloud management system. 
+%e also identified existing efforts in this area and which may be used as a starting point to a full-blown solution.
+We study the use of existing IaaS managers (\ie OpenStack) to control an Edge infrastructure, and motivate the need for an  effective collaboration of the resource management system accross the entire Edge.
+We then proceed to describe two possible strategies to follow when designing a solution: (1) a
 \emph{top-down} approach that keeps existing software untouched and
-attempts to implement features by software that run on the top and (2)
+attempts to implement features by software that runs on the top and (2)
 a \emph{bottom-up} approach that extensively improves existing
 software in order to fulfill the requirements. We discuss the pros and
 cons of each strategy and give our recommendation on how we believe we
-should move forward in a design for a cloud platform for an edge
+should move forward in designing a cloud system for an edge
 infrastructure.
 
+Finally, it is important to note that our study lies on one kind of edge infrastructure. Other variants can be envisions where, for example, hardware resources can dynamicaly join and leave the edge infrastructure. For such cases, this study needs to be further extended to integrate additional features not discussed in this paper.
 
-\AL{We should highlight that we conducted our study on one kind of
-  edge infrastructure. People start to envision more advanced
-  scenarios where third party entities might provided hardware
-  resources that can join the infrastructure. In such a case, our
-  resource managmeent system will have to integrate additional
-  features not discussed in the paper}
+%\AL{We should highlight that we conducted our study on one kind of  edge infrastructure. People start to envision more advanced scenarios where third party entities might provided hardware resources that can join the infrastructure. In such a case, our resource managmeent system will have to integrate additional features not discussed in the paper}
