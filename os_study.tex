@@ -38,12 +38,11 @@ per Edge site is deployed.
 \subsection{Centralized (Remote) Management}
 \label{subsec:centralized_os}
 In this scenario, OpenStack operates an Edge infrastructure
-like a traditional single DC environment. %Cloud Computing one. 
-The ``only'' difference is
-related to the wide-area networking between the control nodes
-and the compute nodes~\cite{www:openstack-wanwide}. The distinction between the different Edge
-sites can be done by leveraging the concept of host aggregates
-within OpenStack.
+as a traditional single DC environment. %Cloud Computing one.
+The ``only'' difference is related to the wide-area networking between
+control and compute nodes~\cite{www:openstack-wanwide}. The
+distinction between the different Edge sites can be done by leveraging the
+concept of host aggregates within OpenStack.
 
 From the requirements' viewpoint, L1 and most L2 requirements can be
 fulfilled in a straightforward way (because the infrastructure can be
@@ -57,7 +56,7 @@ a permanent connectivity between compute nodes, services and their
 DBs.  In other words, while this scenario provides a ``Single Pane of
 Glass'' for administrators and DevOps, it has the drawback of being a
 ``Single Point of Failure'' preventing DevOps to use Edge resources in
-case of network split brains.
+case of network split-brains.
 
 \subsection{Multiple Regions}
 In this scenario, each Edge site corresponds to a \emph{region}

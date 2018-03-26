@@ -32,9 +32,9 @@ without extending or revising the existing VIM codebase. For example,
 OpenStack Tricircle~\cite{tricircle}, a top-down project to allow
 virtual networking across different sites, ended up "breaking" the
 core of OpenStack by introducing specific L2 mechanisms. Such
-intrusive modifications negate the aforementioned independency.
+intrusive modifications negate the aforementioned independence.
 %
-Moreover, collaboration features listed in L2 would require to
+Moreover, L2 features require to
 re-implement many low-level VIM services at the overlay level. For
 instance, the OpenStack ``boot a VM'' process looks as follow from a
 bird's-eye view: (1) Get the URL of the image by looking up into the
@@ -42,13 +42,13 @@ database, (2) Schedule and boot the VM. Thus, booting a VM on
 \emph{Site 1} using an image defined in \emph{Site 2} would require to
 implement a dedicated workflow at the overlay level in order to
 interact with both sites and copy the image from the image manager
-(\ie Glance) of \emph{Site 2} in the one of \emph{Site 1} before booting the VM. 
+(\ie Glance) of \emph{Site 2} to the one of \emph{Site 1} before booting the VM. 
 %
 This is valid for most L2 features such as a fined authorization management
 with different rights in different Edge sites.
 %
 Finally, this top-down overlay should be developed \emph{a la
-  peer-to-peer} to cope with L3 requirements (\ie network split brain
+  peer-to-peer} to cope with L3 requirements (\ie network split-brain
 issues).
 
 
@@ -56,9 +56,9 @@ issues).
 
 
 \paragraph{Bottom-Up Design}
-In bottom-up design, the system is not limited by what is made
+In the bottom-up design, the system is not limited by what is
 available through VIM APIs. If one can make OpenStack natively
-collaborative, this can allow supporting features across the entire
+collaborative, features can be supported across the entire
 Edge infrastructure for free. For instance, the aforementioned
 OpenStack ``boot a VM on Site 1 with image on Site 2'' process would
 be feasible without modifying the VIM codebase if \emph{Site 1} can
@@ -71,15 +71,15 @@ mechanisms must be revised to consider possible side-effects related to
 collaboration operations.
 %, like one of the edge scenarios, in mind.
 %
-For instance, a boot process of a VM initiated on \emph{Site 1} can finally be
+For instance, a VM boot process initiated on \emph{Site 1} can finally be
 completed on \emph{Site 2}. The question is then to define where the states
-related to this VM should be stored, keeping in mind the split brain
+related to this VM should be stored, keeping in mind the split-brain
 challenge.
 
 Finally, L4 requirements cannot be intrinsically satisfied by the
 bottom-up approach while L5 implies strong limitations regarding how
 collaborations should be implemented (for instance sharing internal
-states of different edge sites between operators look unlikely).
+states of different Edge sites between operators looks unlikely).
 
 % This kind of collaboration may be achieved with a collaborative
 % backend that relies on a notion of \emph{space}. \emph{Space} says in
@@ -105,18 +105,18 @@ and none individually seems to meet all technical and business
 requirements of Edge scenarios.
 On the technical perspective, the bottom-up
 design seems to be the most appropriate to cope with L1, L2 and L3
-requirements while the top-down strategy is the only one to satisfy L4
+requirements, while the top-down strategy is the only one to satisfy L4
 and L5.
 %
 On a business perspective, a top-down approach can easily fulfill the
 short and medium-term Time-To-Market (TTM) requirements. In that
 sense, top-down is the working solution people consider first, and is
-in fact the one the opensource community has been working towards so
+in fact the one the open-source community has been working towards so
 far. However, our community should investigate a long-term solution
 that lays on a bottom-up approach, tackling general scientific
 challenges such as the definition of a reference architecture for a
-resource management system for Edge infrastructures and more specific
-ones like the share of the internal states in an Edge context.
+resource management system for Edge infrastructures, and more specific
+ones like sharing internal states in an Edge context.
 
 
 
