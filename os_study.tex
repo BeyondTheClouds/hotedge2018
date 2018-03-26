@@ -7,10 +7,10 @@
 %\AL{We should add one sentence that justify why we have this section}
 %
 This section studies the use of OpenStack to control an Edge
-infrastructure.  Such an analysis is meaningful as the OpenStack
+infrastructure. Such an analysis is meaningful as the OpenStack
 codebase has been evolving to deal with large scale and multi-site
-objectives for the two last years.  Precisely, the section evaluates
-OpenStack with respect to its latest improvements regarding the requirements
+objectives for the two last years. Precisely, the section evaluates
+OpenStack, including its latest improvements, with respect to the requirements
 defined in the previous section.
 %in
 %regards to the requirements defined in the previous section,
@@ -24,12 +24,12 @@ plane). Whenever users perform an action on OpenStack, the control
 plane processes that action which ends on the data plane.  Among the
 most important control plane services, one can cite \verb|keystone|,
 \verb|nova|, \verb|glance|, and \verb|neutron|, whose respectively are
-in charge of authentification, VM life cycle, their images and
+in charge of authentication, VM life cycle, their images and
 associated networking.
 
 Because OpenStack comes with several deployment alternatives and
-because the edge sites considered in our study can host data and
-control nodes, we discuss two scenarios. The first tries to mimic a
+because the Edge sites considered in our study can host data and
+control nodes, we discuss two scenarios. The first one tries to mimic a
 single DC environment by having a single OpenStack with all control
 services on one site and data nodes on other sites.  The second
 corresponds to a specific multi-region deployment, where one OpenStack
@@ -48,20 +48,20 @@ within OpenStack.
 From the requirements' viewpoint, L1 and most L2 requirements can be
 fulfilled in a straightforward way (because the infrastructure can be
 spread over several network domains, some L2 operations including
-specific network actions cannot be satisfied).  For L3, only L3.1
+specific network actions cannot be satisfied). For L3, only L3.1
 requirements can be satisfied, L3.2 expectations cannot be met due to
 the considered deployment scenario. Most OpenStack services create and
 manipulate logical objects that are persisted in shared databases
-(DBs).  While this enables services to easily collaborate, it imposes
+(DBs). While this enables services to easily collaborate, it imposes
 a permanent connectivity between compute nodes, services and their
 DBs.  In other words, while this scenario provides a ``Single Pane of
-Glass'' for administrator and DevOps, it has the drawback of being a
+Glass'' for administrators and DevOps, it has the drawback of being a
 ``Single Point of Failure'' preventing DevOps to use Edge resources in
 case of network split brains.
 
 \subsection{Multiple Regions}
 In this scenario, each Edge site corresponds to a \emph{region}
-in OpenStack terminology, which is a complete deployment of
+in the OpenStack terminology, which is a complete deployment of
 OpenStack with all control services and a ``shared'' Keystone.
 % (\ie the identify and service provider).
 The main advantage of this deployment is related to the independency
@@ -70,9 +70,9 @@ of each site in case of network disconnections.
 The downside relates to the fact that the current codebase does not
 provide any mechanism to allow the collaboration between several
 regions and thus L2 requirements cannot be met.~\endnote{Due to space
-  limitation, we did not discuss a third scenario leveraging the
-  OpenStack \emph{cells} concept. However, we underline that such an approach
-  has the drawback of the two discussed scenarios.}
+limitation, we did not discuss a third scenario leveraging the
+OpenStack \emph{cells} concept. However, we underline that such an approach
+has the drawback of the two discussed scenarios.}
 
 
 \subsection{Effective Collaboration is Needed}
@@ -83,16 +83,14 @@ is achieved by supposing a collaboration a la \emph{peer-to-peer},
 that is, an Edge site always serves local resources and collaborates
 with other Edge sites if need be. To develop such a resource
 management system, the developer has two fundamental design options:
-\emph{top-down} or \emph{bottom-up}. Both designs impact how to handle
-the collaboration needed by the system.
+\emph{top-down} or \emph{bottom-up}. Both designs differently impact the way
+this required collaboration can be handled.
 
-A top-down collaboration design implements the collaboration by
-federating VIMs' API. It leverages on existing VIMs as they are made
-available today without introducing modifications/extensions. Examples
-of approaches following a \emph{top-down} design are:
-ONAP~\cite{onap}, Kingbird~\cite{kingbird},
-FogBow~\cite{brasileiro2016fogbow} and
-p2p-OpenStack~\cite{ericsson-p2p}
+A top-down collaboration design implements the collaboration by federating
+VIMs' API. As a consequence the existing VIM codebases without introducing
+modifications/extensions. Examples of approaches following a \emph{top-down}
+design are: ONAP~\cite{onap}, Kingbird~\cite{kingbird},
+FogBow~\cite{brasileiro2016fogbow} and p2p-OpenStack~\cite{ericsson-p2p}.
 
 A bottom-up collaboration design lays on making VIMs
 mechanisms/services directly collaborative~\cite{7923796}. For example, having two
