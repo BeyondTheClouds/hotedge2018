@@ -17,17 +17,19 @@
 
 \begin{table*}
     \centering
-        \input{tab_req.tex}
+    \input{tab_req.tex}
+    \vspace*{-.1cm}
     \caption{Classification of the requirements to administrate and use Edge
     Computing infrastructures in $5$ levels.}
-    \label{tab:requirements}
+  \label{tab:requirements}
+      \vspace*{-.2cm}
 \end{table*}
 
 Herein we classify features administrators and DevOps expect
 to find in the context of Edge Computing infrastructures.
 The classification is based on $5$ \emph{levels}, starting from the easiest
 aspects, \ie interacting with a single site (considered in level 1, L1), to
-more complex aspects like managing multiple sites (L2), up to considering that
+more complex aspects like managing multiple sites (L2), up to taking into account that
 sites can be owned by different operators (L5).
 \Cref{tab:requirements} summarizes the classification we detail below.
 
@@ -50,7 +52,7 @@ considers the actions both administrators and DevOps expect to perform on a
 single, reachable site.
 %
 Most operations are elementary from the Edge viewpoint because they correspond
-to the ones already provided by OpenStack.
+to the ones already provided by a VIM such as OpenStack.
 In other words, each Edge site can be considered as an independent Cloud at
 this level. The unmanned aspect only impacts this level by requiring to perform
 all operations remotely if needed.
@@ -90,8 +92,9 @@ inter-services (different services from different sites).
 Concrete operations consist for instance in configuring users'
 access on a per-site basis, listing available VM images or pushing new
 ones on multiple sites (intra-service operations). From the
-DevOps viewpoint, a user should be able to boot a VM on \emph{Site 1} (depicted
-on \cref{fig:fogedge-archi}) using an image defined in \emph{Site 2}
+DevOps viewpoint, a user should be able to boot a VM on \emph{Site 1}
+% (depicted on \cref{fig:fogedge-archi})%
+using an image defined in \emph{Site 2}
 (inter-service operation). Similarly to L1, they both expect metrics collected
 from several sites and collaborated mechanisms regarding the security (\eg
 secret key sharing, network encryption).
@@ -99,8 +102,9 @@ secret key sharing, network encryption).
 Because collaboration between sites can be either explicit (\ie the
 targeted sites are explicitly specified in the operation), or implicit
 (\ie the resource management system is in charge of selecting
-resources), we have defined two sub-levels as depicted in
-\cref{tab:requirements}, respectively called L2.1 and L2.2. The implicit
+resources), we have defined two sub-levels,
+% as depicted in \cref{tab:requirements},
+respectively called L2.1 and L2.2. The implicit
 manner suggests that policies (\eg performance objectives, energy
 consumption) and constraints (\eg affinity rules, hardware requirements) are
 provided by admins/DevOps so that the resource management system takes the
@@ -110,13 +114,12 @@ re-scheduling faulty resources across sites).
 % should be elaborated and/or refs should be given here
 
 \paragraph{L3. Robustness \wrt network split brains}
-Because of potential intermittent connections between Edge sites, L3 includes
-L2 operations but with the possibility to face \emph{split brains} (\ie
-situations where the infrastructure is partitioned due to communication
-failures).
+%Because of potential intermittent connections between Edge sites,
+L3 includes L2 operations but with the possibility to face situations
+where the infrastructure is partitioned due to network disconnections.
 %
 \Cref{fig:fogedge-archi} depicts such a case where \emph{Site 1} is isolated
-from the other sites. In this scenario, admin/DevOps that can reach \emph{Site
+from the other sites. In this scenario, administrators/DevOps that can reach \emph{Site
 1} (\ie located in the same geographical area) should be able to perform L1
 operations on \emph{Site 1} despite the split-brain. Such a requirement
 makes sense as L1 is limited to one site and does not impact other ones.
@@ -125,7 +128,7 @@ Regarding the $2$\textsuperscript{nd} partition containing the other sites, L1
 and L2 must be guaranteed for any subset of sites inside the partition.
 
 Since split brains might impact differently already-provisioned resources and
-management services, we decided to refine L3 into two sub-classes. L3.1 is
+management services, we refined L3 into two sub-classes. L3.1 is
 related to the features that allow already-deployed applications to continue to
 serve local requests without being impacted. For instance, an \emph{apache}
 server or a storage backend should be able to satisfy requests coming from the
@@ -148,20 +151,18 @@ infrastructure.
 % determine its global consumption in case of split-brains?
 
 \paragraph{L4. Multiple Cloud environments}
-Delivering a resource management system at large scale in a unified manner is
+Delivering a resource management system at large scale in a unified manner might be
 not conceivable from the software viewpoint. Since different versions and types
 of infrastructure managers might co-exist at the same time across the whole
 infrastructure, L4 gathers the related requirements.
 %
-More precisely, L4.1 considers L3 features when Edge sites can be operated by
-different versions of the same software stack.
+More precisely, L4.1 considers L3 features when different versions of the same software stack co-exist across the infrastructure.
 %
-L4.2 increases the complexity by enabling the collaboration of different
-resource management systems, including possibly different concepts (\eg
+L4.2 increases the complexity by considering  the collaboration of mutiple systems, including possibly different concepts (\eg
 OpenStack for VMs and Kubernetes for Containers).
-
-As a consequence, it is necessary to discover sites' capabilities in order to
-only allow possible operations.
+%
+Such a requirement implies to be able to get sites' capabilities in order to
+only allow meaningful collaborations.
 
 \paragraph{L5. Multiple operators}
 L5 corresponds to the holy grail in terms of expected features. In addition to
