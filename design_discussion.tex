@@ -27,7 +27,7 @@ designed to do so, the system can easily allow L4 requirements, \ie the
 support of different versions and types of VIMs - \eg
 FogBow~\cite{brasileiro2016fogbow}.
 
-Unfortunately, a top-down design cannot satisfy entirely L2 requirements
+Unfortunately, a top-down design cannot satisfy all L2 requirements
 without extending or revising the existing VIM codebase. For example,
 OpenStack Tricircle~\cite{tricircle}, a top-down project to allow
 virtual networking across different sites, ended up "breaking" the
@@ -37,19 +37,18 @@ intrusive modifications negate the aforementioned independency.
 Moreover, collaboration features listed in L2 would require to
 re-implement many low-level VIM services at the overlay level. For
 instance, the OpenStack ``boot a VM'' process looks as follow from a
-bird's-eye view: (1) Get the URL of the image by looking up into the
-database, (2) Schedule and boot the VM. Thus, booting a VM on
+bird's-eye view: (1) Get URL of the image by looking up into the
+DB, (2) Schedule and boot the VM. Thus, booting a VM on
 \emph{Site 1} using an image defined in \emph{Site 2} would require to
 implement a dedicated workflow at the overlay level in order to
 interact with both sites and copy the image from the image manager
-(\ie Glance) of \emph{Site 2} in the one of \emph{Site 1} before booting the VM. 
+(\ie Glance) of \emph{Site 2} to the one of \emph{Site 1} before booting the VM. 
 %
 This is valid for most L2 features such as a fined authorization management
 with different rights in different Edge sites.
 %
 Finally, this top-down overlay should be developed \emph{a la
-  peer-to-peer} to cope with L3 requirements (\ie network split brain
-issues).
+  peer-to-peer} to cope with L3 requirements (\ie network split brain).
 
 
 %------Moreover, if different VIM flavors are deployed, it might become impractical to provide a single VIM management-view to users as different VIMs might have specific features that need to be managed.
@@ -63,16 +62,18 @@ Edge infrastructure for free. For instance, the aforementioned
 OpenStack ``boot a VM on Site 1 with image on Site 2'' process would
 be feasible without modifying the VIM codebase if \emph{Site 1} can
 either directly contact the image manager of \emph{Site 2}, or share
-the database backend with \emph{Site 2}.
+the DB backend with \emph{Site 2}.
 
 However, the efficiency and ease brought by collaboration come at a
 cost. Since OpenStack has not been designed to be collaborative, most
-mechanisms must be revised to consider possible side-effects related to
+mechanisms must be revised to consider side-effects related to
 collaboration operations.
 %, like one of the edge scenarios, in mind.
 %
-For instance, a boot process of a VM initiated on \emph{Site 1} can finally be
-completed on \emph{Site 2}. The question is then to define where the states
+For instance, a boot process of a VM initiated on \emph{Site 1} can 
+%finally be completed 
+be finalized
+on \emph{Site 2}. The question is then to define where the states
 related to this VM should be stored, keeping in mind the split brain
 challenge.
 
