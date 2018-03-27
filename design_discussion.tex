@@ -6,15 +6,15 @@
 \section{Design Discussion}
 \label{sec:design_discussion}
 
-In this section, we discuss the pros and cons of the \emph{top-down} and
-\emph{bottom-up} designs targeted at the end of the previous section.
+The top-down and bottom-up designs introduced in the previous section have 
+their own pros and cons. 
 % to extend OpenStack with multi-site collaboration.
-More precisely, our discussion is driven by the following questions: (i) On the
-one hand, while the top-down design is the most common approach, can it fulfill
-all the expected requirements listed in our classification without requiring
-changes in the VIM codebase? (ii) On the other hand, while the bottom-up design
-seems to disrupt the design principles by requiring \emph{a la peer-to-peer}
-strategies in VIM's internal mechanisms, should it be discarded?
+%More precisely, our discussion is driven by the following questions: (i) On the
+%one hand, while the top-down design is the most common approach, can it fulfill
+%all the expected requirements listed in our classification without requiring
+%changes in the VIM codebase? (ii) On the other hand, while the bottom-up design
+%seems to disrupt the design principles by requiring \emph{a la peer-to-peer}
+%strategies in VIM's internal mechanisms, should it be discarded?
 
 \paragraph{Top-Down Design}
 The top-down approach consists in designing a set of overlay components that
@@ -24,18 +24,18 @@ a new version is released every six months with a lot of changes in the
 codebase, whereas changes rarely impact the APIs. Therefore, a top-down design
 makes VIM development and the overlay system components independent. If
 designed to do so, the system can easily allow L4 requirements, \ie the
-support of different versions and types of VIMs - \eg
+support of different versions and types of VIMs - as demonstrated by 
 FogBow~\cite{brasileiro2016fogbow}.
 
-Unfortunately, a top-down design cannot satisfy entirely L2 requirements
+Unfortunately, a top-down design cannot satisfy all L2 requirements
 without extending or revising the existing VIM codebase. For example,
 OpenStack Tricircle~\cite{tricircle}, a top-down project to allow
 virtual networking across different sites, ended up "breaking" the
 core of OpenStack by introducing specific L2 mechanisms. Such
 intrusive modifications negate the aforementioned independence.
 %
-Moreover, L2 features require to
-re-implement many low-level VIM services at the overlay level. For
+Moreover, L2 features in general require to
+re-implement many low-level VIM functionalities at the overlay level. For
 instance, the OpenStack ``boot a VM'' process looks as follow from a
 bird's-eye view: (1) Get the URL of the image by looking up into the
 database, (2) Schedule and boot the VM. Thus, booting a VM on
@@ -44,12 +44,20 @@ implement a dedicated workflow at the overlay level in order to
 interact with both sites and copy the image from the image manager
 (\ie Glance) of \emph{Site 2} to the one of \emph{Site 1} before booting the VM. 
 %
-This is valid for most L2 features such as a fined authorization management
-with different rights in different Edge sites.
+This is valid for most L2 features such as a fine-grained authorization management
+with different rights in different edge sites.
 %
-Finally, this top-down overlay should be developed \emph{a la
-  peer-to-peer} to cope with L3 requirements (\ie network split-brain
-issues).
+%%FW: I do not like the example above, it already assumes a specific solution, I suggest we use the following
+%For instance, when sites are specified implicitly (cf. L2.2) a scheduling functionality 
+%needs to be implemented at the overlay-level, similar to the scheduling functionality
+%already in \texttt{nova}.  
+%This is in fact the case for most L2 features such as a fined authorization management
+%with different rights in different Edge sites.
+%% Also, I do not know if the following is a pro or a con
+%Finally, this top-down overlay should be developed \emph{a la
+%  peer-to-peer} to cope with L3 requirements (\ie network split-brain
+%issues).
+
 
 
 %------Moreover, if different VIM flavors are deployed, it might become impractical to provide a single VIM management-view to users as different VIMs might have specific features that need to be managed.
@@ -59,13 +67,13 @@ issues).
 In the bottom-up design, the system is not limited by what is
 available through VIM APIs. If one can make OpenStack natively
 collaborative, features can be supported across the entire
-Edge infrastructure for free. For instance, the aforementioned
+edge infrastructure for free. For instance, the aforementioned
 OpenStack ``boot a VM on Site 1 with image on Site 2'' process would
 be feasible without modifying the VIM codebase if \emph{Site 1} can
 either directly contact the image manager of \emph{Site 2}, or share
 the database backend with \emph{Site 2}.
 
-However, the efficiency and ease brought by collaboration come at a
+However, the efficiency and ease of use brought by collaboration comes at a
 cost. Since OpenStack has not been designed to be collaborative, most
 mechanisms must be revised to consider possible side-effects related to
 collaboration operations.
@@ -100,9 +108,9 @@ states of different Edge sites between operators looks unlikely).
 
 
 \paragraph{Summary}
-In the end, there are \emph{pros} and \emph{cons} in both approaches,
+In the end, there are \emph{pros} and \emph{cons} for both approaches,
 and none individually seems to meet all technical and business
-requirements of Edge scenarios.
+requirements of edge scenarios.
 On the technical perspective, the bottom-up
 design seems to be the most appropriate to cope with L1, L2 and L3
 requirements, while the top-down strategy is the only one to satisfy L4
