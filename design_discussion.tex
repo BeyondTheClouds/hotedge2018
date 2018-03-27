@@ -6,15 +6,17 @@
 \section{Design Discussion}
 \label{sec:design_discussion}
 
-The top-down and bottom-up designs introduced in the previous section have 
-their own pros and cons. 
+%The top-down and bottom-up designs introduced in the previous section have 
+%their own pros and cons. 
 % to extend OpenStack with multi-site collaboration.
-%More precisely, our discussion is driven by the following questions: (i) On the
-%one hand, while the top-down design is the most common approach, can it fulfill
-%all the expected requirements listed in our classification without requiring
-%changes in the VIM codebase? (ii) On the other hand, while the bottom-up design
-%seems to disrupt the design principles by requiring \emph{a la peer-to-peer}
-%strategies in VIM's internal mechanisms, should it be discarded?
+In this section, we discuss the pros and cons of the \emph{top-down} and
+\emph{bottom-up} designs targeted at the end of the previous section.
+More precisely, our discussion is driven by the following questions: (i) On the
+one hand, while the top-down design is the most common approach, can it fulfill
+all the expected requirements listed in our classification without requiring
+changes in the VIM codebase? (ii) On the other hand, while the bottom-up design
+seems to disrupt the design principles by requiring \emph{a la peer-to-peer}
+strategies in VIM's internal mechanisms, should it be discarded?
 
 \paragraph{Top-Down Design}
 The top-down approach consists in designing a set of overlay components that
