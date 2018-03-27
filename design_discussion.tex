@@ -47,7 +47,7 @@ interact with both sites and copy the image from the image manager
 (\ie Glance) of \emph{Site 2} to the one of \emph{Site 1} before booting the VM. 
 %
 This is valid for most L2 features such as a fine-grained authorization management
-with different rights in different edge sites.
+with different rights in different \edge sites.
 %
 %%FW: I do not like the example above, it already assumes a specific solution, I suggest we use the following
 %For instance, when sites are specified implicitly (cf. L2.2) a scheduling functionality 
@@ -69,7 +69,7 @@ with different rights in different edge sites.
 In the bottom-up design, the system is not limited by what is
 available through VIM APIs. If one can make OpenStack natively
 collaborative, features can be supported across the entire
-edge infrastructure for free. For instance, the aforementioned
+\edge infrastructure for free. For instance, the aforementioned
 OpenStack ``boot a VM on Site 1 with image on Site 2'' process would
 be feasible without modifying the VIM codebase if \emph{Site 1} can
 either directly contact the image manager of \emph{Site 2}, or share
@@ -89,7 +89,7 @@ challenge.
 Finally, L4 requirements cannot be intrinsically satisfied by the
 bottom-up approach while L5 implies strong limitations regarding how
 collaborations should be implemented (for instance sharing internal
-states of different Edge sites between operators looks unlikely).
+states of different \edge sites between operators looks unlikely).
 
 % This kind of collaboration may be achieved with a collaborative
 % backend that relies on a notion of \emph{space}. \emph{Space} says in
@@ -112,7 +112,7 @@ states of different Edge sites between operators looks unlikely).
 \paragraph{Summary}
 In the end, there are \emph{pros} and \emph{cons} for both approaches,
 and none individually seems to meet all technical and business
-requirements of edge scenarios.
+requirements of \edge scenarios.
 On the technical perspective, the bottom-up
 design seems to be the most appropriate to cope with L1, L2 and L3
 requirements, while the top-down strategy is the only one to satisfy L4
@@ -125,8 +125,8 @@ in fact the one the open-source community has been working towards so
 far. However, our community should investigate a long-term solution
 that lays on a bottom-up approach, tackling general scientific
 challenges such as the definition of a reference architecture for a
-resource management system for Edge infrastructures, and more specific
-ones like sharing internal states in an Edge context.
+resource management system for \edge infrastructures, and more specific
+ones like sharing internal states in an \edge context.
 
 
 

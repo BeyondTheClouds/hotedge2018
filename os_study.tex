@@ -6,7 +6,7 @@
 \label{sec:system_design_considerations}
 %\AL{We should add one sentence that justify why we have this section}
 %
-This section studies the use of OpenStack to control an edge
+This section studies the use of OpenStack to control an \edge
 infrastructure. Such an analysis is meaningful as the OpenStack
 codebase has been evolving to deal with large scale and multi-site
 objectives for the two last years. Precisely, the section evaluates
@@ -29,7 +29,7 @@ authentication/authorization, VM life cycle management, VM image management and
 associated network management.
 
 Because OpenStack comes with several deployment alternatives and
-because the edge sites considered in our study can host data and
+because the \edge sites considered in our study can host data and
 control nodes, we elected to discuss two scenarios:
 a centralized management scenario and a multiple regions scenario described next.
 % The first one tries to mimic a
@@ -40,11 +40,11 @@ a centralized management scenario and a multiple regions scenario described next
 
 \subsection{Centralized (Remote) Management}
 \label{subsec:centralized_os}
-In this scenario, OpenStack operates an edge infrastructure
+In this scenario, OpenStack operates an \edge infrastructure
 as a traditional single DC environment, %. %Cloud Computing one.
 the key difference being the wide-area networking found between the
 control and compute nodes~\cite{www:openstack-wanwide}. The
-distinction between the different edge sites can be realized by leveraging the
+distinction between the different \edge sites can be realized by leveraging the
 concept of host aggregates within OpenStack.
 
 From the requirements' viewpoint, L1 and most L2 requirements can be
@@ -58,11 +58,11 @@ manipulate logical objects that are persisted in shared databases
 a requirement of permanent connectivity between compute nodes, services and their
 DBs.  In other words, while this scenario provides a ``Single Pane of
 Glass'' for administrators and DevOps, it has the drawback of being a
-``Single Point of Failure'' preventing DevOps to use Edge resources in
+``Single Point of Failure'' preventing DevOps to use \edge resources in
 case of network split-brains.
 
 \subsection{Multiple Regions}
-In this scenario, each edge site corresponds to a \emph{region}
+In this scenario, each \edge site corresponds to a \emph{region}
 in the OpenStack terminology, which is a complete deployment of
 OpenStack with all control services and a ``shared'' Keystone.
 % (\ie the identify and service provider).
@@ -79,11 +79,11 @@ has the drawback of the two discussed scenarios.}
 
 \subsection{Effective Collaboration is Needed}
 Despite the fallibility of the network, and frequent isolation risks
-of an edge site from the rest of the infrastructure, an edge
+of an \edge site from the rest of the infrastructure, an \edge
 infrastructure may be able to meet L3 requirements. This can be
 achieved by supposing a collaboration a la \emph{peer-to-peer},
-that is, an edge site always serves local resources and collaborates
-with other edge sites if need be. To develop such a resource
+that is, an \edge site always serves local resources and collaborates
+with other \edge sites if need be. To develop such a resource
 management system, two fundamental design options exist:
 \emph{top-down} or \emph{bottom-up}. Both designs differently impact the way
 this required collaboration can be handled.
