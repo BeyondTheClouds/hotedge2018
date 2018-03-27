@@ -19,14 +19,19 @@ seems to disrupt the design principles by requiring \emph{a la peer-to-peer}
 strategies in VIM's internal mechanisms, should it be discarded?
 
 \paragraph{Top-Down Design}
-The top-down approach consists in designing a set of overlay components that
-interact with existing VIM APIs to avoid modifying VIM codebases.
-Avoiding codebase modifications is of particular importance in OpenStack since
-a new version is released every six months with a lot of changes in the
-codebase, whereas changes rarely impact the APIs. Therefore, a top-down design
-makes VIM development and the overlay system components independent. If
-designed to do so, the system can easily allow L4 requirements, \ie the
-support of different versions and types of VIMs - as demonstrated by 
+The top-down approach consists in designing a set of overlay
+components that interact with existing VIM APIs to avoid modifying VIM
+codebases.
+%
+Avoiding codebase modifications is of particular importance in
+fast-growing software stacks. For example, a new version of OpenStack
+is realeased every six months with a lot of changes in the codebase,
+whereas changes rarely impact the APIs.
+%
+Therefore, a top-down design makes VIM development and the overlay
+system components independent. If designed to do so, the system can
+easily allow L4 requirements, \ie the support of different versions
+and types of VIMs - as demonstrated by
 FogBow~\cite{brasileiro2016fogbow}.
 
 Unfortunately, a top-down design cannot satisfy all L2 requirements
@@ -46,8 +51,12 @@ implement a dedicated workflow at the overlay level in order to
 interact with both sites and copy the image from the image manager
 (\ie Glance) of \emph{Site 2} to the one of \emph{Site 1} before booting the VM. 
 %
-This is valid for most L2 features such as a fine-grained authorization management
-with different rights in different \edge sites.
+This is valid for most L2 features such as a fine-grained
+authorization management with different rights in different \edge
+sites (L2.1) or a cross-sites scheduling functionality when sites are
+specified implicitly (L2.2). Such a mechanism will be similar to the
+placement workflow already available in \texttt{Nova}.
+
 %
 %%FW: I do not like the example above, it already assumes a specific solution, I suggest we use the following
 %For instance, when sites are specified implicitly (cf. L2.2) a scheduling functionality 
@@ -56,9 +65,10 @@ with different rights in different \edge sites.
 %This is in fact the case for most L2 features such as a fined authorization management
 %with different rights in different Edge sites.
 %% Also, I do not know if the following is a pro or a con
-%Finally, this top-down overlay should be developed \emph{a la
-%  peer-to-peer} to cope with L3 requirements (\ie network split-brain
-%issues).
+Finally, we should also keep in mind that the L3 requirements related
+to network split-brains imply to design the overlay components \emph{a
+  la peer-to-peer}, which might increase the complexity of this
+approach.
 
 
 
@@ -85,6 +95,11 @@ For instance, a VM boot process initiated on \emph{Site 1} can finally be
 completed on \emph{Site 2}. The question is then to define where the states
 related to this VM should be stored, keeping in mind the split-brain
 challenge.
+%
+It is noteworthy that identifying all these aspects requires the understanding of most
+existing code, which is a daunting task in respect to the OpenStack
+ecosystem size.
+% 
 
 Finally, L4 requirements cannot be intrinsically satisfied by the
 bottom-up approach while L5 implies strong limitations regarding how
@@ -122,11 +137,16 @@ On a business perspective, a top-down approach can easily fulfill the
 short and medium-term Time-To-Market (TTM) requirements. In that
 sense, top-down is the working solution people consider first, and is
 in fact the one the open-source community has been working towards so
-far. However, our community should investigate a long-term solution
-that lays on a bottom-up approach, tackling general scientific
-challenges such as the definition of a reference architecture for a
-resource management system for \edge infrastructures, and more specific
-ones like sharing internal states in an \edge context.
+far.
+%
+However, our community should investigate a long-term solution that
+lays on a bottom-up approach.  This will require first to dive into
+OpenStack and understand its intricate internal mechanisms leveraging
+tools like EnOS~\cite{cherrueau2017toward} to mitigate the efforts,
+and second, to address scientific challenges such as the definition of
+a reference architecture for a resource management system for \edge
+infrastructures, how to share internal system states in an \edge
+context~\ldots.
 
 
 
