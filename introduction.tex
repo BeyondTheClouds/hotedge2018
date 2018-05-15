@@ -150,21 +150,30 @@ In this paper, we present reflections to initiate discussions through our commun
   \vspace*{-.3cm}
 \end{figure}
 
-Since there are as many \edge infrastructures as use-cases, we
-highlight that the infrastructure considered in this
-study is composed
-%, from the hardware viewpoint,
- of several individually-managed and geo-distributed micro DCs (up to thousands)
-composed of up to one hundred servers (nearly two racks).
-Figure~\ref{fig:fogedge-archi} depicts such an infrastructure.
-The expected latency and bandwidth between elements may fluctuate, in particular because
-networks can be wired or wireless. Moreover, disconnections
-between sites may occur, leading to network split-brain
-situations~\cite{4456903}.
+%From the hardware viewpoint,
+Since there are as many \edge infrastructures as
+use-cases, we highlight that the infrastructure considered in this study is
+composed of several individually-managed and geo-distributed micro DCs (up to
+thousands) composed of up to one hundred servers (nearly two racks).
+Figure~\ref{fig:fogedge-archi} depicts such an infrastructure. The expected
+latency and bandwidth between elements may fluctuate, in particular because
+networks can be wired or wireless. Moreover, disconnections between sites may
+occur, leading to network split-brain situations~\cite{4456903}.
 Finally, it is possible to consider additional DCs at the \extremeedge, within private institutions or public transports.
 %
-From the software viewpoint, to simplify the model and
-without loss of generality, we mainly assume OpenStack ~\cite{openstack:www} as the default VIM.  
+From the software viewpoint, since we investigate how existing \cloud managers
+can be extended to the \edge, we consider as our default VIM
+OpenStack~\cite{openstack:www}: the de-facto open-source solution for
+\cloudcomputing infrastructures.%
+\endnote{One can note however that our study applies on any other resource
+manager built on the similar building blocks as OpenStack (\eg Kubernetes).
+Such building blocks are conceptually identified
+in~\cite{moreno2012csp}.}
+
+%From the software viewpoint, to simplify the model and without loss of
+%generality, we mainly assume OpenStack ~\cite{openstack:www} as the default
+%VIM.
+
 %After years of development, OpenStack is today the de facto open-source solution to operate, supervise and use
 %IaaS infrastructures.
 %More recently it has increased its effort to address edge computing cases.
