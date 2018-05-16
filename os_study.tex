@@ -41,6 +41,7 @@ a centralized management scenario and a multiple regions scenario described next
 %corresponds to a multi-region deployment, where one OpenStack
 %is deployed per edge site.
 
+\vspace*{-.3cm}
 \subsection{Centralized (Remote) Management}
 \label{subsec:centralized_os}
 In this scenario, OpenStack operates an \edge infrastructure
@@ -54,16 +55,20 @@ From the requirements' viewpoint, L1 and most L2 requirements can be
 fulfilled in a straightforward way (because the infrastructure can be
 spread over several network domains, some L2 operations including
 specific network actions cannot be satisfied). For L3, only L3.1
-requirements can be satisfied while L3.2  cannot be met due to
-the centralized control plane. Most OpenStack services create and
-manipulate logical objects that are persisted in shared databases
-(DBs). While this enables services to easily collaborate, it imposes
-a requirement of permanent connectivity between compute nodes, services and their
-DBs.  In other words, while this scenario provides a ``Single Pane of
-Glass'' for administrators and DevOps, it has the drawback of being a
-``Single Point of Failure'' preventing DevOps to use \edge resources in
-case of network split-brains.
+requirements can be satisfied while L3.2 cannot be met due to
+the centralized control plane.
+For instance, most OpenStack services collaborate through a message system and
+through the manipulation of logical objects that are persisted in shared
+databases (DBs). While this enables services to easily collaborate, it imposes
+a requirement of permanent connectivity between the services located at the
+compute nodes and the control services like the databases and message buses
+located in the DC.
+In other words, while this scenario provides a ``Single Pane of
+Glass'' for administrators and DevOps, it has the drawback of being a ``Single
+Point of Failure'' preventing DevOps to use \edge resources in case of network
+split-brains.
 
+\vspace*{-.2cm}
 \subsection{Multiple Regions}
 In this scenario, each \edge site corresponds to a \emph{region}
 in the OpenStack terminology, which is a complete deployment of
@@ -80,6 +85,7 @@ OpenStack \emph{cells} concept. However, we underline that such an approach
 has the drawback of the two discussed scenarios.}
 
 
+\vspace*{-.1cm}
 \subsection{Effective Collaboration is Needed}
 Despite the fallibility of the network, and frequent isolation risks
 of an \edge site from the rest of the infrastructure, an \edge
